@@ -1,0 +1,61 @@
+<?php
+/**
+ * Magedelight
+ * Copyright (C) 2016 Magedelight <info@magedelight.com>
+ *
+ * NOTICE OF LICENSE
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://opensource.org/licenses/gpl-3.0.html.
+ *
+ * @category Magedelight
+ * @package Magedelight_Bundlediscount
+ * @copyright Copyright (c) 2016 Mage Delight (http://www.magedelight.com/)
+ * @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License,version 3 (GPL-3.0)
+ * @author Magedelight <info@magedelight.com>
+ */
+?>
+<script type="text/javascript">
+//<![CDATA[
+    var productbundleTemplateBox = '<table class="admin__dynamic-rows admin__control-table" cellpadding="0" cellspacing="0">' +
+                            '<thead>' +
+                                '<tr class="headings">' +
+                                    '<th><?php echo __('Name') ?></th>' +
+                                    '<th><?php echo __('Qty') ?></th>' +
+                                    '<th><?php echo __('Position') ?></th>' +
+                                    '<th class="last">&nbsp;</th>' +
+                                '</tr>' +
+                           '</thead> ' +
+                           '<tbody>' +
+                           '</tbody>' +
+                           '</table>';
+                       
+  var productbundleTemplateRow = '<td>' +
+                        '    <input type="hidden" data-form-part="product_form" id="<?php echo $this->getFieldId() ?>_id_{{index}}" name="<?php echo $this->getFieldName() ?>[{{parentIndex}}][{{index}}][item_id]" value="{{item_id}}">' +
+                        '    <input type="hidden" data-form-part="product_form" name="<?php echo $this->getFieldName() ?>[{{parentIndex}}][{{index}}][bundle_id]" value="{{bundle_id}}">' +
+                        '    <input type="hidden" data-form-part="product_form" class="product" name="<?php echo $this->getFieldName() ?>[{{parentIndex}}][{{index}}][product_id]" value="{{product_id}}">' +
+                        '    <input type="hidden" data-form-part="product_form" name="<?php echo $this->getFieldName() ?>[{{parentIndex}}][{{index}}][delete]" value="" class="delete">' +
+                        '    {{name}}<br />' +
+                        '   <div class="nobr">' +
+                        '        <strong><?php echo __('SKU') ?>:</strong> {{sku}}' +
+                        '    </div>' +
+                        '</td>' +
+                        '<td><input data-form-part="product_form"  class="input-text required-entry validate-greater-than-zero" type="text" name="<?php echo $this->getFieldName() ?>[{{parentIndex}}][{{index}}][qty]" value="{{qty}}" /></td>' +
+                        '<td><input data-form-part="product_form" class="input-text validate-zero-or-greater" type="text" name="<?php echo $this->getFieldName() ?>[{{parentIndex}}][{{index}}][sort_order]" value="{{sort_order}}" /></td>' +
+                        '<td class="last"><span title="Delete Row"><button id="bundlediscount_selection_{{index}}_add_button" title="Delete" type="button" class="action-delete delete-option" onclick="pbSelection.remove(event)" data-ui-id="product-bundlediscount-md-bundlediscount-options-box-md-bundlediscount-selection-template-selection-delete-button" ><span>Delete</span></button></span></td>';
+                    
+                    
+                    pbSelection = new Productbundle.Selection(productbundleTemplateBox,productbundleTemplateRow,'<?php echo $this->getFieldId() ?>','<?php echo $this->getSelectionSearchUrl() ?>',pbOption);
+                    
+//]]>   
+</script>

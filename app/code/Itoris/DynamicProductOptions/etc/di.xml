@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * ITORIS
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the ITORIS's Magento Extensions License Agreement
+ * which is available through the world-wide-web at this URL:
+ * http://www.itoris.com/magento-extensions-license.html
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to sales@itoris.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extensions to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to the license agreement or contact sales@itoris.com for more information.
+ *
+ * @category   ITORIS
+ * @package    ITORIS_M2_DYNAMIC_PRODUCT_OPTIONS
+ * @copyright  Copyright (c) 2016 ITORIS INC. (http://www.itoris.com)
+ * @license    http://www.itoris.com/magento-extensions-license.html  Commercial License
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../vendor/magento/framework/ObjectManager/etc/config.xsd">
+
+    <preference for="Magento\Catalog\Block\Adminhtml\Product\Edit\Tab\Options" type="Itoris\DynamicProductOptions\Block\Adminhtml\Product\Edit\Tab\Options" />
+    <preference for="Magento\Catalog\Model\Product\Type\Simple" type="Itoris\DynamicProductOptions\Model\Rewrite\Product\Type\Simple" />
+    <preference for="Magento\Catalog\Model\Product\Type\Virtual" type="Itoris\DynamicProductOptions\Model\Rewrite\Product\Type\Virtual" />
+
+    <preference for="Magento\Catalog\Model\Product\Option\Validator\DefaultValidator" type="Itoris\DynamicProductOptions\Model\Rewrite\Option\Validator\DefaultValidator" />
+    <preference for="Magento\Catalog\Model\Product\Option" type="Itoris\DynamicProductOptions\Model\Rewrite\Option" />
+    <preference for="Magento\Catalog\Model\Product\Option\Value" type="Itoris\DynamicProductOptions\Model\Rewrite\Option\Value" />
+    <preference for="Magento\Catalog\Model\Product\Option\Type\Date" type="Itoris\DynamicProductOptions\Model\Rewrite\Option\Type\Date" />
+    <preference for="Magento\Catalog\Model\Product\Option\Type\DefaultType" type="Itoris\DynamicProductOptions\Model\Rewrite\Option\Type\DefaultType" />
+    <preference for="Magento\Catalog\Model\Product\Option\Type\File" type="Itoris\DynamicProductOptions\Model\Rewrite\Option\Type\File" />
+    <preference for="Magento\Catalog\Model\Product\Option\Type\Select" type="Itoris\DynamicProductOptions\Model\Rewrite\Option\Type\Select" />
+    <preference for="Magento\Catalog\Model\Product\Option\Type\Text" type="Itoris\DynamicProductOptions\Model\Rewrite\Option\Type\Text" />
+
+    <preference for="Magento\ConfigurableProduct\Model\Product\Type\Configurable" type="Itoris\DynamicProductOptions\Model\Rewrite\Product\Type\Configurable" />
+
+
+    <preference for="Magento\Catalog\Model\ResourceModel\Option" type="Itoris\DynamicProductOptions\Model\Rewrite\ResourceModel\Option" />
+    <preference for="Magento\Catalog\Model\ResourceModel\Option\Value" type="Itoris\DynamicProductOptions\Model\Rewrite\ResourceModel\Option\Value" />
+
+    <preference for="Magento\Bundle\Model\Product\Price" type="Itoris\DynamicProductOptions\Model\Rewrite\Bundle\Product\Price" />
+    
+    <preference for="Magento\Catalog\Model\Product\Option\Repository" type="Itoris\DynamicProductOptions\Model\Rewrite\Product\Option\Repository" />
+    
+    <type name="Magento\Quote\Model\Quote\Item">
+        <plugin name="dpo-quote-item-option-qty" type="Itoris\DynamicProductOptions\Plugin\QuoteItemOptionQty"/>
+    </type>
+</config>

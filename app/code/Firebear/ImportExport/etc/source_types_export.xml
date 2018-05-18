@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @copyright: Copyright © 2017 Firebear Studio. All rights reserved.
+ * @author   : Firebear Studio <fbeardev@gmail.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="source_types.xsd">
+    <type name="file" label="File" modelInstance="Firebear\ImportExport\Model\Source\Type\File" sortOrder="10">
+        <field name="file_path" id="file_path" label="File Path" type="text" required="true" notice="The file must match the format. Use relative path to Magento installation, e.g. var/import/products.csv (Make sure folder have correct write permissions - 775 , for more details please see Magento 2 Permissions guide)" validation="no-whitespace" component="Firebear_ImportExport/js/form/export-path-file"/>
+    </type>
+    <type name="ftp" label="Ftp" modelInstance="Firebear\ImportExport\Model\Source\Type\Ftp" sortOrder="20">
+        <field name="file_path" id="file_path" label="File Path" type="text" required="true" notice="The file must match the format." validation="no-whitespace" component="Firebear_ImportExport/js/form/export-path-file"/>
+        <field name="host" id="host" label="Host" type="text" required="true" />
+        <field name="port" id="port" label="Port" type="text" required="true" />
+        <field name="user" id="username" label="Username" type="text" required="true" />
+        <field name="password" id="password" label="Password" type="text" required="true" />
+    </type>
+    <type name="sftp" label="Sftp" modelInstance="Firebear\ImportExport\Model\Source\Type\Sftp" sortOrder="30">
+        <field name="file_path" id="file_path" label="File Path" type="text" required="true" notice="The file must match the format." validation="no-whitespace" component="Firebear_ImportExport/js/form/export-path-file"/>
+        <field name="host" id="host" label="Host" type="text" required="true" />
+        <field name="port" id="port" label="Port" type="text" required="true" />
+        <field name="username" id="username" label="Username" type="text" required="true" />
+        <field name="password" id="password" label="Password" type="text" required="true" />
+    </type>
+</config>

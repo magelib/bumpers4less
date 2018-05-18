@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * ITORIS
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the ITORIS's Magento Extensions License Agreement
+ * which is available through the world-wide-web at this URL:
+ * http://www.itoris.com/magento-extensions-license.html
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to sales@itoris.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extensions to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to the license agreement or contact sales@itoris.com for more information.
+ *
+ * @category   ITORIS
+ * @package    ITORIS_M2_DYNAMIC_PRODUCT_OPTIONS
+ * @copyright  Copyright (c) 2016 ITORIS INC. (http://www.itoris.com)
+ * @license    http://www.itoris.com/magento-extensions-license.html  Commercial License
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+	<!-- Massaction items will be created through JavaScript to be compatible with M2.0.x and M2.1.x -->
+    <!--<listingToolbar name="listing_top">
+        <massaction name="listing_massaction">
+            <action name="copy_dynamic_options">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="confirm" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">Copy Custom Options 1 to Many</item>
+                            <item name="message" xsi:type="string" translate="false">Please enter the product Id you wish to copy options from: &lt;span id='dpoMassActionContainer'&gt;&lt;/span&gt;&lt;script&gt;dpoGrid.attachCopyMassActionEvent()&lt;/script&gt;</item>
+                        </item>
+                        <item name="type" xsi:type="string">copy_dynamic_options</item>
+                        <item name="label" xsi:type="string" translate="true">Copy Custom Options 1 to Many</item>
+                        <item name="url" xsi:type="url" path="dynamicproductoptions/product_options/massCopy"/>
+                    </item>
+                </argument>
+            </action>
+            <action name="load_dynamic_options">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="confirm" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">Load Options Template 1 to Many</item>
+                            <item name="message" xsi:type="string" translate="false">Please select an option template you wish to apply to selected products: &lt;span id='dpoMassActionContainer'&gt;&lt;/span&gt;&lt;script&gt;dpoGrid.attachLoadMassActionEvent()&lt;/script&gt;</item>
+                        </item>
+                        <item name="type" xsi:type="string">load_dynamic_options</item>
+                        <item name="label" xsi:type="string" translate="true">Load Options Template 1 to Many</item>
+                        <item name="url" xsi:type="url" path="dynamicproductoptions/product_options/massLoad"/>
+                    </item>
+                </argument>
+            </action>
+        </massaction>
+    </listingToolbar>-->
+</listing>

@@ -1,0 +1,1146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="magedelight" translate="label" sortOrder="200">
+            <label>Magedelight</label>
+        </tab>
+        <section id="arp_products" translate="label" type="text" sortOrder="1" showInStore="1" showInDefault="1" showInWebsite="1">
+            <class>separator-top</class>
+            <label>Automatic related products</label>
+            <tab>magedelight</tab>
+            <resource>Magedelight_Arp::config_arp</resource>
+            <group id="license" translate="label" type="text" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                <label>License Configuration</label>
+                <field id="serial_key" translate="label" type="text" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Serial Key</label>
+                    <comment><![CDATA[Enter the serial key that you received at time of purchase.]]></comment>
+                </field>
+                <field id="activation_key" translate="label" type="text" sortOrder="2" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Activation Key</label>
+                    <comment><![CDATA[Enter the activation key that you received at time of purchase.]]></comment>
+                </field>
+            </group>
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                <label>General</label>
+                <field id="select_website" translate="label" type="multiselect" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Select Website</label>
+                    <source_model>Magedelight\Arp\Model\Config\Source\Website</source_model>
+                    <comment>Please save serial and activation keys to get the available options.</comment>
+                </field>
+                <field id="enabled_arp" type="select" translate="label" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Enable Arp</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="productpage" translate="label" type="text" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                <label>Product page</label>
+                <field id="quickview" type="select" translate="label" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Quick view </label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <group id="pagetop" translate="label" type="text" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Product Page Top</label>
+                    <field id="enabled" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="block_layout" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Block layout</label>
+                        <validate>required-entry</validate>
+                        <source_model>Magedelight\Arp\Model\Source\BlockLayout</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="displaymaxproduct_grid" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Display max product To Show for Grid</label>
+                        <validate>required-entry validate-greater-than-zero</validate>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">1</field>
+                        </depends>
+                    </field>
+                    <field id="displaymaxproduct_slider" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Display max product To Show for Slider</label>
+                        <validate>required-entry validate-greater-than-zero</validate>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">2</field>
+                        </depends>
+                    </field>
+                    <field id="slidesToShow" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Product slides To Show</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-5</validate>
+                        <comment>Enter number between 1 to 5</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="slidesToScroll" type="text" translate="label" sortOrder="13" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Product slides To Scroll</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-5</validate>
+                        <comment>Enter number between 1 to 5</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="noOfColunm" type="text" translate="label" sortOrder="11" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>No Of Column</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-5</validate>
+                        <comment>Enter number between 1 to 5</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">1</field>
+                        </depends>
+                    </field>
+                    <field id="addtocartbutton" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label> Show "Add To Cart" button</label>
+                        <source_model>Magedelight\Arp\Model\Source\Yesno</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                </group>
+                <group id="pagebottom" translate="label" type="text" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Product Page Bottom</label>
+                    <field id="enabled" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="block_layout" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Block layout</label>
+                        <validate>required-entry</validate>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                        <source_model>Magedelight\Arp\Model\Source\BlockLayout</source_model>
+                    </field>
+                    <field id="displaymaxproduct_grid" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Display max product To Show for Grid</label>
+                        <validate>required-entry validate-greater-than-zero</validate>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">1</field>
+                        </depends>
+                    </field>
+                    <field id="displaymaxproduct_slider" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Display max product To Show for Slider</label>
+                        <validate>required-entry validate-greater-than-zero</validate>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">2</field>
+                        </depends>
+                    </field>
+                    <field id="slidesToShow" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Product slides To Show</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-5</validate>
+                        <comment>Enter number between 1 to 5</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="slidesToScroll" type="text" translate="label" sortOrder="13" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Product slides To Scroll</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-5</validate>
+                        <comment>Enter number between 1 to 5</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="noOfColunm" type="text" translate="label" sortOrder="11" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>No Of Column</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-5</validate>
+                        <comment>Enter number between 1 to 5</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">1</field>
+                        </depends>
+                    </field>
+                    <field id="addtocartbutton" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label> Show "Add To Cart" button</label>
+                        <source_model>Magedelight\Arp\Model\Source\Yesno</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                </group>
+                <group id="beforenative" translate="label" type="text" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Products Before Native Block</label>
+                    <field id="enabled" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="block_layout" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Block layout</label>
+                        <validate>required-entry</validate>
+                        <source_model>Magedelight\Arp\Model\Source\BlockLayout</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="displaymaxproduct_grid" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Display max product To Show for Grid</label>
+                        <validate>required-entry validate-greater-than-zero</validate>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">1</field>
+                        </depends>
+                    </field>
+                    <field id="displaymaxproduct_slider" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Display max product To Show for Slider</label>
+                        <validate>required-entry validate-greater-than-zero</validate>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">2</field>
+                        </depends>
+                    </field>
+                    <field id="slidesToShow" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Product slides To Show</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-4</validate>
+                        <comment>Enter number between 1 to 4</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="slidesToScroll" type="text" translate="label" sortOrder="13" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Product slides To Scroll</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-4</validate>
+                        <comment>Enter number between 1 to 4</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="noOfColunm" type="text" translate="label" sortOrder="11" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>No Of Column</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-4</validate>
+                        <comment>Enter number between 1 to 4</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">1</field>
+                        </depends>
+                    </field>
+                    <field id="addtocartbutton" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label> Show "Add To Cart" button</label>
+                        <source_model>Magedelight\Arp\Model\Source\Yesno</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                </group>
+                <group id="afternative" translate="label" type="text" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Products After Native Block</label>
+                    <field id="enabled" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="block_layout" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Block layout</label>
+                        <validate>required-entry</validate>
+                        <source_model>Magedelight\Arp\Model\Source\BlockLayout</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="displaymaxproduct_grid" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Display max product To Show for Grid</label>
+                        <validate>required-entry validate-greater-than-zero</validate>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">1</field>
+                        </depends>
+                    </field>
+                    <field id="displaymaxproduct_slider" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Display max product To Show for Slider</label>
+                        <validate>required-entry validate-greater-than-zero</validate>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">2</field>
+                        </depends>
+                    </field>
+                    <field id="slidesToShow" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Product slides To Show</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-4</validate>
+                        <comment>Enter number between 1 to 4</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="slidesToScroll" type="text" translate="label" sortOrder="13" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Product slides To Scroll</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-4</validate>
+                        <comment>Enter number between 1 to 4</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="noOfColunm" type="text" translate="label" sortOrder="11" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>No Of Column</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-4</validate>
+                        <comment>Enter number between 1 to 4</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">1</field>
+                        </depends>
+                    </field>
+                    <field id="addtocartbutton" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label> Show "Add To Cart" button</label>
+                        <source_model>Magedelight\Arp\Model\Source\Yesno</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                </group>
+                <group id="native" translate="label" type="text" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Products Instead Native Block</label>
+                    <field id="enabled" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="block_layout" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Block layout</label>
+                        <validate>required-entry</validate>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                        <source_model>Magedelight\Arp\Model\Source\BlockLayout</source_model>
+                    </field>
+                    <field id="displaymaxproduct_grid" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Display max product To Show for Grid</label>
+                        <validate>required-entry validate-greater-than-zero</validate>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">1</field>
+                        </depends>
+                    </field>
+                    <field id="displaymaxproduct_slider" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Display max product To Show for Slider</label>
+                        <validate>required-entry validate-greater-than-zero</validate>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">2</field>
+                        </depends>
+                    </field>
+                    <field id="slidesToShow" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Product slides To Show</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-5</validate>
+                        <comment>Enter number between 1 to 4</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="slidesToScroll" type="text" translate="label" sortOrder="13" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Product slides To Scroll</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-5</validate>
+                        <comment>Enter number between 1 to 4</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="noOfColunm" type="text" translate="label" sortOrder="11" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>No Of Column</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-4</validate>
+                        <comment>Enter number between 1 to 4</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">1</field>
+                        </depends>
+                    </field>
+                    <field id="addtocartbutton" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label> Show "Add To Cart" button</label>
+                        <source_model>Magedelight\Arp\Model\Source\Yesno</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                </group>
+                <group id="sidebartop" translate="label" type="text" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Products Sidebar Top</label>
+                    <field id="enabled" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="block_layout" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Block layout</label>
+                        <validate>required-entry</validate>
+                        <source_model>Magedelight\Arp\Model\Source\BlockLayout</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="displaymaxproduct_grid" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Display max product To Show for Grid</label>
+                        <validate>required-entry validate-greater-than-zero</validate>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">1</field>
+                        </depends>
+                    </field>
+                    <field id="displaymaxproduct_slider" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Display max product To Show for Slider</label>
+                        <validate>required-entry validate-greater-than-zero</validate>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">2</field>
+                        </depends>
+                    </field>
+                    <field id="slidesToShow" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Product slides To Show</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-2</validate>
+                        <comment>Enter number between 1 to 2</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="slidesToScroll" type="text" translate="label" sortOrder="13" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Product slides To Scroll</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-2</validate>
+                        <comment>Enter number between 1 to 2</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="noOfColunm" type="text" translate="label" sortOrder="11" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>No Of Column</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-2</validate>
+                        <comment>Enter number between 1 to 2</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">1</field>
+                        </depends>
+                    </field>
+                    <field id="addtocartbutton" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label> Show "Add To Cart" button</label>
+                        <source_model>Magedelight\Arp\Model\Source\Yesno</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                </group>
+                <group id="sidebarbottom" translate="label" type="text" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Products Sidebar Bottom</label>
+                    <field id="enabled" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="block_layout" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Block layout</label>
+                        <validate>required-entry</validate>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                        <source_model>Magedelight\Arp\Model\Source\BlockLayout</source_model>
+                    </field>
+                    <field id="displaymaxproduct_grid" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Display max product To Show for Grid</label>
+                        <validate>required-entry validate-greater-than-zero</validate>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">1</field>
+                        </depends>
+                    </field>
+                    <field id="displaymaxproduct_slider" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Display max product To Show for Slider</label>
+                        <validate>required-entry validate-greater-than-zero</validate>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">2</field>
+                        </depends>
+                    </field>
+                    <field id="slidesToShow" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Product slides To Show</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-2</validate>
+                        <comment>Enter number between 1 to 2</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="slidesToScroll" type="text" translate="label" sortOrder="13" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Product slides To Scroll</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-2</validate>
+                        <comment>Enter number between 1 to 2</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="noOfColunm" type="text" translate="label" sortOrder="11" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>No Of Column</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-2</validate>
+                        <comment>Enter number between 1 to 2</comment>
+                        <depends>
+                             <field id="enabled">1</field>
+                            <field id="block_layout">1</field>
+                        </depends>
+                    </field>
+                    <field id="addtocartbutton" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label> Show "Add To Cart" button</label>
+                        <source_model>Magedelight\Arp\Model\Source\Yesno</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                </group>
+            </group>
+            <group id="categorypage" translate="label" type="text" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                <label>Category page</label>
+                <field id="quickview" type="select" translate="label" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Quick view </label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <group id="pagetop" translate="label" type="text" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Category Page Top</label>
+                    <field id="enabled" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="block_layout" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Block layout</label>
+                        <validate>required-entry</validate>
+                        <source_model>Magedelight\Arp\Model\Source\BlockLayout</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="displaymaxproduct_grid" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Display max product To Show for Grid</label>
+                        <validate>required-entry validate-greater-than-zero</validate>
+                        <depends>
+                             <field id="enabled">1</field>
+                            <field id="block_layout">1</field>
+                        </depends>
+                    </field>
+                    <field id="displaymaxproduct_slider" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Display max product To Show for Slider</label>
+                        <validate>required-entry validate-greater-than-zero</validate>
+                        <depends>
+                             <field id="enabled">1</field>
+                            <field id="block_layout">2</field>
+                        </depends>
+                    </field>
+                    <field id="slidesToShow" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Product slides To Show</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-4</validate>
+                        <comment>Enter number between 1 to 4</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="slidesToScroll" type="text" translate="label" sortOrder="13" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Product slides To Scroll</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-4</validate>
+                        <comment>Enter number between 1 to 4</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="noOfColunm" type="text" translate="label" sortOrder="11" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>No Of Column</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-4</validate>
+                        <comment>Enter number between 1 to 4</comment>
+                        <depends>
+                             <field id="enabled">1</field>
+                            <field id="block_layout">1</field>
+                        </depends>
+                    </field>
+                    <field id="addtocartbutton" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label> Show "Add To Cart" button</label>
+                        <source_model>Magedelight\Arp\Model\Source\Yesno</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                </group>
+                <group id="pagebottom" translate="label" type="text" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Category Page Bottom</label>
+                    <field id="enabled" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="block_layout" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Block layout</label>
+                        <validate>required-entry</validate>
+                        <source_model>Magedelight\Arp\Model\Source\BlockLayout</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="displaymaxproduct_grid" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Display max product To Show for Grid</label>
+                        <validate>required-entry validate-greater-than-zero</validate>
+                        <depends>
+                             <field id="enabled">1</field>
+                            <field id="block_layout">1</field>
+                        </depends>
+                    </field>
+                    <field id="displaymaxproduct_slider" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Display max product To Show for Slider</label>
+                        <validate>required-entry validate-greater-than-zero</validate>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">2</field>
+                        </depends>
+                    </field>
+                    <field id="slidesToShow" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Product slides To Show</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-4</validate>
+                        <comment>Enter number between 1 to 4</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="slidesToScroll" type="text" translate="label" sortOrder="13" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Product slides To Scroll</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-4</validate>
+                        <comment>Enter number between 1 to 4</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="noOfColunm" type="text" translate="label" sortOrder="11" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>No Of Column</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-4</validate>
+                        <comment>Enter number between 1 to 4</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">1</field>
+                        </depends>
+                    </field>
+                    <field id="addtocartbutton" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label> Show "Add To Cart" button</label>
+                        <source_model>Magedelight\Arp\Model\Source\Yesno</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                </group>
+            </group>
+            <group id="shoppingcart" translate="label" type="text" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                <label>Shopping Cart page</label>
+                <field id="quickview" type="select" translate="label" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Quick view </label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <group id="pagetop" translate="label" type="text" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Shopping Cart Page Top</label>
+                    <field id="enabled" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="block_layout" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Block layout</label>
+                        <validate>required-entry</validate>
+                        <source_model>Magedelight\Arp\Model\Source\BlockLayout</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="displaymaxproduct_grid" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Display max product To Show for Grid</label>
+                        <validate>required-entry validate-greater-than-zero</validate>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">1</field>
+                        </depends>
+                    </field>
+                    <field id="displaymaxproduct_slider" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Display max product To Show for Slider</label>
+                        <validate>required-entry validate-greater-than-zero</validate>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">2</field>
+                        </depends>
+                    </field>
+                    <field id="slidesToShow" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Product slides To Show</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-5</validate>
+                        <comment>Enter number between 1 to 5</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="slidesToScroll" type="text" translate="label" sortOrder="13" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Product slides To Scroll</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-5</validate>
+                        <comment>Enter number between 1 to 5</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="noOfColunm" type="text" translate="label" sortOrder="11" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>No Of Column</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-5</validate>
+                        <comment>Enter number between 1 to 5</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">1</field>
+                        </depends>
+                    </field>
+                    <field id="addtocartbutton" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label> Show "Add To Cart" button</label>
+                        <source_model>Magedelight\Arp\Model\Source\Yesno</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                </group>
+                <group id="pagebottom" translate="label" type="text" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Shopping Cart Page Bottom</label>
+                    <field id="enabled" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="block_layout" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Block layout</label>
+                        <validate>required-entry</validate>
+                        <source_model>Magedelight\Arp\Model\Source\BlockLayout</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="displaymaxproduct_grid" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Display max product To Show for Grid</label>
+                        <validate>required-entry validate-greater-than-zero</validate>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">1</field>
+                        </depends>
+                    </field>
+                    <field id="displaymaxproduct_slider" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Display max product To Show for Slider</label>
+                        <validate>required-entry validate-greater-than-zero</validate>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">2</field>
+                        </depends>
+                    </field>
+                    <field id="slidesToShow" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Product slides To Show</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-5</validate>
+                        <comment>Enter number between 1 to 5</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="slidesToScroll" type="text" translate="label" sortOrder="13" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Product slides To Scroll</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-5</validate>
+                        <comment>Enter number between 1 to 5</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="noOfColunm" type="text" translate="label" sortOrder="11" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>No Of Column</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-5</validate>
+                        <comment>Enter number between 1 to 5</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">1</field>
+                        </depends>
+                    </field>
+                    <field id="addtocartbutton" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label> Show "Add To Cart" button</label>
+                        <source_model>Magedelight\Arp\Model\Source\Yesno</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                </group>
+                <group id="beforenative" translate="label" type="text" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Crossell Before Native Block</label>
+                    <field id="enabled" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="block_layout" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Block layout</label>
+                        <validate>required-entry</validate>
+                        <source_model>Magedelight\Arp\Model\Source\BlockLayout</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="displaymaxproduct_grid" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Display max product To Show for Grid</label>
+                        <validate>required-entry validate-greater-than-zero</validate>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">1</field>
+                        </depends>
+                    </field>
+                    <field id="displaymaxproduct_slider" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Display max product To Show for Slider</label>
+                        <validate>required-entry validate-greater-than-zero</validate>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">2</field>
+                        </depends>
+                    </field>
+                    <field id="slidesToShow" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Product slides To Show</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-4</validate>
+                        <comment>Enter number between 1 to 4</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="slidesToScroll" type="text" translate="label" sortOrder="13" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Product slides To Scroll</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-4</validate>
+                        <comment>Enter number between 1 to 4</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="noOfColunm" type="text" translate="label" sortOrder="11" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>No Of Column</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-4</validate>
+                        <comment>Enter number between 1 to 4</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">1</field>
+                        </depends>
+                    </field>
+                    <field id="addtocartbutton" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label> Show "Add To Cart" button</label>
+                        <source_model>Magedelight\Arp\Model\Source\Yesno</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                </group>
+                <group id="native" translate="label" type="text" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Crossell Instead Native Block</label>
+                    <field id="enabled" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="block_layout" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Block layout</label>
+                        <validate>required-entry</validate>
+                        <source_model>Magedelight\Arp\Model\Source\BlockLayout</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="displaymaxproduct_grid" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Display max product To Show for Grid</label>
+                        <validate>required-entry validate-greater-than-zero</validate>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">1</field>
+                        </depends>
+                    </field>
+                    <field id="displaymaxproduct_slider" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Display max product To Show for Slider</label>
+                        <validate>required-entry validate-greater-than-zero</validate>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">2</field>
+                        </depends>
+                    </field>
+                    <field id="slidesToShow" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Product slides To Show</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-4</validate>
+                        <comment>Enter number between 1 to 4</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="slidesToScroll" type="text" translate="label" sortOrder="13" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Product slides To Scroll</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-4</validate>
+                        <comment>Enter number between 1 to 4</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="noOfColunm" type="text" translate="label" sortOrder="11" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>No Of Colunm</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-4</validate>
+                        <comment>Enter number between 1 to 4</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">1</field>
+                        </depends>
+                    </field>
+                    <field id="addtocartbutton" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label> Show "Add To Cart" button</label>
+                        <source_model>Magedelight\Arp\Model\Source\Yesno</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                </group>
+                <group id="afternative" translate="label" type="text" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Crossell After Native Block</label>
+                    <field id="enabled" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="block_layout" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Block layout</label>
+                        <validate>required-entry</validate>
+                        <source_model>Magedelight\Arp\Model\Source\BlockLayout</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="displaymaxproduct_grid" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Display max product To Show for Grid</label>
+                        <validate>required-entry validate-greater-than-zero</validate>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">1</field>
+                        </depends>
+                    </field>
+                    <field id="displaymaxproduct_slider" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Display max product To Show for Slider</label>
+                        <validate>required-entry validate-greater-than-zero</validate>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">2</field>
+                        </depends>
+                    </field>
+                    <field id="slidesToShow" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Product slides To Show</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-4</validate>
+                        <comment>Enter number between 1 to 4</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="slidesToScroll" type="text" translate="label" sortOrder="13" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Product slides To Scroll</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-4</validate>
+                        <comment>Enter number between 1 to 4</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="noOfColunm" type="text" translate="label" sortOrder="11" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>No Of Column</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-4</validate>
+                        <comment>Enter number between 1 to 4</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">1</field>
+                        </depends>
+                    </field>
+                    <field id="addtocartbutton" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label> Show "Add To Cart" button</label>
+                        <source_model>Magedelight\Arp\Model\Source\Yesno</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                </group>
+            </group>
+            <group id="cmspage" translate="label" type="text" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                <label>Cms page</label>
+                <field id="quickview" type="select" translate="label" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Quick view </label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <group id="pagetop" translate="label" type="text" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Cms Page Top</label>
+                    <field id="enabled" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="block_layout" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Block layout</label>
+                        <validate>required-entry</validate>
+                        <source_model>Magedelight\Arp\Model\Source\BlockLayout</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="displaymaxproduct_grid" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Display max product To Show for Grid</label>
+                        <validate>required-entry validate-greater-than-zero</validate>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">1</field>
+                        </depends>
+                    </field>
+                    <field id="displaymaxproduct_slider" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Display max product To Show for Slider</label>
+                        <validate>required-entry validate-greater-than-zero</validate>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">2</field>
+                        </depends>
+                    </field>
+                    <field id="slidesToShow" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Product slides To Show</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-5</validate>
+                        <comment>Enter number between 1 to 5</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="slidesToScroll" type="text" translate="label" sortOrder="13" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Product slides To Scroll</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-5</validate>
+                        <comment>Enter number between 1 to 5</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="noOfColunm" type="text" translate="label" sortOrder="11" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>No Of Column</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-5</validate>
+                        <comment>Enter number between 1 to 5</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">1</field>
+                        </depends>
+                    </field>
+                    <field id="addtocartbutton" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label> Show "Add To Cart" button</label>
+                        <source_model>Magedelight\Arp\Model\Source\Yesno</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                </group>
+                <group id="pagebottom" translate="label" type="text" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Cms Page Bottom</label>
+                    <field id="enabled" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="block_layout" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Block layout</label>
+                        <validate>required-entry</validate>
+                        <source_model>Magedelight\Arp\Model\Source\BlockLayout</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="displaymaxproduct_grid" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Display max product To Show for Grid</label>
+                        <validate>required-entry validate-greater-than-zero</validate>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">1</field>
+                        </depends>
+                    </field>
+                    <field id="displaymaxproduct_slider" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Display max product To Show for Slider</label>
+                        <validate>required-entry validate-greater-than-zero</validate>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">2</field>
+                        </depends>
+                    </field>
+                    <field id="slidesToShow" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Product slides To Show</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-5</validate>
+                        <comment>Enter number between 1 to 5</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="slidesToScroll" type="text" translate="label" sortOrder="13" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>Product slides To Scroll</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-5</validate>
+                        <comment>Enter number between 1 to 5</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="noOfColunm" type="text" translate="label" sortOrder="11" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label>No Of Column</label>
+                        <validate>required-entry validate-digits validate-digits-range digits-range-1-5</validate>
+                        <comment>Enter number between 1 to 5</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                            <field id="block_layout">1</field>
+                        </depends>
+                    </field>
+                    <field id="addtocartbutton" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                        <label> Show "Add To Cart" button</label>
+                        <source_model>Magedelight\Arp\Model\Source\Yesno</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                </group>
+            </group>
+            <group id="ordersuccesspage" translate="label" type="text" sortOrder="1" showInDefault="1" showInStore="1" showInWebsite="1">
+                <label>Order Success Page</label>
+                <field id="enabled" type="select" translate="label" sortOrder="9" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="quickview" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Quick view </label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="block_layout" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Block layout</label>
+                    <validate>required-entry</validate>
+                    <source_model>Magedelight\Arp\Model\Source\BlockLayout</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="displaymaxproduct_grid" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Display max product To Show for Grid</label>
+                    <validate>required-entry validate-greater-than-zero</validate>
+                    <depends>
+                        <field id="enabled">1</field>
+                        <field id="block_layout">1</field>
+                    </depends>
+                </field>
+                <field id="displaymaxproduct_slider" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Display max product To Show for Slider</label>
+                    <validate>required-entry validate-greater-than-zero</validate>
+                    <depends>
+                        <field id="enabled">1</field>
+                        <field id="block_layout">2</field>
+                    </depends>
+                </field>
+                <field id="slidesToShow" type="text" translate="label" sortOrder="12" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Product slides To Show</label>
+                    <validate>required-entry validate-digits validate-digits-range digits-range-1-5</validate>
+                    <comment>Enter number between 1 to 5</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="slidesToScroll" type="text" translate="label" sortOrder="13" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Product slides To Scroll</label>
+                    <validate>required-entry validate-digits validate-digits-range digits-range-1-5</validate>
+                    <comment>Enter number between 1 to 5</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="noOfColunm" type="text" translate="label" sortOrder="11" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>No Of Column</label>
+                    <validate>required-entry validate-digits validate-digits-range digits-range-1-5</validate>
+                    <comment>Enter number between 1 to 5</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                        <field id="block_layout">1</field>
+                    </depends>
+                </field>
+                <field id="addtocartbutton" type="select" translate="label" sortOrder="10" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label> Show "Add To Cart" button</label>
+                    <source_model>Magedelight\Arp\Model\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

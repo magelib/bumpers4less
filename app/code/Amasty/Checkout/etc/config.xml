@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2017 Amasty (https://www.amasty.com)
+ * @package Amasty_Checkout
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <amasty_checkout>
+            <general>
+                <enabled>1</enabled>
+                <title>Checkout</title>
+                <description>Please enter your details below to complete your purchase</description>
+                <subscribe_authorization>1</subscribe_authorization>
+            </general>
+            <design>
+                <layout>2columns</layout>
+            </design>
+            <additional_options>
+                <discount>1</discount>
+            </additional_options>
+        </amasty_checkout>
+    </default>
+</config>

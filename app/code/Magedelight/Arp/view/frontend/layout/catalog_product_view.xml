@@ -1,0 +1,179 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content.aside">
+            <referenceBlock name="catalog.product.related">
+                <action method='setCustomTemplate'>
+                </action>
+                <block class="Magento\Framework\View\Element\RendererList" name="category.product.type.details.renderers.native" as="details.renderers">
+                    <block class="Magento\Framework\View\Element\Template" as="default"/>
+                    <block class="Magento\Swatches\Block\Product\Renderer\Listing\Configurable" as="configurable" template="Magedelight_Arp::catalog/product/product/native.phtml" >
+                        <arguments>
+                            <argument name="type" xsi:type="string">product-native</argument>
+                        </arguments>
+                    </block>
+                </block>
+            </referenceBlock>
+            <block class="Magedelight\Arp\Block\Catalog\Product\RelatedItems" name="arp.related.product.details.before" before="catalog.product.related" cacheable="false">
+                <action method="setCustomTemplate"/>
+                <arguments>
+                    <argument name="type" xsi:type="string">product-before</argument>
+                    <argument name="position" xsi:type="string">2</argument>
+                    <argument name="group_name" xsi:type="string">beforenative</argument>
+                </arguments>
+                <block class="Magento\Catalog\Block\Product\ProductList\Item\Container" name="related.product.addto.product.before" as="addto">
+                    <block class="Magento\Wishlist\Block\Catalog\Product\ProductList\Item\AddTo\Wishlist"
+                               name="related.product.addto.wishlist.product.before" as="wishlist" before="compare"
+                               template="Magento_Wishlist::catalog/product/list/addto/wishlist.phtml"/>    
+                    <block class="Magento\Catalog\Block\Product\ProductList\Item\AddTo\Compare"
+                               name="related.product.addto.compare.product.before" as="compare"
+                               template="Magento_Catalog::product/list/addto/compare.phtml"/>
+                </block>
+                <block class="Magento\Framework\View\Element\RendererList" name="category.product.type.details.renderers.before" as="details.renderers">
+                    <block class="Magento\Framework\View\Element\Template" as="default"/>
+                    <block class="Magento\Swatches\Block\Product\Renderer\Listing\Configurable" as="configurable" template="Magedelight_Arp::catalog/product/product/beforeNative.phtml" >
+                        <arguments>
+                            <argument name="type" xsi:type="string">product-before</argument>
+                        </arguments>
+                    </block>
+                </block>
+            </block>
+            <block class="Magedelight\Arp\Block\Catalog\Product\RelatedItems" name="arp.related.product.details.after" after= "catalog.product.related" cacheable="false">
+                <action method="setCustomTemplate"/>
+                <arguments>
+                    <argument name="type" xsi:type="string">product-after</argument>
+                    <argument name="position" xsi:type="string">3</argument>
+                    <argument name="group_name" xsi:type="string">afternative</argument>
+                </arguments>
+                <block class="Magento\Catalog\Block\Product\ProductList\Item\Container" name="related.product.addto.product.after" as="addto">
+                    <block class="Magento\Wishlist\Block\Catalog\Product\ProductList\Item\AddTo\Wishlist"
+                               name="related.product.addto.wishlist.product.after" as="wishlist" before="compare"
+                               template="Magento_Wishlist::catalog/product/list/addto/wishlist.phtml"/>    
+                    <block class="Magento\Catalog\Block\Product\ProductList\Item\AddTo\Compare"
+                               name="related.product.addto.compare.product.after" as="compare"
+                               template="Magento_Catalog::product/list/addto/compare.phtml"/>
+                </block>
+                <block class="Magento\Framework\View\Element\RendererList" name="category.product.type.details.renderers.after" as="details.renderers">
+                    <block class="Magento\Framework\View\Element\Template" as="default"/>
+                    <block class="Magento\Swatches\Block\Product\Renderer\Listing\Configurable" as="configurable" template="Magedelight_Arp::catalog/product/product/afterNative.phtml" >
+                        <arguments>
+                            <argument name="type" xsi:type="string">product-after</argument>
+                        </arguments>
+                    </block>
+                </block>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <container name="arp.product.info.main.sidebar.top" label="Catalog Product Container Arp" htmlTag="div" htmlClass="arp-product-sidebar-top" before = '-' />
+            <block class="Magedelight\Arp\Block\Catalog\Product\RelatedItems" name="arp.related.product.details.top" before="-" cacheable="false">
+                <action method="setCustomTemplate"/>
+                <arguments>
+                    <argument name="type" xsi:type="string">product-top</argument>
+                    <argument name="position" xsi:type="string">4</argument>
+                    <argument name="group_name" xsi:type="string">pagetop</argument>
+                </arguments>
+                <block class="Magento\Catalog\Block\Product\ProductList\Item\Container" name="related.product.addto.product.top" as="addto">
+                    <block class="Magento\Wishlist\Block\Catalog\Product\ProductList\Item\AddTo\Wishlist"
+                               name="related.product.addto.wishlist.product.top" as="wishlist" before="compare"
+                               template="Magento_Wishlist::catalog/product/list/addto/wishlist.phtml"/>    
+                    <block class="Magento\Catalog\Block\Product\ProductList\Item\AddTo\Compare"
+                               name="related.product.addto.compare.product.top" as="compare"
+                               template="Magento_Catalog::product/list/addto/compare.phtml"/>
+                </block>
+                <block class="Magento\Framework\View\Element\RendererList" name="category.product.type.details.renderers.top" as="details.renderers">
+                    <block class="Magento\Framework\View\Element\Template" as="default"/>
+                    <block class="Magento\Swatches\Block\Product\Renderer\Listing\Configurable" as="configurable" template="Magedelight_Arp::catalog/product/product/top.phtml" >
+                        <arguments>
+                            <argument name="type" xsi:type="string">product-top</argument>
+                        </arguments>
+                    </block>
+                </block> 
+            </block>  
+            <referenceContainer name="product.info.main">
+                <block class="Magedelight\Arp\Block\Catalog\Product\RelatedItems" name="arp.related.product.details.sidebar.top" before= "-" cacheable="false">
+                    <action method="setCustomTemplate"/>
+                    <arguments>
+                        <argument name="type" xsi:type="string">product-sidebar-top</argument>
+                        <argument name="position" xsi:type="string">6</argument>
+                        <argument name="group_name" xsi:type="string">sidebartop</argument>
+                    </arguments>
+                    <block class="Magento\Catalog\Block\Product\ProductList\Item\Container" name="related.product.addto.product.sidebar.top" as="addto">
+                        <block class="Magento\Wishlist\Block\Catalog\Product\ProductList\Item\AddTo\Wishlist"
+                               name="related.product.addto.wishlist.product.sidebar.top" as="wishlist" before="compare"
+                               template="Magento_Wishlist::catalog/product/list/addto/wishlist.phtml"/>    
+                        <block class="Magento\Catalog\Block\Product\ProductList\Item\AddTo\Compare"
+                               name="related.product.addto.compare.product.sidebar.top" as="compare"
+                               template="Magento_Catalog::product/list/addto/compare.phtml"/>
+                    </block>
+                    <block class="Magento\Framework\View\Element\RendererList" name="category.product.type.details.renderers.sidebar.top" as="details.renderers">
+                        <block class="Magento\Framework\View\Element\Template" as="default"/>
+                        <block class="Magento\Swatches\Block\Product\Renderer\Listing\Configurable" as="configurable" template="Magedelight_Arp::catalog/product/product/sidebar-top.phtml" >
+                            <arguments>
+                                <argument name="type" xsi:type="string">product-sidebar-top</argument>
+                            </arguments>
+                        </block>
+                    </block>
+                </block>
+                <block class="Magedelight\Arp\Block\Catalog\Product\RelatedItems" name="arp.related.product.details.sidebar.bottom" after= "-" cacheable="false">
+                    <action method="setCustomTemplate"/>
+                    <arguments>
+                        <argument name="type" xsi:type="string">product-sidebar-bottom</argument>
+                        <argument name="position" xsi:type="string">7</argument>
+                        <argument name="group_name" xsi:type="string">sidebarbottom</argument>
+                    </arguments>
+                    <block class="Magento\Catalog\Block\Product\ProductList\Item\Container" name="related.product.addto.product.sidebar.bottom" as="addto">
+                        <block class="Magento\Wishlist\Block\Catalog\Product\ProductList\Item\AddTo\Wishlist"
+                                   name="related.product.addto.wishlist.product.sidebar.bottom" as="wishlist" before="compare"
+                                   template="Magento_Wishlist::catalog/product/list/addto/wishlist.phtml"/>    
+                        <block class="Magento\Catalog\Block\Product\ProductList\Item\AddTo\Compare"
+                                   name="related.product.addto.compare.product.sidebar.bottom" as="compare"
+                                   template="Magento_Catalog::product/list/addto/compare.phtml"/>
+                    </block>
+                    <block class="Magento\Framework\View\Element\RendererList" name="category.product.type.details.renderers.sidebar.bottom" as="details.renderers">
+                        <block class="Magento\Framework\View\Element\Template" as="default"/>
+                        <block class="Magento\Swatches\Block\Product\Renderer\Listing\Configurable" as="configurable" template="Magedelight_Arp::catalog/product/product/sidebar-bottom.phtml" >
+                            <arguments>
+                                <argument name="type" xsi:type="string">product-sidebar-bottom</argument>
+                            </arguments>
+                        </block>
+                    </block>
+                </block>
+            </referenceContainer>
+        </referenceContainer>
+        <referenceContainer name="content.bottom">
+            <block class="Magedelight\Arp\Block\Catalog\Product\RelatedItems" name="arp.related.product.details.bottom" after= "content.aside" cacheable="false">
+                <action method="setCustomTemplate"/>
+                <arguments>
+                    <argument name="type" xsi:type="string">product-bottom</argument>
+                    <argument name="position" xsi:type="string">5</argument>
+                    <argument name="group_name" xsi:type="string">pagebottom</argument>
+                </arguments>
+                <block class="Magento\Catalog\Block\Product\ProductList\Item\Container" name="related.product.addto.product.bottom" as="addto">
+                    <block class="Magento\Wishlist\Block\Catalog\Product\ProductList\Item\AddTo\Wishlist"
+                               name="related.product.addto.wishlist.product.bottom" as="wishlist" before="compare"
+                               template="Magento_Wishlist::catalog/product/list/addto/wishlist.phtml"/>    
+                    <block class="Magento\Catalog\Block\Product\ProductList\Item\AddTo\Compare"
+                               name="related.product.addto.compare.product.bottom" as="compare"
+                               template="Magento_Catalog::product/list/addto/compare.phtml"/>
+                </block>
+                <block class="Magento\Framework\View\Element\RendererList" name="category.product.type.details.renderers.bottom" as="details.renderers">
+                    <block class="Magento\Framework\View\Element\Template" as="default"/>
+                    <block class="Magento\Swatches\Block\Product\Renderer\Listing\Configurable" as="configurable" template="Magedelight_Arp::catalog/product/product/bottom.phtml" >
+                        <arguments>
+                            <argument name="type" xsi:type="string">product-bottom</argument>
+                        </arguments>
+                    </block>
+                </block>
+            </block>
+        </referenceContainer>
+        <move element="arp.product.info.main.sidebar.top" destination="product.info.main" before="-" />
+        <move element="arp.related.product.details.sidebar.top" destination="arp.product.info.main.sidebar.top" />
+        <move element="page.main.title" destination="product.info.main" after= "arp.product.info.main.sidebar.top" />
+    </body>
+</page>

@@ -1,0 +1,48 @@
+{
+    "name": "shipperhq/module-shipper",
+    "description": "Magento Shipping integration with ShipperHQ",
+    "type": "magento2-module",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "authors": [
+        {
+            "name": "ShipperHQ",
+            "email": "sales@shipperhq.com",
+            "homepage": "http://www.Shipperhq.com"
+        },
+        {
+            "name": "Zowta LLC"
+        }
+    ],
+    "support": {
+        "documentation": "http://docs.shipperhq.com"
+    },
+    "require": {
+        "shipperhq/library-ws": "*",
+        "shipperhq/library-shipper": "*",
+        "shipperhq/module-common": "*",
+        "shipperhq/module-logger": "*"
+    },
+    "repositories": [
+        {
+        "type": "vcs",
+        "url": ""
+        }
+    ],
+    "autoload": {
+        "files": [
+            "src/registration.php"
+        ],
+        "psr-4": {
+	        "ShipperHQ\\Shipper\\": "src/"
+			
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ShipperHQ\\Shipper\\Test\\": "tests/unit/"
+        }
+    }
+}

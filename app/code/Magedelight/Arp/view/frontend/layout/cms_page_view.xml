@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Magedelight\Arp\Block\Cms\Page" name="arp.related.product.cms.top" before="-" cacheable="false">
+                <action method="setCustomTemplate"/>
+                <arguments>
+                    <argument name="type" xsi:type="string">cms-top</argument>
+                    <argument name="position" xsi:type="string">16</argument>
+                    <argument name="group_name" xsi:type="string">pagetop</argument>        
+                </arguments> 
+                <block class="Magento\Catalog\Block\Product\ProductList\Item\Container" name="crosssell.product.addto.top" as="addto">
+                    <block class="Magento\Wishlist\Block\Catalog\Product\ProductList\Item\AddTo\Wishlist"
+                           name="crosssell.product.addto.wishlist.top" as="wishlist" before="compare"
+                           template="Magento_Wishlist::catalog/product/list/addto/wishlist.phtml"/>    
+                    <block class="Magento\Catalog\Block\Product\ProductList\Item\AddTo\Compare"
+                           name="crosssell.product.addto.compare.top" as="compare"
+                           template="Magento_Catalog::product/list/addto/compare.phtml"/>
+                </block>
+                <block class="Magento\Framework\View\Element\RendererList" name="category.product.type.details.renderers.top" as="details.renderers">
+                    <block class="Magento\Framework\View\Element\Template" as="default"/>
+                    <block class="Magento\Swatches\Block\Product\Renderer\Listing\Configurable" as="configurable" template="Magedelight_Arp::cms/product/top.phtml" >
+                        <arguments>
+                            <argument name="type" xsi:type="string">success-top</argument>
+                        </arguments>
+                    </block>
+                </block> 
+            </block>
+            <block class="Magedelight\Arp\Block\Cms\Page" name="arp.related.product.cms.after" after="-" cacheable="false">
+                <action method="setCustomTemplate"/>
+                <arguments>
+                    <argument name="type" xsi:type="string">cms-bottom</argument>
+                    <argument name="position" xsi:type="string">17</argument>
+                    <argument name="group_name" xsi:type="string">pagebottom</argument>        
+                </arguments> 
+                <block class="Magento\Catalog\Block\Product\ProductList\Item\Container" name="crosssell.product.addto.bottom" as="addto">
+                    <block class="Magento\Wishlist\Block\Catalog\Product\ProductList\Item\AddTo\Wishlist"
+                           name="crosssell.product.addto.wishlist.after" as="wishlist" before="compare"
+                           template="Magento_Wishlist::catalog/product/list/addto/wishlist.phtml"/>    
+                    <block class="Magento\Catalog\Block\Product\ProductList\Item\AddTo\Compare"
+                           name="crosssell.product.addto.compare.after" as="compare"
+                           template="Magento_Catalog::product/list/addto/compare.phtml"/>
+                </block>
+                <block class="Magento\Framework\View\Element\RendererList" name="category.product.type.details.renderers.bottom" as="details.renderers">
+                    <block class="Magento\Framework\View\Element\Template" as="default"/>
+                    <block class="Magento\Swatches\Block\Product\Renderer\Listing\Configurable" as="configurable" template="Magedelight_Arp::cms/product/bottom.phtml" >
+                        <arguments>
+                            <argument name="type" xsi:type="string">success-bottom</argument>
+                        </arguments>
+                    </block>
+                </block> 
+            </block>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,148 @@
+<?php
+/**
+ * Magedelight
+ * Copyright (C) 2016 Magedelight <info@magedelight.com>
+ *
+ * NOTICE OF LICENSE
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://opensource.org/licenses/gpl-3.0.html.
+ *
+ * @category Magedelight
+ * @package Magedelight_Bundlediscount
+ * @copyright Copyright (c) 2016 Mage Delight (http://www.magedelight.com/)
+ * @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License,version 3 (GPL-3.0)
+ * @author Magedelight <info@magedelight.com>
+ */
+?>
+<script type="text/javascript">
+    optionTemplate = '<div id="<?php echo $this->getFieldId() ?>content__{{index}}"  class="admin__collapsible-content _show"><div id="<?php echo $this->getFieldId() ?>_{{index}}"  class="fieldset-wrapper"> ' +
+            '<fieldset class="admin__fieldset">' +
+            '<fieldset class="admin__field" id="<?php /* @escapeNotVerified */ echo $this->getFieldId() ?>__field_{{index}}">' +
+            '<div class="admin__field-control admin__field-group-columns admin__control-group-equal admin__control-grouped">' +
+            '<div class="admin__field" > ' +
+            '<label class="admin__field-label" for="<?php echo $this->getFieldName() ?>[{{index}}][name]"><span><?php echo __('Bundle Name') ?></span> </label>' +
+            '<div class="admin__field-control">' +
+            '<input class="admin__control-text" type="text" data-form-part="product_form" name="<?php echo $this->getFieldName() ?>[{{index}}][name]" id="<?php echo $this->getFieldId() ?>_{{index}}_name" value="{{name}}">' +
+            '</div>' +
+            '</div>' +
+            '<div class="admin__field" >' +
+            '<label class="admin__field-label"  for="<?php echo $this->getFieldName() ?>[{{index}}][qty]"><span><?php echo __('Base Product Qty') ?></span> </label>' +
+            '<div class="admin__field-control">' +
+            '<input class="admin__control-text qty validate-greater-than-zero" data-form-part="product_form"  type="text" name="<?php echo $this->getFieldName() ?>[{{index}}][qty]" id="<?php echo $this->getFieldId() ?>_{{index}}_qty" value="{{qty}}"/>' +
+            '</div>' +
+            '<?php //echo $block->escapeJsQuote($this->getOptionDeleteButtonHtml())    ?>' +
+            '</div>' +
+            '<div class="admin__field">' +
+            '<label class="admin__field-label"><span></span> </label>' +
+            '<div class="admin__field-control">' +
+            '<button id="<?php echo $this->getFieldId() ?>_{{index}}_delete" title="Delete Bundle" onclick="pbOption.remove(event)" type="button" class="action-delete action-secondary"  data-ui-id="product-bundlediscount-md-bundlediscount-options-box-option-delete-button" ><span>Delete Bundle</span></button>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</fieldset>' +
+            '<fieldset class="admin__field">' +
+            '<div class="admin__field-control admin__field-group-columns admin__control-group-equal admin__control-grouped">' +
+            '<div class="admin__field" > ' +
+            '<label class="admin__field-label" for="<?php echo $this->getFieldName() ?>[{{index}}][date_from]"><span><?php echo __('Enable From') ?></span> </label>' +
+            '<div class="admin__field-control">' +
+            '<input data-form-part="product_form" class="admin__control-text validate-date-range date-range-<?php echo $this->getFieldId() ?>_{{index}}_date-from" type="text" name="<?php echo $this->getFieldName() ?>[{{index}}][date_from]" id="<?php echo $this->getFieldId() ?>_{{index}}_date_from" value="{{date_from}}">' +
+            '<script>require(["jquery","mage/calendar"],function($){$("#<?php echo $this->getFieldId() ?>_{{index}}_date_from").calendar({buttonText:"<?php echo __('Select Date') ?>",minDate : new Date()});});<\/script>' +
+            '</div>' +
+            '</div>' +
+            '<div class="admin__field"> ' +
+            '<label class="admin__field-label" for="<?php echo $this->getFieldName() ?>[{{index}}][date_to]"><span><?php echo __('Enable To') ?></span> </label>' +
+            '<div class="admin__field-control">' +
+            '<input data-form-part="product_form"  class="admin__control-text validate-date-range date-range-<?php echo $this->getFieldId() ?>_{{index}}_date-to" type="text" name="<?php echo $this->getFieldName() ?>[{{index}}][date_to]" id="<?php echo $this->getFieldId() ?>_{{index}}_date_to" value="{{date_to}}">' +
+            '<script type="text\/javascript">require(["jquery","mage/calendar"],function($){$("#<?php echo $this->getFieldId() ?>_{{index}}_date_to").calendar({buttonText:"<?php echo __('Select Date') ?>",minDate : new Date()});});<\/script>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</fieldset>' +
+            '<fieldset class="admin__field">' +
+            '<div class="admin__field-control admin__field-group-columns admin__control-group-equal admin__control-grouped"> ' +
+            '<div class="admin__field" > ' +
+            '<label class="admin__field-label" for="<?php echo $this->getFieldName() ?>[{{index}}][discount_type]"><span><?php echo __('Discount Type') ?> </span></label>' +
+            '<div class="admin__field-control">' +
+            '<select data-form-part="product_form"  name="<?php echo $this->getFieldName() ?>[{{index}}][discount_type]" id="<?php echo $this->getFieldId() ?>_{{index}}_discount_type" class="admin__control-select"><option value="0"><?php echo __('Fixed') ?></option><option value="1"><?php echo __('Percentage') ?></option></select>' +
+            '</div>' +
+            '</div>' +
+            '<div class="admin__field _required"> ' +
+            '<label class="admin__field-label" for="<?php echo $this->getFieldName() ?>[{{index}}][discount_price]"><span><?php echo __('Discount Price') ?></span></label>' +
+            '<div class="admin__field-control">' +
+            '<input data-form-part="product_form"  class="required-entry admin__control-text validate-greater-than-zero" type="text" name="<?php echo $this->getFieldName() ?>[{{index}}][discount_price]" id="<?php echo $this->getFieldId() ?>_{{index}}_discount_price" value="{{discount_price}}" />' +
+            '</div>' +
+            '</div>' +
+            '<div class="admin__field"> ' +
+            '<label class="admin__field-label" for="<?php echo $this->getFieldName() ?>[{{index}}][exclude_base_product]"><span><?php echo __('Ignore Base Product From Discount') ?> </span></label>' +
+            '<div class="admin__field-control">' +
+            '<select data-form-part="product_form"  name="<?php echo $this->getFieldName() ?>[{{index}}][exclude_base_product]" id="<?php echo $this->getFieldId() ?>_{{index}}_exclude_base_product" class="admin__control-select"><option value="0"><?php echo __('No') ?></option><option value="1"><?php echo __('Yes') ?></option></select>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</fieldset>' +
+            '<fieldset class="admin__fieldset">' +
+            '<table class="admin__dynamic-rows admin__control-table" cellpadding="0" cellspacing="0">' +
+            '<thead>' +
+            '<tr>' +
+            '<th class="opt-type _required"><?php echo __('Status') ?> <span class="_required"></span></label></th>' +
+            '<th class="opt-order _required"><?php echo __('Sort Order') ?> <span class="_required"></span></label></th>' +
+            '<th class="opt-type _required"><?php echo __('Customer Groups') ?> <span class="_required"></span></label></th>' +
+            '<th class="opt-type _required"><?php echo __('Store View') ?> <span class="_required"></span></label></th>' +
+            '<th>&nbsp;</th>' +
+            '</tr>' +
+            '</thead>' +
+            '<tbody>' +
+            '<tr>' +
+            '<input type="hidden" data-form-part="product_form"  id="<?php echo $this->getFieldId() ?>_id_{{index}}" name="<?php echo $this->getFieldName() ?>[{{index}}][bundle_id]" value="{{bundle_id}}">' +
+            '<input type="hidden" data-form-part="product_form"  name="<?php echo $this->getFieldName() ?>[{{index}}][delete]" value="" class="delete">' +
+            '<td><select data-form-part="product_form"  title="" class="admin__control-select" id="<?php echo $this->getFieldId() ?>_{{index}}_status" name="<?php echo $this->getFieldName() ?>[{{index}}][status]"><option value="1"><?php echo __('Enabled') ?></option><option value="0"><?php echo __('Disabled') ?></option></select></td>' +
+            '<td><input data-form-part="product_form"  class="required-entry admin__control-text validate-zero-or-greater" type="text" name="<?php echo $this->getFieldName() ?>[{{index}}][sort_order]" value="{{sort_order}}"></td>' +
+            '<td><select multiple class="required-entry  admin__control-multiselect bundle_customer_group" id="<?php echo $this->getFieldId() ?>_{{index}}_customer_groups" data-form-part="product_form" size="6" multiple="multiple"><?php echo $this->getCustomerGroupsOptions() ?></select>' +
+            '<input type="hidden" data-form-part="product_form" id="<?php echo $this->getFieldId() ?>_{{index}}_customer_groups_hid" name="<?php echo $this->getFieldName() ?>[{{index}}][customer_groups]" value="{{customer_groups}}">' +
+            '</td>' +
+            '<td><select data-form-part="product_form" class=" required-entry admin__control-multiselect bundle_stores" id="<?php echo $this->getFieldId() ?>_{{index}}_store_ids" size="6" multiple="multiple"><?php echo $this->getStoreViewOptions() ?></select>' +
+            '<input type="hidden" data-form-part="product_form" id="<?php echo $this->getFieldId() ?>_{{index}}_store_ids_hid" name="<?php echo $this->getFieldName() ?>[{{index}}][store_ids]" value="{{store_ids}}">' +
+            '</td>' +
+            '<td>&nbsp;<?php //echo $block->escapeJsQuote($this->getAddSelectionButtonHtml())    ?><button id="bundlediscount_option_{{index}}_add_button" title="Add Product" type="button" class="action-default primary add" onclick="pbSelection.showSearch(event)"  data-ui-id="product-bundlediscount-md-bundlediscount-options-box-add-selection-button" ><span>Add Product</span></button></td>' +
+            '</tr>' +
+            '</tbody>' +
+            '</table>' +
+            '<div id="<?php echo $this->getFieldId() ?>_search_{{index}}">' +
+            '</div>' +
+            '</fieldset>' +
+            '</fieldset>' +
+            '</div>' +
+            '</div>';
+</script>
+
+<script type="text/javascript">
+    var pbOption = new Productbundle.Option(optionTemplate, '<?php echo $this->getFieldId() ?>', 'productbundle_container_top');
+
+</script>
+<?php echo $this->getSelectionHtml() ?>
+<script type="text/javascript">
+    var optionIndex = 0;
+<?php foreach ($block->getBundles() as $_bundle): ?>
+        optionIndex = pbOption.add(<?php echo $_bundle->toJson() ?>);
+    <?php if ($_bundle->getSelections()): ?>
+        <?php foreach ($_bundle->getSelections() as $_selection): ?>
+                pbSelection.addRow(optionIndex, <?php echo $_selection->toJson() ?>);
+        <?php endforeach; ?>
+    <?php endif; ?>
+<?php endforeach; ?>
+</script>
+
+<script type="text/javascript">
+observeMultiSelect();
+</script>

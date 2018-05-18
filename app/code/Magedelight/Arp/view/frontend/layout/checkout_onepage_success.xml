@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Magedelight\Arp\Block\Checkout\Cart\CrosellBlockSuccess" name="arp.related.product.cart.after" after="-" cacheable="false">
+                <action method="setCustomTemplate"/>
+                <arguments>
+                    <argument name="type" xsi:type="string">order-success-page</argument>                        
+                </arguments>
+                <block class="Magento\Catalog\Block\Product\ProductList\Item\Container" name="crosssell.product.addto.after" as="addto">
+                    <block class="Magento\Wishlist\Block\Catalog\Product\ProductList\Item\AddTo\Wishlist"
+                               name="crosssell.product.addto.wishlist.after" as="wishlist" before="compare"
+                               template="Magento_Wishlist::catalog/product/list/addto/wishlist.phtml"/>    
+                    <block class="Magento\Catalog\Block\Product\ProductList\Item\AddTo\Compare"
+                               name="crosssell.product.addto.compare.after" as="compare"
+                               template="Magento_Catalog::product/list/addto/compare.phtml"/>
+                </block>
+                <block class="Magento\Framework\View\Element\RendererList" name="category.product.type.details.renderers.bottom" as="details.renderers">
+                    <block class="Magento\Framework\View\Element\Template" as="default"/>
+                    <block class="Magento\Swatches\Block\Product\Renderer\Listing\Configurable" as="configurable" template="Magedelight_Arp::checkout/cart/product/ordersucess.phtml" >
+                        <arguments>
+                            <argument name="type" xsi:type="string">success-bottom</argument>
+                        </arguments>
+                    </block>
+                </block> 
+            </block>
+                
+            <block class="Magento\Checkout\Block\Onepage\Success" name="checkout.success" template="success.phtml" cacheable="false"/>
+        </referenceContainer>
+        <container name="order.success.additional.info" label="Order Success Additional Info"/>
+    </body>
+</page>

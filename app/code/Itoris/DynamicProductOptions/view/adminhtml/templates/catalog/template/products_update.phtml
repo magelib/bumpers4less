@@ -1,0 +1,83 @@
+<?php
+/**
+ * ITORIS
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the ITORIS's Magento Extensions License Agreement
+ * which is available through the world-wide-web at this URL:
+ * http://www.itoris.com/magento-extensions-license.html
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to sales@itoris.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extensions to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to the license agreement or contact sales@itoris.com for more information.
+ *
+ * @category   ITORIS
+ * @package    ITORIS_M2_DYNAMIC_PRODUCT_OPTIONS
+ * @copyright  Copyright (c) 2016 ITORIS INC. (http://www.itoris.com)
+ * @license    http://www.itoris.com/magento-extensions-license.html  Commercial License
+ */
+ ?>
+<style>
+    #saveandapply {background-color:#1002eb; border-color:#1002eb;}
+</style>
+<?php
+$templateId = $block->needsProductUpdate();
+if ($templateId) {
+    $configIds = $block->getConfigsToUpdate();
+    if (count($configIds)) {
+    ?>
+        <style>
+        #dpo_progress {width:100% !important; background:#fff799; color:#8d0808; border:1px solid #aaa; padding:5px 20px; border-radius:5px; box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3); margin:10px 0px; font-size:16px;}
+        </style>
+        <div id="dpo_progress">
+            <?php echo __('Updating template in products:') ?>
+            <span class="current">0</span>
+            <?php echo __('of'); ?>
+            <span class="total"><?php echo count($configIds); ?></span>
+            (<span class="percent">0</span>%)
+            <img src="<?php echo $block->getViewFileUrl('Itoris_DynamicProductOptions::images/loading.gif'); ?>" alt="loading" />
+        </div>
+        <script type="text/javascript">
+            require([
+                'jquery'
+            ], function (jQuery) {
+                window.dpoConfigIds = <?php echo json_encode($configIds); ?>;
+                window.dpoPageSize = 100;
+                window.dpoCurrentPosition = 0;
+                window.dpoProcessed = 0;
+                window.dpoProcessConfigs = function(){                    
+                    var toProcess = window.dpoConfigIds.slice(window.dpoCurrentPosition, window.dpoCurrentPosition + window.dpoPageSize);
+                    window.dpoProcessed += toProcess.length;
+                    jQuery.ajax({
+                        url: '<?php echo $block->getUrl('dynamicproductoptions/product_options_template/processConfigs'); ?>',
+                        data: {configs: toProcess, template_id: <?php echo $templateId; ?>},
+                        method: 'POST'
+                    }).done(function(result){
+                        if (result.success) {
+                            jQuery('#dpo_progress .current').text(window.dpoProcessed);
+                            jQuery('#dpo_progress .percent').text(parseInt(window.dpoProcessed / window.dpoConfigIds.length * 100));
+                            window.dpoCurrentPosition += window.dpoPageSize;
+                            if (window.dpoCurrentPosition < window.dpoConfigIds.length) {
+                                window.dpoProcessConfigs();
+                            } else {
+                                jQuery('#dpo_progress img').attr({src: '<?php echo $block->getViewFileUrl('Itoris_DynamicProductOptions::images/done.png'); ?>'});
+                                //setTimeout(function(){jQuery('#dpo_progress').hide(400);}, 2000);                                
+                            }
+                        } else {
+                            jQuery('#dpo_progress').text(result.error);
+                        }
+                    });                    
+                };
+                window.dpoProcessConfigs();
+            });
+        </script>
+    <?php
+    }
+}
+?>

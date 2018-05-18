@@ -1,0 +1,25 @@
+{
+    "name": "unirgy/m2-rapidflow",
+    "description": "",
+    "require": {
+        "php": "^5.6|^7.0",
+        "unirgy/m2-simple-license": "2.0.*"
+    },
+    "repositories": [
+        {"type": "composer", "url": "https://repo.packagist.com/unirgy/"},
+        {"packagist.org": false}
+    ],
+    "type": "magento2-module",
+    "version": "3.0.48",
+    "license": [
+        "proprietary"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Unirgy\\RapidFlow\\": ""
+        }
+    }
+}

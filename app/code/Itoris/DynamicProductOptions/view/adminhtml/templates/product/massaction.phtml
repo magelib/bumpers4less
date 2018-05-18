@@ -1,0 +1,121 @@
+<script type="text/javascript">
+	<?php if ($block->isEnabled()) { ?>
+    require([
+        'jquery'
+    ], function (jQuery) {
+        jQuery(document).ready(function(){
+            var scripts = document.getElementsByTagName('script'), initScript = false;
+            for(var i=0; i<scripts.length; i++) if (scripts[i].type == 'text/x-magento-init') {
+                initScript = scripts[i];
+                if (initScript) {
+                    try{
+                        //creating mass action items here, not from xml of the ui_component
+                        var obj = JSON.parse(initScript.innerHTML);
+                        var actions = obj['*']['Magento_Ui/js/core/app']['components']['product_listing']['children']['product_listing']['children']['listing_top']['children']['listing_massaction']['config']['actions'];
+                        actions[actions.length] = {
+                            component: "uiComponent",
+                            label: "<?php echo $block->escapeHtml(__("Copy Custom Options 1 to Many")) ?>",
+                            type: "copy_dynamic_options",
+                            url: "<?php echo $block->getUrl('dynamicproductoptions/product_options/massCopy') ?>",
+                            confirm: {
+                                message: "<?php echo $block->escapeHtml(__("Please enter the product Id you wish to copy options from")) ?>: <span id='dpoMassActionContainer'></span><scri"+"pt>dpoGrid.attachCopyMassActionEvent()</scr"+"ipt>",
+                                title: "<?php echo $block->escapeHtml(__("Copy Custom Options 1 to Many")) ?>"
+                            }
+                        };
+                        actions[actions.length] = {
+                            component: "uiComponent",
+                            label: "<?php echo $block->escapeHtml(__("Load Options Template 1 to Many")) ?>",
+                            type: "load_dynamic_options",
+                            url: "<?php echo $block->getUrl('dynamicproductoptions/product_options/massLoad') ?>",
+                            confirm: {
+                                message: "<?php echo $block->escapeHtml(__("Please select an option template you wish to apply to selected products")) ?>: <span id='dpoMassActionContainer'></span><scri"+"pt>dpoGrid.attachLoadMassActionEvent()</scr"+"ipt>",
+                                title: "<?php echo $block->escapeHtml(__("Load Options Template 1 to Many")) ?>"
+                            }
+                        };
+                        initScript.innerHTML = JSON.stringify(obj);
+                    } catch(e){}
+                }
+            }
+        });
+    });
+	var dpoGrid = {
+		templates: <?php echo json_encode((array) $block->getTemplatesList()); ?>,
+		attachCopyMassActionEvent: function(){
+			require([
+				'uiRegistry'
+			], function (registry) {
+				var massaction = registry.get('product_listing.product_listing.listing_top.listing_massaction');
+				var postParams = massaction.getSelections();
+				window.dpoMassActionObject = massaction.getAction('copy_dynamic_options');
+				window.dpoMassActionURL = window.dpoMassActionObject.url;
+			});
+			var container = jQuery('#dpoMassActionContainer'), popup = jQuery('#dpoMassActionContainer').closest('.modal-popup');
+			var input = jQuery('<input>').attr('type', 'text');
+			container.append(input);
+			container.closest('.modal-popup').find('button.action-accept').attr('disabled', 'disabled');
+			input.on('keyup', function(){
+				if (this.value != "") {
+					popup.find('button.action-accept').removeAttr('disabled');
+				} else {
+					popup.find('button.action-accept').attr('disabled', 'disabled');
+				}
+				window.dpoMassActionObject.url = window.dpoMassActionURL + 'from_product_id/'+this.value+'/';
+			});
+			setTimeout(function(){input.focus()}, 100);
+		},
+		attachLoadMassActionEvent: function(){
+			require([
+				'uiRegistry'
+			], function (registry) {
+				var massaction = registry.get('product_listing.product_listing.listing_top.listing_massaction');
+				var postParams = massaction.getSelections();
+				window.dpoMassActionObject = massaction.getAction('load_dynamic_options');
+				window.dpoMassActionURL = window.dpoMassActionObject.url;
+			});
+			var container = jQuery('#dpoMassActionContainer'), popup = jQuery('#dpoMassActionContainer').closest('.modal-popup');
+			var dropdown = jQuery('<select>');
+			dropdown.append(jQuery('<option>').attr('value', '').html('-- Please select a template --'));
+			for(i in this.templates) {
+				dropdown.append(jQuery('<option>').attr('value', i).html(this.templates[i]));
+			}
+			container.append(dropdown);
+            jQuery('<div style="margin-top:15px;">Select method:</div>').appendTo(container);
+            jQuery('<div style="margin:10px 0px; padding:10px 20px; background:#ceddff; border-radius:5px; border:1px solid #a0b6e7; line-height:30px;">'+
+                    '<input type="radio" name="method" id="dpomethod0" value="0" /><label for="dpomethod0" style="margin-left:5px;">Replace options and leave them editable</label><br />'+
+                    '<input type="radio" name="method" id="dpomethod1" value="1" /><label for="dpomethod1" style="margin-left:5px;">Append options and leave them editable</label><br />'+
+                    '</div>').appendTo(container);
+            jQuery('<div style="margin:10px 0px; padding:10px 20px; background:#fffcb6; border-radius:5px; border:1px solid #f5f086; line-height:30px;">'+
+                    '<input type="radio" name="method" id="dpomethod2" value="2" checked="checked" /><label for="dpomethod2" style="margin-left:5px;">Replace options and associate to template</label><br />'+
+                    '<input type="radio" name="method" id="dpomethod3" value="3" /><label for="dpomethod3" style="margin-left:5px;">Append options and associate to template</label><br />'+
+                    '</div>').appendTo(container);
+            jQuery('[name="method"]').on('click', function(){
+                window.dpoMassActionObject.url = window.dpoMassActionURL + 'template_id/'+dropdown[0].value+'/method/'+jQuery('[name="method"]:checked').val()+'/';
+            });
+			container.closest('.modal-popup').find('button.action-accept').attr('disabled', 'disabled');
+			dropdown.on('change', function(){
+				if (this.value != "") {
+					popup.find('button.action-accept').removeAttr('disabled');
+				} else {
+					popup.find('button.action-accept').attr('disabled', 'disabled');
+				}
+				window.dpoMassActionObject.url = window.dpoMassActionURL + 'template_id/'+dropdown[0].value+'/method/'+jQuery('[name="method"]:checked').val()+'/';
+			});
+			setTimeout(function(){dropdown.focus()}, 100);
+		}
+	}
+	<?php } else { ?>
+		require([
+			'jquery'
+		], function (jQuery) {
+			window.hideMassActions = function(){
+				if (jQuery('.action-menu-items').length) {
+					jQuery('.action-menu-items li span').each(function(i, span){
+						if (span.innerHTML.toLowerCase().indexOf('copy custom options') > -1 ||
+							span.innerHTML.toLowerCase().indexOf('load options') > -1) span.parentNode.style.display = 'none';
+					});
+				} else setTimeout(window.hideMassActions, 200);
+			}
+			window.hideMassActions();
+		});
+	<?php } ?>
+</script>

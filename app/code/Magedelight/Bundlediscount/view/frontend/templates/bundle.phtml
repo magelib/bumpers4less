@@ -1,0 +1,148 @@
+<?php
+/**
+ * Magedelight
+ * Copyright (C) 2016 Magedelight <info@magedelight.com>
+ *
+ * NOTICE OF LICENSE
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://opensource.org/licenses/gpl-3.0.html.
+ *
+ * @category Magedelight
+ * @package Magedelight_Bundlediscount
+ * @copyright Copyright (c) 2016 Mage Delight (http://www.magedelight.com/)
+ * @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License,version 3 (GPL-3.0)
+ * @author Magedelight <info@magedelight.com>
+ */
+$this->_objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$this->scopeConfig = $this->_objectManager->create('Magento\Framework\App\Config\ScopeConfigInterface');
+$storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
+$isEnabled = $this->scopeConfig->getValue('bundlediscount/others/enable_frontend', $storeScope);
+$bundlesModel = $this->_objectManager->create('Magedelight\Bundlediscount\Model\Bundlediscount');
+$priceHelper = $this->_objectManager->create('Magento\Framework\Pricing\Helper\Data');
+$helper = $this->_objectManager->create('Magedelight\Bundlediscount\Helper\Data');
+?>
+<?php if ($isEnabled): ?>
+
+    <script type="text/javascript">
+        var bundles_optionsPrice = [];
+
+    </script>
+    <?php
+    $bundles = $block->getCollection();
+
+    if (count($bundles) > 0):
+        ?>
+        <div style="clear:both;">
+            <div class="col-main">
+
+                <div class="page-contents promotions">
+                    <div class="page-title category-title">
+
+                        <h1><?php echo $helper->getPromotionHeading() ?></h1>
+                    </div>
+                    <div class="prmomtions-contents">
+                        <ul>
+                            <?php foreach ($bundles as $bundle): ?>
+
+                                <?php
+                                $totals = $bundlesModel->calculateDiscountAmount($bundle);
+                                ?>
+                                <?php $_selections = $bundle->getSelections(); ?>
+                                <?php
+                                if (!$_selections) {
+                                    continue;
+                                }
+                                ?>
+                                <li class="promotions-lists">
+                                    <?php if ($bundle->getName() != '' || strlen($bundle->getName()) > 0): ?>
+                                        <h3><a href="<?php echo $bundle->getProductUrl() ?>" title="<?php echo $bundle->getProductName() ?>"><?php echo $bundle->getName() ?></a></h3>
+
+
+
+                                    <?php endif; ?>
+                                    <div class="promotions-discount-container">
+                                        <div class="promotions-selections">
+                                            <div class="promotions-selections-img tooltip<?php echo $bundle->getId() ?>">
+                                                <a href="<?php echo $bundle->getProductUrl() ?>" title="<?php echo $bundle->getProductName() ?>">
+                                                    <img src="<?php echo $bundle->getImageUrl() ?>" height="90" width="90" /></a>
+                                                <div class="promotions-qty">X<?php echo $bundle->getQty() ?></div>
+                                                <div class="tooltip" id="productNameTooltip<?php echo $bundle->getId() ?>"><?php echo $bundle->getProductName() ?></div>
+                                                <style type="text/css">
+                                                    .tooltip<?php echo $bundle->getId() ?>:hover .tooltip{display:block;position:absolute;top:0;cursor:pointer;}
+                                                </style>
+                                                <script type="text/javascript">
+                                                </script>
+                                            </div>
+
+                                            <div class="promotions-selections-plus">+</div>
+                                            <?php $i = 1; ?>
+                                            <?php foreach ($_selections as $_selection): ?>
+                                                <div class="promotions-selections-img tooltip<?php echo $_selection->getId() ?>">
+                                                    <a href="<?php echo $_selection->getProductUrl() ?>" title="<?php echo $_selection->getProductName() ?>">
+                                                        <img src="<?php echo $_selection->getImageUrl() ?>" height="90" width="90" /></a>
+                                                    <div class="promotions-qty">X<?php echo $_selection->getQty() ?></div>
+                                                    <div class="tooltip" id="productNameTooltip<?php echo $_selection->getId() ?>"><?php echo $_selection->getName() ?></div>
+                                                    <style type="text/css">
+                                                        .tooltip<?php echo $_selection->getId() ?>:hover .tooltip{display:block;position:absolute;top:0;;cursor:pointer;}
+                                                    </style>
+                                                </div>
+
+                                                <?php if ($i < $_selections->count()): ?>
+                                                    <div class="promotions-selections-plus">+</div>
+                                                    <?php $i++; ?>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+                                        </div>
+                                        <div class="promotions-info">
+                                            <?php if (!$bundle->hasOptions() && !$bundle->hasCustomOptions()): ?>
+                                                <p class="price-container">
+                                                    <span class="old-price"><?php echo $priceHelper->currency($totals['total_amount'], true, false) ?></span>
+                                                    <span class="new-price"><?php echo $priceHelper->currency($totals['final_amount'], true, false) ?></span>
+                                                </p>
+                                            <?php endif; ?>
+                                            <p class="discount-info"><?php echo $totals['discount_label'] . ' discount.' ?></p>
+                                            <?php if ($bundle->getDiscountType() == '0' || (!$bundle->hasOptions() && !$bundle->hasCustomOptions())): ?>
+                                                <p class="amount-info"><?php echo '-' . $priceHelper->currency($totals['discount_amount'], true, false) . ' discount on buying this offer.' ?></p>
+                                            <?php endif; ?>
+                                            <?php if ($bundle->canShowAddToCartButton()): ?>
+                                                <p class="actions">
+                                                    <?php if (!$bundle->hasOptions() && !$bundle->hasCustomOptions()): ?>
+                                                        <button class="action primary tocart" type="button" title="<?php echo __('Add to Cart') ?>" onclick="addToCart('<?php echo $helper->getBundleAddToCartUrl($bundle->getId()) ?>')"><span><span><?php echo __('Add to Cart') ?></span></span></button>
+                                                    <?php else: ?>
+                                                        <?php $_configureUrl = $this->getUrl('md_bundlediscount/index/configure', array('bundle_id' => $bundle->getId())) ?>
+                                                        <button class="action primary tocart" type="button" title="<?php echo __('Configure') ?>" onclick="configureOptions(<?php echo $bundle->getId() ?>, '<?php echo $_configureUrl ?>');"><span><span><?php echo __('Configure') ?></span></span></button>
+                                                    <div id="configure_bundle_<?php echo $bundle->getId() ?>" class="loading configure_bundle_<?php echo $bundle->getId() ?>" style="display:none;"></div>
+
+                                                <?php endif; ?>
+                                                </p>
+                                            <?php else: ?>
+                                                <p class="action availability out-of-stock">
+                                                    <span><?php echo __('Out of stock') ?></span>
+                                                </p>
+                                            <?php endif; ?>
+                                        </div>  
+                                    </div>
+
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>
+

@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!--
+/* Magedelight
+ * Copyright (C) 2016 Magedelight <info@magedelight.com>
+ *
+ * NOTICE OF LICENSE
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://opensource.org/licenses/gpl-3.0.html.
+ *
+ * @category Magedelight
+ * @package Magedelight_Megamenu
+ * @copyright Copyright (c) 2016 Mage Delight (http://www.magedelight.com/)
+ * @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License,version 3 (GPL-3.0)
+ * @author Magedelight <info@magedelight.com>
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+       <script src="Magedelight_Arp/js/blockdepedency.js"/>
+    </head>
+    <update handle="editor"/>
+    <body>
+        <referenceContainer name="content">
+            <!--referenceBlock name="arp_form">
+                <block class="Magedelight\Arp\Block\Adminhtml\Index\Promo\Tab\Conditions" name="catalog_edit_tab_main_conditions">
+                    <arguments>
+                        <argument name="config" xsi:type="array">
+                            <item name="label" xsi:type="string" translate="true">Where to display related products</item>
+                            <item name="collapsible" xsi:type="boolean">true</item>
+                            <item name="additionalClasses" xsi:type="array">
+                                <item name="block_page_product_tree" xsi:type="boolean">true</item>
+                                <item name="displayblock" xsi:type="boolean">true</item>
+                            </item>
+                            <item name="opened" xsi:type="boolean">false</item>
+                            <item name="sortOrder" xsi:type="number">20</item>
+                            <item name="canShow" xsi:type="boolean">true</item>
+                            <item name="componentType" xsi:type="string">fieldset</item>
+                        </argument>
+                    </arguments>
+                </block>
+                <block class="Magedelight\Arp\Block\Adminhtml\Index\Related\Tab\Conditions" name="catalog_edit_related_tab_conditions">
+                    <arguments>
+                        <argument name="config" xsi:type="array">
+                            <item name="label" xsi:type="string" translate="true">Which products are displayed</item>
+                            <item name="collapsible" xsi:type="boolean">true</item>
+                            <item name="opened" xsi:type="boolean">false</item>
+                            <item name="sortOrder" xsi:type="number">25</item>
+                            <item name="canShow" xsi:type="boolean">true</item>
+                            <item name="componentType" xsi:type="string">fieldset</item>
+                        </argument>
+                    </arguments>
+                </block>               
+            </referenceBlock-->
+            <uiComponent name="arp_form"/>
+        </referenceContainer>
+    </body>
+</page>

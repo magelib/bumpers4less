@@ -1,0 +1,20 @@
+<?php
+// @codingStandardsIgnoreFile
+?>
+<?php
+    $theme = $this->helper('Infortis\Base\Helper\Data');
+    $showTabs = $theme->getCfg('product_page/tabs'); //$block->getData('show_tabs');
+    $containerClasses = '';
+    $innerContainerClasses = '';
+    if ($showTabs)
+    {
+        $containerClasses .= ' collateral-tabs';
+        $innerContainerClasses .= 'product data items ' . $theme->getCfg('product_page/tabs_style');
+    }
+    else
+    {
+        $containerClasses .= ' collateral-stacked';
+    }
+?>
+<?php if ($detailedInfoGroup = $block->getGroupChildNames('detailed_info', 'getChildHtml')):?>    	
+<?php endif; ?>

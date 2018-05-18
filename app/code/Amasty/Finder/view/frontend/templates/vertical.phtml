@@ -1,0 +1,52 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2017 Amasty (https://www.amasty.com)
+ * @package Amasty_Finder
+ */
+?>
+<?php
+/**
+ * Copyright © 2015 Amasty. All rights reserved.
+ */
+/**
+ * @var $block \Amasty\Finder\Block\Form
+ */
+?>
+<?php $finderId = 'amfinder_' . uniqid(); ?>
+<form method="post" action="<?php echo $block->getActionUrl() ?>">
+    <div class="amfinder-vertical" id="<?php echo $finderId ?>Container">
+        <input type="hidden" name="finder_id" value="<?php echo $block->getId() ?>"/>
+        <input type="hidden" name="back_url" value="<?php echo $block->getBackUrl() ?>"/>
+        <input type="hidden" name="reset_url" value="<?php echo $block->getResetUrl() ?>"/>
+        <input type="hidden" name="category_id" value="<?php echo $block->getCurrentCategoryId() ?>"/>
+        <input type="hidden" name="current_apply_url" value="<?php echo $block->getCurrentApplyUrlEncoded() ?>"/>
+        <?php foreach ($block->getFinder()->getDropdowns() as $dropdown): ?>
+            <div class="dropdown-title"><?php echo __($block->escapeHtml($dropdown->getName())) ?></div>
+            <div class="dropdown-element amshopby-clearer">
+                <select <?php echo $block->getDropdownAttributes($dropdown)?> style="width:200px">
+                    <?php foreach($block->getDropdownValues($dropdown) as $v): ?>
+                        <option value="<?php echo $v['value'] ?>"<?php if ($v['selected']):?>selected="selected"<?php endif ?>>
+                            <?php echo $block->escapeHtml($v['label']) ?>
+
+                        </option>
+                    <?php endforeach ?>
+                </select>
+            </div>
+        <?php endforeach ?>
+        <br />
+        <div class="amfinder-buttons" style="display:<?php echo ($block->isButtonsVisible() ? 'block' : 'none')?>">
+            <button class="button action primary" title="<?php echo __('Find') ?>" type="submit"><span><span><?php echo __('Find') ?></span></span></button>
+            <button class="button" name="reset" value="1" title="<?php echo __('Reset') ?>" type="submit"><span><span><?php echo __('Reset') ?></span></span></button>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    require(['jquery', 'Amasty_Finder/js/amfinder'], function($) {
+        var finderConfig = <?php echo $block->getJsonConfig(); ?>;
+        finderConfig.containerId = '<?php echo $finderId ?>Container';
+        finderConfig.loadingText = '<?php echo __('Loading...')?>';
+        $("#<?php echo $finderId ?>Container").amfinder(finderConfig);
+    });
+</script>
+<br />

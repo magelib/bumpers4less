@@ -1,0 +1,472 @@
+<?php
+/**
+ * ITORIS
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the ITORIS's Magento Extensions License Agreement
+ * which is available through the world-wide-web at this URL:
+ * http://www.itoris.com/magento-extensions-license.html
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to sales@itoris.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extensions to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to the license agreement or contact sales@itoris.com for more information.
+ *
+ * @category   ITORIS
+ * @package    ITORIS_M2_DYNAMIC_PRODUCT_OPTIONS
+ * @copyright  Copyright (c) 2016 ITORIS INC. (http://www.itoris.com)
+ * @license    http://www.itoris.com/magento-extensions-license.html  Commercial License
+ */
+?>
+<?php /** @var $block \Itoris\DynamicProductOptions\Block\Adminhtml\Product\Options */ ?>
+<div id="options_settings_div">
+	<?php echo $block->getSettingsFormHtml() ?>
+</div>
+
+<div class="entry-edit-head">
+	<h4><?php echo $block->escapeHtml(__('Options Configuration')) ?></h4>
+	<input type="hidden" name="affect_product_custom_options" data-form-part="product_form" value="1" />
+	<div class="right">
+		<button id="itoris-dynamicoptions-add-new-section" class="scalable add" type="button" style="display:none;"><span><?php echo $block->escapeHtml(__('Add New Section')) ?></span></button>
+		<button id="itoris-dynamicoptions-remove-all-fields" class="scalable delete<?php if ($block->getStoreId() > 0) echo " disabled" ?>"<?php if ($block->getStoreId() > 0) echo ' disabled="disabled"' ?> type="button"><span><?php echo $block->escapeHtml(__('Remove All')) ?></span></button>
+	</div>
+</div>
+<div class="fieldset">
+	<div id="default_config_msg" style="display:none; clear:both;"><?php echo __('Default configuration will be used for the store view. Uncheck checkbox &quot;Use Default&quot; to create custom.') ?></div>
+	<?php if ($block->getStoreId() > 0) echo '<div style="clear:both;">'.__('<b>Please Note.</b> You can\'t remove or create new options (except Image and HTML Text) for specific store view. That should be done in the Default configuration scope and then inherited to the store view scope. However, you still can hide some options by setting <i>visibility = hidden</i>. In the store view scope you can also rename options, reorder, set custom prices and change other properties.').'</div>'; ?>
+	<div class="hor-scroll" id="itoris-dynamicoptions-field-manager-area"></div>
+	<div id="itoris-dynamicoptions-permanent-configs" style="display: none;"></div>
+	<div id="itoris-dynamicoptions-configs">
+		<input type="hidden" id="itoris-dynamicoptions-config" name="itoris_dynamicproductoptions[configuration]" value="" data-form-part="product_form" />
+		<input type="hidden" id="itoris-dynamicoptions-config_internal" disabled="disabled" value="" data-form-part="product_form" />
+        <input type="hidden" id="itoris-dynamicoptions-config_delete" name="itoris_dynamicproductoptions[delete]" value="" data-form-part="product_form" />
+    </div>
+	</div>
+	<input type="hidden" id="itoris-dynamicoptions-configs-serialized" name="itoris_dynamicproductoptions_serialized" disabled="disabled" data-form-part="product_form" />
+</div>
+
+<div id="css_adjustments_div">
+	<div class="entry-edit-head">
+		<h4><?php echo $block->escapeHtml(__('CSS Adjustments (for advanced use only)')) ?></h4>
+	</div>
+	<div class="fieldset">
+		<textarea id="itoris-dynamicproductoptions-css-adjustments" style="width:100%;" rows="10" name="itoris_dynamicproductoptions[css_adjustments]" data-form-part="product_form"><?php echo $block->htmlEscape($block->getOptionsConfig()->getCssAdjustments()) ?></textarea>
+	</div>
+</div>
+
+<div id="extra_js_div">
+	<div class="entry-edit-head">
+		<h4><?php echo $block->escapeHtml(__('Extra JavaScript (for advanced use only)')) ?></h4>
+	</div>
+	<div class="fieldset">
+		<textarea id="itoris-dynamicproductoptions-extra-js" style="width:100%;" rows="10" name="itoris_dynamicproductoptions[extra_js]" data-form-part="product_form"><?php echo $block->htmlEscape($block->getOptionsConfig()->getExtraJs()) ?></textarea>
+	</div>
+</div>
+
+<div id="itoris_dynamicoptions_products_grid_popup" style="display: none;">
+	<div class="product-grid-popup-content"></div>
+	<div class="product-grid-popup-buttons">
+		<button class="button" type="button" onclick="itorisDynamicOptions.hideProductsGridPopup();"><span><span><?php echo $block->escapeHtml(__('Cancel')) ?></span></span></button>
+	</div>
+</div>
+
+<div id="itoris_dynamicoptions_tier_popup" style="display: none;">
+	<table cellpadding="0" cellspacing="3" border="0" class="tier-popup-table" style="width:100%">
+		<thead>
+			<tr>
+				<th style="width:50px">Min QTY</th>
+				<th style="width:60px">Price</th>
+				<th style="width:70px">Price Type</th>
+				<th>&nbsp;</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><input type="text" style="width:100%" class="dpo_tier_qty" /></td>
+				<td><input type="text" style="width:100%" class="dpo_tier_price" /></td>
+				<td><select class="dpo_tier_price_type" style="width:100%">
+					<option value="fixed"><?php echo $block->escapeHtml(__('Fixed')) ?></option>
+					<option value="percent"><?php echo $block->escapeHtml(__('Percent')) ?></option>
+				</select></td>
+				<td><a href="javascript://" class="dpo_tier_remove" onclick="itorisDynamicOptions.removeTierRow(this);"><?php echo $block->escapeHtml(__('Remove')) ?></a></td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="4" style="text-align:left">
+                    <div style="font-size:10px; line-height:12px; margin:5px 0">
+                        <?php echo $block->escapeHtml(__('Check checkbox Qty to rely on the option qty')) ?><br />
+                        <?php echo $block->escapeHtml(__('Uncheck checkbox Qty to rely on the product qty')) ?>
+                    </div>
+                    <a href="javascript://" onclick="itorisDynamicOptions.addTierRow(this);"><?php echo $block->escapeHtml(__('+ Add Tier Price')) ?></a>
+                </td>
+			</tr>
+		</tfoot>
+	</table>
+	<div style="margin-top:5px;">
+		<button type="button" class="save" onclick="itorisDynamicOptions.saveTierPrices(this);"><span><?php echo $block->escapeHtml(__('Apply')) ?></span></button>
+		<button type="button" class="delete last" onclick="itorisDynamicOptions.hideTierPopup();"><span><?php echo $block->escapeHtml(__('Cancel')) ?></span></button>
+	</div>
+</div>
+
+<div id="itoris-dynamicproductoptions-customergroups-popup" class="itoris-dynamicproductoptions-customergroups-popup" style="display: none;">
+	<?php $customerGroups = $block->getCustomerGroups(); ?>
+	<select multiple="multiple" size="<?php echo count($customerGroups) ?>">
+		<?php foreach ($customerGroups as $group): ?>
+			<option value="<?php echo $group['value'] ?>"><?php echo $group['label'] ?></option>
+		<?php endforeach; ?>
+	</select>
+	<div>
+		<button type="button" class="save"><span><?php echo $block->escapeHtml(__('Apply')) ?></span></button>
+		<button type="button" class="delete last"><span><?php echo $block->escapeHtml(__('Cancel')) ?></span></button>
+	</div>
+</div>
+<div id="itoris-dynamicproductoptions-conditions-popup" class="itoris-dynamicproductoptions-conditions-popup" style="display: none;"></div>
+<input id="condition-result" type="hidden" />
+<div id="itoris-dynamicproductoptions-conditions-config" style="display: none;">
+<div id="itoris-dynamicoptions-conditions-template-condition-conbination">
+		<span>If <span class="rule-param"></span>
+		<select class="rule-param-element" style="display: none;">
+			<option value="any">ANY</option>
+			<option value="all">ALL</option>
+		</select>
+		of these conditions are <span class="rule-param"></span>
+		<select class="rule-param-element" style="display: none;">
+			<option value="1">TRUE</option>
+			<option value="0">FALSE</option>
+		</select>
+		:</span>
+	<img class="rule-remove-icon" src="<?php echo $block->getViewFileUrl('images/rule_component_remove.gif') ?>" style="display: none;"/>
+</div>
+<div id="itoris-dynamicoptions-conditions-template-field-condition">
+	<span class="rule-param-name"></span> <span class="rule-param"></span>
+	<select class="rule-param-element" style="display: none;">
+		<?php foreach ($block->getRuleParamsConditions() as $key => $label): ?>
+			<option value="<?php echo $key ?>"><?php echo $label ?></option>
+		<?php endforeach; ?>
+	</select>
+	<span class="rule-param"></span><input class="rule-param-element" type="text" style="display: none;"/>
+	<img class="rule-remove-icon" src="<?php echo $block->getViewFileUrl('images/rule_component_remove.gif') ?>" />
+</div>
+<div id="itoris-dynamicoptions-conditions-template-new-condition">
+	<img class="new-condition-icon" src="<?php echo $block->getViewFileUrl('images/rule_component_add.gif') ?>" />
+	<select class="new-condition rule-param-element" style="display: none;">
+		<option value="">Please choose a condition to add...</option>
+		<option value="combination">Conditions Combination</option>
+		<optgroup label="Fields" class="fields-options"></optgroup>
+	</select>
+</div>
+<div id="itoris-dynamicoptions-sections-visibility-fields" class="itoris-dynamicproductoptions-section-visibility" style="display: none;">
+	<div>
+		<?php echo $block->escapeHtml(__('Visibility')) ?>:
+		<select class="dynamicoptions-visibility">
+				<?php foreach ($block->getVisibilityOptions() as $option): ?>
+					<option value="<?php echo $option['value'] ?>"><?php echo $option['label'] ?></option>
+				<?php endforeach; ?>
+		</select>
+	</div>
+	<div>
+		<?php echo $block->escapeHtml(__('Make it')) ?>:
+		<select class="dynamicoptions-visibility_action">
+				<?php foreach ($block->getVisibilityOptions() as $option): ?>
+					<option value="<?php echo $option['value'] ?>"><?php echo $option['label'] ?></option>
+				<?php endforeach; ?>
+		</select>
+	</div>
+	<div>
+		<?php echo $block->escapeHtml(__('If')) ?>:
+		<div class="dynamicoptions-edit-pen-icon edit-field-condition"></div>
+		<input type="text" class="dynamicoptions-visibility_condition validate-field-condition" style="width: 350px;"/>
+	</div>
+</div>
+<table id="itoris-dynamicoptions-field-configuration">
+<col width="100px"/>
+<col width="100px"/>
+<col width="100px"/>
+<col width="30px"/>
+<col width="50px"/>
+<col width="100px"/>
+<col width="80px"/>
+<col width="80px"/>
+<tbody>
+<tr>
+	<td colspan="3" class="field-label"><?php echo $block->escapeHtml(__('Title')) ?></td>
+	<td class="field-label td-dynamicoptions-internal_id" style="width: 45px;"><?php echo $block->escapeHtml(__('Field ID')) ?></td>
+	<td class="field-label"><?php echo $block->escapeHtml(__('Required')) ?></td>
+	<td class="field-label td-dynamicoptions-validation"><?php echo $block->escapeHtml(__('Validation')) ?></td>
+	<td colspan="2" class="field-label td-dynamicoptions-max_characters"><?php echo $block->escapeHtml(__('Max Len')) ?></td>
+</tr>
+<tr>
+	<td colspan="3"><input type="text" class="dynamicoptions-title"/></td>
+	<td class="a-center dynamicoptions-td-internal-id td-dynamicoptions-internal_id"><span class="dynamicoptions-internal_id"></span></td>
+	<td>
+		<select class="dynamicoptions-is_require">
+			<option value="1"><?php echo $block->escapeHtml(__('Yes')) ?></option>
+			<option value="0"><?php echo $block->escapeHtml(__('No')) ?></option>
+		</select>
+	</td>
+	<td class="td-dynamicoptions-validation">
+		<select class="dynamicoptions-validation">
+			<option value="0"><?php echo $block->escapeHtml(__('--No validation--')) ?></option>
+			<?php foreach ($block->getValidationTypes(true) as $code => $label): ?>
+				<option value="<?php echo $code ?>"><?php echo $label ?></option>
+			<?php endforeach; ?>
+		</select>
+	</td>
+	<td class="td-dynamicoptions-max_characters">
+		<input type="text" class="dynamicoptions-max_characters">
+	</td>
+	<td class="td-dynamicoptions-max_characters">(0 - <?php echo $block->escapeHtml(__('unlimited')) ?>)</td>
+</tr>
+<tr>
+	<td class="field-label"><?php echo $block->escapeHtml(__('Price')) ?></td>
+	<td class="field-label"><?php echo $block->escapeHtml(__('Price Type')) ?></td>
+	<td class="field-label"><?php echo $block->escapeHtml(__('Sku')) ?></td>
+	<td colspan="5" class="field-label td-dynamicoptions-customer_group"><?php echo $block->escapeHtml(__('Customer Groups')) ?>: <span class="action-link"><?php echo $block->escapeHtml(__('select')) ?></span></td>
+</tr>
+<tr>
+	<td><input type="text" class="dynamicoptions-price"/></td>
+	<td><select class="dynamicoptions-price_type">
+			<option value="fixed"><?php echo $block->escapeHtml(__('Fixed')) ?></option>
+			<option value="percent"><?php echo $block->escapeHtml(__('Percent')) ?></option>
+		</select></td>
+	<td><input type="text" class="dynamicoptions-sku" /></td>
+	<td colspan="5"><span class="text-dynamicoptions-customer_group"><?php echo $block->escapeHtml(__('All Groups')) ?></span></td>
+</tr>
+<tr class="tr-dynamicoptions-values" style="display: none;">
+	<td colspan="3" class="field-label"><?php echo $block->escapeHtml(__('Title')) ?></td>
+	<td class="field-label" style="width: 45px;"><?php echo $block->escapeHtml(__('Field ID')) ?></td>
+	<td class="field-label"><?php echo $block->escapeHtml(__('Required')) ?></td>
+	<td class="field-label td-dynamicoptions-customer_group" colspan="3"><?php echo $block->escapeHtml(__('Customer Groups')) ?>: <span class="action-link"><?php echo $block->escapeHtml(__('select')) ?></span></td>
+</tr>
+<tr class="tr-dynamicoptions-values" style="display: none;">
+	<td colspan="3"><input type="text" class="dynamicoptions-title"/></td>
+	<td class="a-center dynamicoptions-td-internal-id"><span class="dynamicoptions-internal_id"></span></td>
+	<td>
+		<select class="dynamicoptions-is_require">
+			<option value="1"><?php echo $block->escapeHtml(__('Yes')) ?></option>
+			<option value="0"><?php echo $block->escapeHtml(__('No')) ?></option>
+		</select>
+	</td>
+	<td colspan="3"><span class="text-dynamicoptions-customer_group"><?php echo $block->escapeHtml(__('All Groups')) ?></span></td>
+</tr>
+<tr>
+	<td colspan="3" class="field-label td-dynamicoptions-default_value"><?php echo $block->escapeHtml(__('Default Value')) ?></td>
+	<td colspan="5"></td>
+</tr>
+<tr>
+	<td colspan="3" class="td-dynamicoptions-default_value"><input type="text" class="dynamicoptions-default_value"/></td>
+	<td colspan="5"  class="field-label td-dynamicoptions-default_value"><input type="checkbox" value="1" class="dynamicoptions-hide_on_focus"/><label><?php echo $block->escapeHtml(__('Hide on focus')) ?></label></td>
+</tr>
+<tr class="tr-dynamicoption-file" style="display: none;">
+	<td colspan="2" class="field-label"><?php echo $block->escapeHtml(__('Allowed File Extensions')) ?></td>
+	<td colspan="6" class="field-label"><?php echo $block->escapeHtml(__('Maximum Image Size')) ?></td>
+</tr>
+<tr class="tr-dynamicoption-file" style="display: none;">
+	<td colspan="2"><input type="text" class="dynamicoptions-file_extension" /><p class="note">png, jpg, jpeg, gif</p></td>
+	<td colspan="6">
+		<input type="text" class="image-size-input validate-digits dynamicoptions-image_size_x" />x
+		<input type="text" class="image-size-input validate-digits dynamicoptions-image_size_y" />px
+		<p class="note"><?php echo $block->escapeHtml(__('leave blank if it is not an image')) ?></p>
+	</td>
+</tr>
+<tr class="tr-dynamicoptions-image" style="display: none;">
+	<td colspan="2" class="field-label"><?php echo $block->escapeHtml(__('Image SRC')) ?></td>
+	<td colspan="2" class="field-label"><?php echo $block->escapeHtml(__('Image Alt')) ?></td>
+	<td colspan="2" class="field-label"><?php echo $block->escapeHtml(__('Image Title')) ?></td>
+	<td colspan="2" class="field-label td-dynamicoptions-customer_group" colspan="3"><?php echo $block->escapeHtml(__('Customer Groups')) ?>: <span class="action-link"><?php echo $block->escapeHtml(__('select')) ?></span></td>
+</tr>
+<tr class="tr-dynamicoptions-image" style="display: none;">
+	<td colspan="2">
+		<button type="button"><?php echo $block->escapeHtml(__('Upload Image')) ?></button>
+		<input type="hidden" class="dynamicoptions-img_src" />
+	</td>
+	<td colspan="2"><input type="text" class="dynamicoptions-img_alt" /></td>
+	<td colspan="2"><input type="text" class="dynamicoptions-img_title" /></td>
+	<td colspan="2"><span class="text-dynamicoptions-customer_group"><?php echo $block->escapeHtml(__('All Groups')) ?></span></td>
+</tr>
+<tr class="tr-dynamicoptions-html" style="display: none;">
+	<td colspan="6" class="field-label"><?php echo $block->escapeHtml(__('HTML')) ?></td>
+	<td colspan="2" class="field-label td-dynamicoptions-customer_group" colspan="3"><?php echo $block->escapeHtml(__('Customer Groups')) ?>: <span class="action-link"><?php echo $block->escapeHtml(__('select')) ?></span></td>
+</tr>
+<tr class="tr-dynamicoptions-html" style="display: none;">
+	<td colspan="6"><textarea class="dynamicoptions-static_text" style="width: 100%;" rows="15"></textarea></td>
+	<td colspan="2"><span class="text-dynamicoptions-customer_group"><?php echo $block->escapeHtml(__('All Groups')) ?></span></td>
+</tr>
+<tr class="tr-dynamicoptions-values" style="display: none;">
+	<td colspan="8">
+		<table class="dynamicoptions-values-table">
+			<thead>
+			<tr>
+				<th class="field-label"><?php echo $block->escapeHtml(__('Title')) ?></th>
+				<th class="field-label only-radio" style="width: 170px;"><?php echo $block->escapeHtml(__('Image SRC or Color')) ?></th>
+				<th class="field-label only-radio"><?php echo $block->escapeHtml(__('Swatch')) ?></th>
+				<th class="field-label" style="width: 35px;"><?php echo $block->escapeHtml(__('Price')) ?></th>
+				<th class="field-label" style="width:60px"><?php echo $block->escapeHtml(__('Price Type')) ?></th>
+				<th class="field-label" style="width:35px"><?php echo $block->escapeHtml(__('Tier')) ?></th>
+				<th class="field-label"><?php echo $block->escapeHtml(__('Sku/Product Id')) ?></th>
+
+                <th class="field-label"><?php echo $block->escapeHtml(__('Weight')) ?></th>
+
+				<th class="field-label not-multiple-dropdown"><?php echo $block->escapeHtml(__('Qty')) ?></th>
+				<th class="field-label"><?php echo $block->escapeHtml(__('Def')) ?></th>
+				<th class="field-label"><?php echo $block->escapeHtml(__('Visibility')) ?></th>
+				<th class="field-label"><?php echo $block->escapeHtml(__('Make it')) ?></th>
+				<th class="field-label" style="width: 79px;"><?php echo $block->escapeHtml(__('If')) ?></th>
+				<th class="field-label" style="width: 95px;"><?php echo $block->escapeHtml(__('User Groups')) ?></th>
+				<th class="field-label only-radio" style="width: 60px;"><?php echo $block->escapeHtml(__('Carriage return')) ?></th>
+				<th class="field-label"><?php echo $block->escapeHtml(__('Css Class')) ?></th>
+				<th class="field-label" style="width: 56px;"><?php echo $block->escapeHtml(__('Order')) ?></th>
+				<th class="field-label"><?php echo $block->escapeHtml(__('Del')) ?></th>
+			</tr>
+			</thead>
+			<tbody>
+				<tr style="display: none;">
+					<td><input type="text" class="dynamicoptions-default_select_title" value="-- Please select --"/></td>
+					<td colspan="14">
+						<span style="font-style: italic;"> (<?php echo $block->escapeHtml(__('default option')) ?>)</span>
+					</td>
+				</tr>
+			</tbody>
+			<tfoot>
+			<tr class="template">
+				<td><input type="text" class="dynamicoptions-value-title" /></td>
+				<td class="only-radio">
+					<div class="remove-img-icon" style="display: none;"></div>
+					<button type="button"><?php echo $block->escapeHtml(__('Upload Image')) ?></button>
+                    <span class="dynamicoptions-value-base_img-span">
+                        <span>Base Img?</span>
+                        <input type="checkbox" class="dynamicoptions-value-base_img" />
+                    </span>
+					<input type="hidden" class="dynamicoptions-value-image_src" />
+                    <input type="hidden" class="dynamicoptions-value-color" />
+				</td>
+                <td class="only-radio"><input type="checkbox" class="dynamicoptions-value-swatch" /></td>
+				<td><input type="text" class="dynamicoptions-value-price" /></td>
+				<td>
+					<select class="dynamicoptions-value-price_type">
+						<option value="fixed"><?php echo $block->escapeHtml(__('Fixed')) ?></option>
+						<option value="percent"><?php echo $block->escapeHtml(__('Percent')) ?></option>
+					</select>
+				</td>
+				<td>
+					<div class="dynamicoptions-edit-pen-icon edit-value-tier"></div>
+					<span class="dynamicoptions-tier-popup-container"></span>
+					<span class="dynamicoptions-has-tier" style="color:blue" title="<?php echo __('Edit tier prices') ?>"></span>
+				</td>
+				<td style="width: 110px;">
+					<input type="text" class="dynamicoptions-value-sku" style="width: 60px;float:left;"/>
+					<span class="add-product-link" title="<?php echo __('Link item to another product') ?>"><?php echo $block->escapeHtml(__('+ Link')) ?></span>
+					<div class="dynamicoptions-edit-pin-icon pin-linked-item" style="margin-left:5px;float: left;" title="<?php echo __('Use title and price from product') ?>"></div>
+					<div class="dynamicoptions-edit-pen-icon edit-linked-item" style="margin-left:5px;float: left;" title="<?php echo __('Override product\'s name and price') ?>"></div>
+					<div class="remove-img-icon remove-product-link" style="margin-left:5px;float: left;" title="<?php echo __('Unlink item from product') ?>"></div>
+				</td>
+
+                <td><input type="text" class="dynamicoptions-value-weight" style="width: 25px" ></td>
+
+				<td class="not-multiple-dropdown"><input type="checkbox" class="dynamicoptions-value-use_qty" /></td>
+				<td><input type="checkbox" class="dynamicoptions-value-is_selected" /></td>
+				<td><select class="dynamicoptions-value-visibility">
+						<?php foreach ($block->getVisibilityOptions() as $option): ?>
+							<option value="<?php echo $option['value'] ?>"><?php echo $option['label'] ?></option>
+						<?php endforeach; ?>
+					</select></td>
+				<td><select class="dynamicoptions-value-visibility_action">
+						<?php foreach ($block->getVisibilityOptions() as $option): ?>
+							<option value="<?php echo $option['value'] ?>"><?php echo $option['label'] ?></option>
+						<?php endforeach; ?>
+					</select></td>
+				<td>
+					<div class="dynamicoptions-edit-pen-icon edit-value-condition"></div>
+					<input type="text" class="dynamicoptions-value-visibility_condition" style="width: 50px;" />
+				</td>
+				<td>
+					<div class="dynamicoptions-edit-pen-icon edit-value-groups"></div>
+					<span class="text-dynamicoptions-value-customer_group"><?php echo $block->escapeHtml(__('All Groups')) ?></span>
+				</td>
+				<td class="only-radio"><input type="checkbox" class="dynamicoptions-value-carriage_return" /></td>
+				<td><input type="text" class="dynamicoptions-value-css_class" /></td>
+				<td>
+					<input type="text" class="dynamicoptions-value-order" style="width:20px;" />
+					<div class="sort-arrows-box">
+						<div class="sort-arrow-up"></div>
+						<div class="sort-arrow-down"></div>
+					</div>
+				</td>
+				<td><div class="remove-icon"<?php if ($block->getStoreId() > 0) echo ' style="display:none"' ?>></div></td>
+			</tr>
+			<tr><td colspan="15"><span class="action-link"<?php if ($block->getStoreId() > 0) echo ' style="display:none"' ?>>+ <?php echo $block->escapeHtml(__('Add Option')) ?></td></tr>
+			</tfoot>
+		</table>
+	</td>
+</tr>
+<tr class="tr-dynamicoptions-all">
+	<td class="field-label"><?php echo $block->escapeHtml(__('Visibility')) ?></td>
+	<td class="field-label"><?php echo $block->escapeHtml(__('Make it')) ?></td>
+	<td colspan="6" class="field-label"><?php echo $block->escapeHtml(__('If')) ?></td>
+</tr>
+<tr class="tr-dynamicoptions-all">
+	<td>
+		<select class="dynamicoptions-visibility">
+			<?php foreach ($block->getVisibilityOptions() as $option): ?>
+                <option value="<?php echo $option['value'] ?>"><?php echo $option['label'] ?></option>
+			<?php endforeach; ?>
+		</select>
+	</td>
+	<td>
+		<select class="dynamicoptions-visibility_action">
+			<?php foreach ($block->getVisibilityOptions() as $option): ?>
+                <option value="<?php echo $option['value'] ?>"><?php echo $option['label'] ?></option>
+			<?php endforeach; ?>
+		</select>
+	</td>
+	<td colspan="6">
+		<div class="dynamicoptions-edit-pen-icon edit-field-condition"></div><input type="text" class="dynamicoptions-visibility_condition" style="width:90%;" />
+	</td>
+</tr>
+<tr class="tr-dynamicoptions-all">
+	<td colspan="3" class="field-label"><?php echo $block->escapeHtml(__('Comment')) ?></td>
+	<td colspan="2" class="field-label"><?php echo $block->escapeHtml(__('Css Class')) ?></td>
+	<td colspan="3" class="field-label"><?php echo $block->escapeHtml(__('HTML Arguments')) ?></td>
+</tr>
+<tr class="tr-dynamicoptions-all">
+	<td colspan="3"><input type="text" class="dynamicoptions-comment"/></td>
+	<td colspan="2"><input type="text" class="dynamicoptions-css_class"/></td>
+	<td colspan="3"><input type="text" class="dynamicoptions-html_args"/></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="itoris-dynamicoptions-reorder-arrows-template" class="reorder-arrows-box" style="display: none;">
+    <div class="reorder-arrow reorder-arrow-left"></div>
+    <div class="reorder-arrow reorder-arrow-top"></div>
+    <div class="reorder-arrow reorder-arrow-right"></div>
+    <div class="reorder-arrow reorder-arrow-bottom"></div>
+</div>
+<script type="text/javascript">
+    require(['itoris_options','prototype','itoris_spectrum'], function(Itoris) {
+        window.dpoDefaultTemplateURL = '<?php echo $block->getUrl('dynamicproductoptions/product_options_template/newtemplate', ['id' => 9999999]);  ?>';
+        <?php $config = $block->getDynamicOptionsJsObjectConfig(); ?>
+        dynamicOptionsTemplates = {
+            drop_down_items_table_header: '<th><?php echo $block->escapeJsHtml('Title') ?></th><th style="width:60px;"><?php echo $block->escapeJsHtml('Price') ?></th>'
+            + '<th style="width:80px;"><?php echo $block->escapeJsHtml('Price Type') ?></th><th style="width:100px;"><?php echo $block->escapeJsHtml('Sku') ?></th>'
+            + '<th style="width:80px;"><?php echo $block->escapeJsHtml('Selected?') ?></th><th style="width:80px;"><?php echo $block->escapeJsHtml('Disabled?') ?></th>'
+            + '<th style="width:120px;"><?php echo $block->escapeJsHtml('CSS class') ?></th><th style="width:70px;"><?php echo $block->escapeJsHtml('Order') ?></th>'
+            + '<th style="width:40px;"><?php echo $block->escapeJsHtml('Del') ?></th>',
+            radio_items_table_header: '<th><?php echo $block->escapeJsHtml('Title') ?></th>'
+            + '<th style="width:100px;"><?php echo $block->escapeJsHtml('Img SRC') ?></th><th style="width:60px;"><?php echo $block->escapeJsHtml('Price') ?></th>'
+            + '<th style="width:80px;"><?php echo $block->escapeJsHtml('Price Type') ?></th><th style="width:100px;"><?php echo $block->escapeJsHtml('Sku') ?></th>'
+            + '<th style="width:80px;"><?php echo $block->escapeJsHtml('Selected?') ?></th><th style="width:80px;"><?php echo $block->escapeJsHtml('Disabled?') ?></th>'
+            + '<th style="width:80px;"><?php echo $block->escapeJsHtml('Carriage Return') ?></th><th style="width:120px;"><?php echo $block->escapeJsHtml('CSS class') ?></th>'
+            + '<th style="width:70px;"><?php echo $block->escapeJsHtml('Order') ?></th><th style="width:40px;"><?php echo $block->escapeJsHtml('Del') ?></th>'
+        };
+        itorisDynamicOptions = new Itoris.OptionManager(<?php echo \Zend_Json::encode($config) ?>, <?php echo $block->getSectionsJson() ?>);
+
+    });
+</script>
+

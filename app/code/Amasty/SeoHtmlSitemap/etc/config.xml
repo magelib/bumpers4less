@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2017 Amasty (https://www.amasty.com)
+ * @package Amasty_SeoHtmlSitemap
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <amseohtmlsitemap>
+            <general>
+                <layout>1column</layout>
+                <show_search_field>1</show_search_field>
+            </general>
+            <cms>
+                <show_cms_pages>1</show_cms_pages>
+                <column_number>5</column_number>
+            </cms>
+            <categories>
+                <show_categories>1</show_categories>
+                <show_as>2</show_as>
+                <column_number>5</column_number>
+            </categories>
+        </amseohtmlsitemap>
+    </default>
+</config>

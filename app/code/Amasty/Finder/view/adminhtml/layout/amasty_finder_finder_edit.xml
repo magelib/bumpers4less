@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2017 Amasty (https://www.amasty.com)
+ * @package Amasty_Finder
+ */
+-->
+<!--
+/**
+ * Copyright © 2015 Amasty. All rights reserved.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="amasty_finder_finder_import_log_grid"/>
+    <update handle="amasty_finder_finder_import_history_grid"/>
+    <update handle="amasty_finder_finder_gridProducts"/>
+
+    <update handle="amasty_finder_finder_grid_universal"/>
+    <head>
+        <css src="Amasty_Finder::css/import.css" />
+    </head>
+    <body>
+        <referenceContainer name="left">
+            <block class="Amasty\Finder\Block\Adminhtml\Finder\Edit\Tabs" name="amasty_finder_finder_edit_tabs">
+                <block class="Amasty\Finder\Block\Adminhtml\Finder\Edit\Tab\Main" name="amasty_finder_finder_edit_tab_main"/>
+                <block class="Amasty\Finder\Block\Adminhtml\Finder\Edit\Tab\Dropdowns" name="amasty_finder_finder_edit_tab_dropdowns"/>
+                <block class="Amasty\Finder\Block\Adminhtml\Finder\Edit\Tab\Products" name="amasty_finder_finder_edit_tab_products" template="Amasty_Finder::widget/grid/container_products.phtml"/>
+                <block class="Amasty\Finder\Block\Adminhtml\Finder\Edit\Tab\Import" name="amasty_finder_finder_edit_tab_import" template="Amasty_Finder::import.phtml">
+                    <block class="Magento\Backend\Block\Widget\Grid\Container" name="adminhtml.amasty.finder.finder.import.log.grid.container" as="grid_import" template="Magento_Backend::widget/grid/container/empty.phtml" />
+                </block>
+                <block class="Amasty\Finder\Block\Adminhtml\Finder\Edit\Tab\ImportHistory" name="amasty_finder_finder_edit_tab_import_history" />
+                <block class="Amasty\Finder\Block\Adminhtml\Finder\Edit\Tab\Universal" name="amasty_finder_finder_edit_tab_universal" />
+                <block class="Amasty\Finder\Block\Adminhtml\Finder\Edit\Tab\UniversalImport" name="amasty_finder_finder_edit_tab_universal_import"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">main_section</argument>
+                    <argument name="block" xsi:type="string">amasty_finder_finder_edit_tab_main</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">dropdowns_section</argument>
+                    <argument name="block" xsi:type="string">amasty_finder_finder_edit_tab_dropdowns</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">products_section</argument>
+                    <argument name="block" xsi:type="string">amasty_finder_finder_edit_tab_products</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">import_section</argument>
+                    <argument name="block" xsi:type="string">amasty_finder_finder_edit_tab_import</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">import_history_section</argument>
+                    <argument name="block" xsi:type="string">amasty_finder_finder_edit_tab_import_history</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">universal_section</argument>
+                    <argument name="block" xsi:type="string">amasty_finder_finder_edit_tab_universal</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">universal_import_section</argument>
+                    <argument name="block" xsi:type="string">amasty_finder_finder_edit_tab_universal_import</argument>
+                </action>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Amasty\Finder\Block\Adminhtml\Finder\Edit" name="finder_finder_edit"/>
+        </referenceContainer>
+    </body>
+</page>

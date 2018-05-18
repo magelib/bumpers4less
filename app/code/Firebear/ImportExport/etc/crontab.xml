@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @copyright: Copyright © 2017 Firebear Studio. All rights reserved.
+ * @author   : Firebear Studio <fbeardev@gmail.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+    <job name="importexport_jobs_run_id" instance="Firebear\ImportExport\Cron\RunImportJobs" method="execute">
+    <schedule>*/1 * * * *</schedule>
+    </job>
+    <job name="importexport_export_jobs_run_id" instance="Firebear\ImportExport\Cron\RunExportJobs" method="execute">
+        <schedule>*/1 * * * *</schedule>
+    </job>
+    </group>
+</config>

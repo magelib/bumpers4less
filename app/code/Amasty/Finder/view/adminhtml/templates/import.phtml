@@ -1,0 +1,243 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2017 Amasty (https://www.amasty.com)
+ * @package Amasty_Finder
+ */
+?>
+<?php /* @var $block Amasty\Finder\Block\Adminhtml\Finder\Edit\Tab\Import */ ?>
+<div class="entry-edit form-inline">
+
+    <input type="hidden" id="amfinder_ajax_action" name="amfinder_ajax_action" value="<?php echo $this->getUrl('*/finderImport/upload');?>">
+
+
+    <fieldset class="fieldset admin__fieldset " id="finder_import">
+        <legend class="admin__legend legend">
+            <span><?php echo __('Upload Files'); ?></span>
+        </legend><br>
+
+
+        <div class="admin__field field field-dropdown_2_sort  required _required" data-ui-id="finder-finder-edit-form-fieldset-element-form-field-dropdown-2-sort">
+            <label class="label admin__field-label" for="finder_dropdown_dropdown_2_sort" data-ui-id="finder-finder-edit-form-fieldset-element-select-dropdown-2-sort-label">
+                <span><?php echo __('Delete Existing Data'); ?></span></label>
+            <div class="admin__field-control control">
+
+                <select id="delete_existing_data" name="delete_existing_data" class="required-entry _required select">
+                    <option value="0"><?php echo __('No'); ?></option>
+                    <option value="1"><?php echo __('Yes'); ?></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="uploader" id="finderImportDropZone">
+            <div><?php echo __('Drag & Drop CSV Files Here'); ?></div>
+            <div class="or">-<?php echo __('or'); ?>-</div>
+            <div class="browser">
+                <label>
+                    <span><?php echo __('Click to open the file Browser'); ?></span>
+                    <input type="file" name="files[]" multiple="multiple" title='<?php echo __('Click to add Files'); ?>' accept="text/csv" />
+                    <input type="hidden" id="form_key_file" name="form_key_file" value="<?php echo $this->getFormKey();?>" />
+                </label>
+            </div>
+            <div class="uploader-spinner" id="uploaderSpinner"></div>
+        </div>
+
+        <script type="text/javascript">
+            require(['jquery', 'Amasty_Finder/js/dmuploader.min'], function($) {
+                $('#finderImportDropZone').dmUploader({
+                    url: '<?php echo $block->getUrl('*/*/upload', array('id' => $block->getFinderId()));?>',
+                    extraData: {
+                        delete_existing_data: $("#delete_existing_data").val(),
+                        form_key: $("#form_key_file").val()
+                    },
+                    dataType: 'json',
+                    allowedTypes: '*',
+                    extFilter: 'csv',
+                    onBeforeUpload: function(widget){
+                        widget.settings.extraData['delete_existing_data'] = $("#delete_existing_data").val();
+                        $("#uploaderSpinner").show();
+                    },
+                    onComplete: function(){
+                        $("#uploaderSpinner").hide();
+                    },
+                    /*onUploadProgress: function(id, percent){
+                        var percentStr = percent + '%';
+                        update_file_progress(id, percentStr);
+                    },*/
+                    onUploadSuccess: function(id, data){
+                        if(data.error) {
+                            var errorMessage = "<?php echo __("Failed to Upload file #");?>";
+                            errorMessage += id + ': ' + data.error;
+                            alert(errorMessage);
+                        } else {
+                            amasty_finder_finder_import_log_gridJsObject.reload();
+                        }
+
+                    },
+                    onUploadError: function(id, message){
+                        var errorMessage = "<?php echo __("Failed to Upload file #");?>";
+                        errorMessage += id + ': ' + message;
+                        alert(errorMessage);
+                    },
+                    /*onFileTypeError: function(file){
+                        //add_log('File \'' + file.name + '\' cannot be added: must be an image');
+                        console.log('onFileTypeError');
+
+                    },
+                    onFileSizeError: function(file){
+                        //add_log('File \'' + file.name + '\' cannot be added: size excess limit');
+                        console.log('onFileSizeError');
+                    },*/
+                    onFileExtError: function(file){
+                        var message = "<?php echo __("File %1 cannot be added: must be an CSV", array("{fileName}"));?>";
+                        message = message.replace("{fileName}", file.name);
+                        alert(message);
+                     },
+                    onFallbackMode: function(message){
+                        alert('Browser not supported(do something else here!): ' + message);
+                    }
+                });
+            });
+        </script>
+
+
+    </fieldset>
+    
+</div>
+<?php echo $block->getChildHtml('grid_import');?>
+
+<div class="am_finder_popup" id="am_finder_popup" style="display: none;">
+    <div class="am_finder_popup_log">
+        <ul id="am_finder_popup_log">
+            <div class="uploader-spinner" id="importSpinner"></div>
+        </ul>
+    </div>
+    <div class="am_finder_popup_progress_container">
+        <div class="am_finder_popup_progress" id="am_finder_popup_progress">
+            &nbsp;
+        </div>
+    </div>
+    <?php /*<div class="am_finder_popup_result">
+		<?php echo __('Download the file:')?><span id="am_finder_popup_result"></span>
+	</div>*/ ?>
+</div>
+
+<script type="text/javascript">
+    require([
+            'jquery',
+            'Magento_Ui/js/modal/alert'
+        ],
+        function($, alert) {
+            $('.button-import').live('click', function(event){
+                jQuery("#importSpinner").show();
+                modalAlertImport = alert({
+                    title: "<?=__('Progress')?>",
+                    content: $("#am_finder_popup").html(),
+                    buttons: [
+                        {
+                            text: '<?=__('STOP')?>',
+                            class: 'action-primary action-accept',
+                            click: function () {
+                                this.closeModal(true);
+                                //amFinderCloseImportPopUp();
+                            }
+                        }
+                    ]
+                });
+                modalAlertImport.on('alertclosed', function()
+                {
+                    amFinderCloseImportPopUp();
+                });
+                if($(this).hasClass('button-import')) {
+                    var $button = $(this);
+                } else {
+                    var $button = $($(event.target).parents('button')[0]);
+                }
+
+                amFinderRunImportFile($button.attr('data-url'), $button.attr('data-progress'));
+            });
+
+            $('.show-import-errors').live('click', function(event){
+                var url = $(event.target).attr('data-url');
+                var modalListErrors = alert({
+                    title: "<?=__('List Errors')?>",
+                    content: '<div class="uploader-spinner" id="uploaderSpinner" style="display: block"></div>',
+                });
+                $.ajax({
+                    url: url,
+                    dataType: "html",
+                    data: {form_key: $("#form_key_file").val()},
+                    success: function(data){
+                        $(modalListErrors).html(data);
+                    }
+                });
+            });
+
+            var ignoreValidate = function () {
+                $("#amasty_finder_finder_import_log_grid_massaction-select").addClass('ignore-validate');
+                $("#amasty_finder_finder_import_history_grid_massaction-select").addClass('ignore-validate');
+                $("#amasty_finder_finder_universal_grid_massaction-select").addClass('ignore-validate');
+            }
+
+            $("#save_and_continue_edit").click(ignoreValidate);
+            $("#save").click(ignoreValidate);
+
+            var isStoppedImport = false;
+
+            function amFinderRunImportFile(url, progress)
+            {
+                progress = progress || 0;
+                jQuery(modalAlertImport).find('#am_finder_popup_progress').width(progress + '%');
+
+                //jQuery('#am_finder_popup').show();
+                isStoppedImport = false;
+
+
+                var onSuccessCallBack = function(response) {
+                    var data = response;
+                    /*if (!data || !data.isJSON()) {
+                     alert('System error: ' + data);
+                     window.location.reload();
+                     }*/
+                    //data = data.evalJSON();
+                    jQuery(modalAlertImport).find('#am_finder_popup_log').append('<li>' + data.message + '</li>', {position: 'content'});
+
+                    jQuery(modalAlertImport).find('#am_finder_popup_progress').width(data.progress + '%');
+
+                    if(data.isCompleted) {
+                        jQuery(modalAlertImport).find("#importSpinner").hide();
+                        jQuery(modalAlertImport).parent().parent().find("button.action-accept span").html(jQuery.mage.__("CLOSE"));
+                    }
+
+                    if (!data.isCompleted && !isStoppedImport) {
+                        setTimeout(function() { amFinderRequestImport(url, onSuccessCallBack); }, 1000);
+                    }
+
+                };
+
+                amFinderRequestImport(url, onSuccessCallBack);
+                return false;
+            }
+
+            function amFinderRequestImport(url, onSuccessCallBack)
+            {
+                if(isStoppedImport) {
+                    return;
+                }
+                jQuery.getJSON(url, onSuccessCallBack);
+            }
+
+            function amFinderCloseImportPopUp()
+            {
+                //jQuery('#am_finder_popup').hide();
+                isStoppedImport = true;
+                jQuery(modalAlertImport).find('#am_finder_popup_log').html('');
+                jQuery(modalAlertImport).find('#am_finder_popup_progress').width('0%');
+                amasty_finder_finder_import_log_gridJsObject.reload();
+                amasty_finder_finder_import_history_gridJsObject.reload();
+                amasty_finder_finder_products_gridJsObject.reload();
+                return false;
+            }
+        }
+    );
+</script>

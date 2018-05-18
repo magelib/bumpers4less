@@ -1,0 +1,85 @@
+"Save and Continue Edit","Save and Continue Edit"
+"Edit Item `%1`","Edit Item `%1`"
+"Add new Item","Add new Item"
+"Blog Pages","Blog Pages"
+"Include Blog Pages","Include Blog Pages"
+Priority,Priority
+0.01-0.99,0.01-0.99
+Frequency,Frequency
+"Brand Pages","Brand Pages"
+"Include brand pages","Include brand pages"
+Categories,Categories
+"Include categories","Include categories"
+"Add Images","Add Images"
+"Include Last Modified","Include Last Modified"
+Extra,Extra
+"Extra Links","Extra Links"
+"Include Extra Links","Include Extra Links"
+"Extra Links to include","Extra Links to include"
+General,General
+Name,Name
+Stores,Stores
+"Path to sitemap file","Path to sitemap file"
+"Like ""sitemap/sitemap1.xml"". Make sure path is writable and accessible through internet","Like ""sitemap/sitemap1.xml"". Make sure path is writable and accessible through internet"
+"Max Items Per File","Max Items Per File"
+"If exceed, index file will be created. Read more at https://support.google.com/webmasters/answer/71453?hl=en","If exceed, index file will be created. Read more at https://support.google.com/webmasters/answer/71453?hl=en"
+"Max File Size (kB)","Max File Size (kB)"
+"Exclude URLs","Exclude URLs"
+"URL to exclude, one per line","URL to exclude, one per line"
+"Date format","Date format"
+"Landing Pages","Landing Pages"
+"Include Landing Pages","Include Landing Pages"
+"Include Improved Navigation Pages","Include Improved Navigation Pages"
+"Improved Navigation Pages","Improved Navigation Pages"
+Pages,Pages
+"Include pages","Include pages"
+"Exclude CMS pages","Exclude CMS pages"
+"URL Keys of CMS Pages to exclude, one per line","URL Keys of CMS Pages to exclude, one per line"
+Products,Products
+"Include products","Include products"
+"Add Images Titles","Add Images Titles"
+"Template for image title","Template for image title"
+"Specify text to be used for empty captions with {product_name} placeholder for product name. Example - ""enjoy {product_name} from e-store""","Specify text to be used for empty captions with {product_name} placeholder for product name. Example - ""enjoy {product_name} from e-store"""
+"Record does not exist","Record does not exist"
+"Item has been successfully deleted","Item has been successfully deleted"
+"Sitemap was successfully duplicated","Sitemap was successfully duplicated"
+"Table Rates","Table Rates"
+"Add Item","Add Item"
+"Item does not exist","Item does not exist"
+"Manage Google XML Sitemaps","Manage Google XML Sitemaps"
+"Manage Google XML Sitemaps ","Manage Google XML Sitemaps "
+"Items(s) were successfully deleted","Items(s) were successfully deleted"
+"We can't delete item(s) right now. Please review the log and try again. ","We can't delete item(s) right now. Please review the log and try again. "
+"Sitemap has been saved","Sitemap has been saved"
+"Profile was successfully saved","Profile was successfully saved"
+"Unable to find item to save","Unable to find item to save"
+always,always
+hourly,hourly
+daily,daily
+weekly,weekly
+monthly,monthly
+yearly,yearly
+never,never
+"With time","With time"
+"Without time","Without time"
+"We can't save the cron expression.","We can't save the cron expression."
+"Please define correct path","Please define correct path"
+"Please create the specified folder ' . . ' before saving the sitemap.","Please create the specified folder ' . . ' before saving the sitemap."
+"Please make sure that ' . . ' is writable by web-server.","Please make sure that ' . . ' is writable by web-server."
+Generate,Generate
+Duplicate,Duplicate
+Edit,Edit
+"XML Google Sitemap","XML Google Sitemap"
+"Cron Settings","Cron Settings"
+"Start Time","Start Time"
+"Sitemap Configuration","Sitemap Configuration"
+"Add Sitemap","Add Sitemap"
+"Store View","Store View"
+"Delete items","Delete items"
+"Delete selected items?","Delete selected items?"
+Delete,Delete
+ID,ID
+Title,Title
+Path,Path
+Url,Url
+"Generated At","Generated At"

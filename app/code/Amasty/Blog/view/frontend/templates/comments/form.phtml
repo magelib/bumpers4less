@@ -1,0 +1,99 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2017 Amasty (https://www.amasty.com)
+ * @package Amasty_Blog
+ */
+?>
+<?php if ($block->canPost()): ?>
+    <?php if ($block->isReply()): ?>
+        <h5><?php echo __('Leave a reply to %1', $block->getReplyToCustomerName()); ?></h5>
+    <?php else: ?>
+        <h5><?php echo __('Leave a comment'); ?></h5>
+    <?php endif; ?>
+    <?php if ($block->getIsAjax()): ?>
+        <?php echo $block->getMessageBlockHtml(); ?>
+    <?php endif; ?>
+    <form class="amblog_form" id="amblog-form-<?php echo $block->getPostId(); ?>" onsubmit="return false;">
+        <fieldset>
+            <div class="comment-form-field">
+                <div class="comment-form-input">
+                    <textarea name="message"
+                              class="textarea required-entry placeholder"
+                              id="message_field"
+                              placeholder="<?php echo $block->isReply() ? __('Leave your awesome reply here...') : __('Leave your awesome comment here...') ?>"
+                              title="<?php echo $block->isReply() ? __('Reply') : __('Comment'); ?>" ><?php echo $block->htmlEscape($block->getFormData()->getMessage()) ?></textarea>
+                </div>
+            </div>
+            <div class="comment-form-field">
+                <div class="comment-form-input">
+                    <input type="text"
+                           name="name"
+                           placeholder="<?php echo __('John Doe') ?>"
+                           id="name_field"
+                           title="<?php echo __('Name') ?>"
+                           class="text required-entry placeholder"
+                           value="<?php echo $block->htmlEscape($block->getFormData()->getName() ? $block->getFormData()->getName() : $block->getCustomerName()) ?>" />
+                </div>
+            </div>
+            <?php if (!$block->isLoggedId()): ?>
+            <div class="comment-form-field">
+                <div class="comment-form-input">
+                    <input type="text"
+                           name="email"
+                           id="email_field"
+                           placeholder="<?php echo __("john.doe@example.com") ?>"
+                           class="text required-entry validate-email placeholder" title="<?php echo __('Email') ?>"
+                           value="<?php echo $block->htmlEscape($block->getFormData()->getEmail() ? $block->getFormData()->getEmail() : $block->getCustomerEmail()) ?>" />
+                </div>
+            </div>
+            <?php else: ?>
+            <input type="hidden" name="email" value="<?php echo $block->getCustomerEmail(); ?>" />
+            <input type="hidden" name="customer_id" value="<?php echo $block->getCustomerId(); ?>" />
+            <?php endif; ?>
+            <input type="hidden" name="secure_code" value="<?php echo $block->getSecureCode(); ?>" />
+            <input type="hidden" name="reply_to" value="<?php echo $block->getReplyTo(); ?>" />
+            <input type="hidden" name="session_id" value="<?php echo $block->getSessionId(); ?>" />
+
+            <div class="form-actions fix-me">
+
+                <?php if ($block->getEmailsEnabled()): ?>
+                    <div class="comment-form-field to-left subscribe">
+                        <div class="comment-form-input">
+
+                            <input type="checkbox"
+                                   class="checkbox"
+                                   name="subscribe_to_replies"
+                                   id="subscribe_to_replies"
+                                   title="<?php echo __('Subscribe to replies') ?>"
+                                   <?php if ($block->isCustomerSubscribed()): ?>checked<?php endif; ?> />
+
+                            <label for="subscribe_to_replies"><?php echo __('Subscribe to comments') ?></label>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
+
+                <button class="button to-right amblog_send" id="amblog_submit_comment"  type="submit">
+                    <span><span><?php echo __("Submit"); ?></span></span>
+                </button>
+            </div>
+        </fieldset>
+    </form>
+<?php else: ?>
+    <?php if ($block->getIsAjax()): ?>
+        <?php echo $block->getMessageBlockHtml(); ?>
+    <?php endif; ?>
+        <p>
+            <?php echo __("Please "); ?>
+            <a href="<?php echo $block->getLoginUrl(); ?>"><?php echo __("login"); ?></a>
+            <?php if ($block->isReply()): ?>
+                <?php echo __(" to reply."); ?>
+            <?php else: ?>
+                <?php echo __(" to comment."); ?>
+            <?php endif; ?>
+        </p>
+    <p><?php echo __("Don't have an account?"); ?></p>
+    <p><a href="<?php echo $block->getRegisterUrl(); ?>"><?php echo __("Sign Up for free"); ?></a>.</p>
+<?php endif; ?>
+

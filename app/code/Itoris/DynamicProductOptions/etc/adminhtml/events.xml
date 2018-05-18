@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * ITORIS
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the ITORIS's Magento Extensions License Agreement
+ * which is available through the world-wide-web at this URL:
+ * http://www.itoris.com/magento-extensions-license.html
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to sales@itoris.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extensions to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to the license agreement or contact sales@itoris.com for more information.
+ *
+ * @category   ITORIS
+ * @package    ITORIS_M2_DYNAMIC_PRODUCT_OPTIONS
+ * @copyright  Copyright (c) 2016 ITORIS INC. (http://www.itoris.com)
+ * @license    http://www.itoris.com/magento-extensions-license.html  Commercial License
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../vendor/magento/framework/Event/etc/events.xsd">
+    <event name="catalog_product_save_after">
+        <observer name="itoris_dynamicproductoptions" instance="Itoris\DynamicProductOptions\Observers\Adminhtml\SaveProductOptions" />
+    </event>
+    <event name="model_save_after">
+        <observer name="itoris_dynamicproductoptions" instance="Itoris\DynamicProductOptions\Observers\Adminhtml\SaveOptionOrOptionValue" />
+    </event>
+    <!--<event name="controller_action_predispatch_catalog_product_save">
+        <observer name="itoris_dynamicproductoptions" instance="Itoris\DynamicProductOptions\Observers\Adminhtml\UnserializeParams" />
+    </event>-->
+    <!--<event name="view_block_abstract_to_html_after">
+        <observer name="itoris_dynamicproductoptions" instance="Itoris\DynamicProductOptions\Observers\Adminhtml\OrderComposeProductOptions" />
+    </event>-->
+    <event name="sales_model_service_quote_submit_after">
+        <observer name="itoris_dynamicproductoptions" instance="Itoris\DynamicProductOptions\Observers\UpdateOrderInventory" />
+    </event>
+    <event name="sales_quote_item_set_product">
+        <observer name="itoris_dynamicproductoptions" instance="Itoris\DynamicProductOptions\Observers\ChangeItemWeight" />
+    </event>
+    <event name="order_cancel_after">
+        <observer name="itoris_dynamicproductoptions" instance="Itoris\DynamicProductOptions\Observers\UpdateOrderInventory" />
+    </event>
+    <event name="sales_order_creditmemo_refund">
+        <observer name="itoris_dynamicproductoptions" instance="Itoris\DynamicProductOptions\Observers\UpdateOrderInventory" />
+    </event>
+</config>

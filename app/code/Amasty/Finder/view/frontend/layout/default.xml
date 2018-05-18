@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2017 Amasty (https://www.amasty.com)
+ * @package Amasty_Finder
+ */
+-->
+<!--
+/**
+ * Copyright © 2015 Amasty. All rights reserved.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Amasty_Finder::css/style.css" />
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Template" template="Amasty_Finder::notification.phtml" />
+        </referenceContainer>
+<!--
+        <referenceContainer name="sidebar.main">
+            <block class="Amasty\Finder\Block\Form" name="amasty.finder.1">
+                <arguments>
+                    <argument name="id" xsi:type="string">1</argument>
+                    <argument name="template" xsi:type="string">vertical</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+-->
+    </body>
+</page>

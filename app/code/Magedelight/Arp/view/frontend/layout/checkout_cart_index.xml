@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="checkout.cart.container">
+            <container name="checkout.cart.container.crosssell" label="Checkout Cart Container Crossell" htmlTag="div" htmlClass="checkout-container-crossell" after = '-' />
+        </referenceContainer>
+        <referenceBlock name="checkout.cart.crosssell">
+            <action method='setCustomTemplate'>
+            </action>
+            <arguments>
+                <argument name="type" xsi:type="string">crosssell</argument>
+                <argument name="group_name" xsi:type="string">native</argument>
+            </arguments>
+            <block class="Magento\Framework\View\Element\RendererList" name="category.product.type.details.renderers.native" as="details.renderers">
+                <block class="Magento\Framework\View\Element\Template" as="default"/>
+                <block class="Magento\Swatches\Block\Product\Renderer\Listing\Configurable" as="configurable" template="Magedelight_Arp::checkout/cart/product/native.phtml" >
+                    <arguments>
+                        <argument name="type" xsi:type="string">shoppingcart-native</argument>
+                    </arguments>
+                </block>
+            </block>
+        </referenceBlock> 
+        <referenceContainer name="content">
+            <block class="Magedelight\Arp\Block\Checkout\Cart\CrosellBlock" name="arp.related.product.cart.top" before = "-" cacheable="false">
+                <action method="setCustomTemplate"/>
+                <arguments>
+                    <argument name="type" xsi:type="string">cart-products-top</argument>
+                    <argument name="position" xsi:type="string">11</argument>
+                    <argument name="group_name" xsi:type="string">pagetop</argument>
+                </arguments>
+                <block class="Magento\Catalog\Block\Product\ProductList\Item\Container" name="crosssell.product.addto.top" as="addto">
+                    <block class="Magento\Wishlist\Block\Catalog\Product\ProductList\Item\AddTo\Wishlist"
+                           name="crosssell.product.addto.wishlist.top" as="wishlist" before="compare"
+                           template="Magento_Wishlist::catalog/product/list/addto/wishlist.phtml"/>    
+                    <block class="Magento\Catalog\Block\Product\ProductList\Item\AddTo\Compare"
+                           name="crosssell.product.addto.compare.top" as="compare"
+                           template="Magento_Catalog::product/list/addto/compare.phtml"/>
+                </block>
+            </block>
+            <block class="Magento\Framework\View\Element\RendererList" name="category.product.type.details.renderers.top" as="details.renderers">
+                <block class="Magento\Framework\View\Element\Template" as="default"/>
+                <block class="Magento\Swatches\Block\Product\Renderer\Listing\Configurable" as="configurable" template="Magedelight_Arp::checkout/cart/product/top.phtml" >
+                    <arguments>
+                        <argument name="type" xsi:type="string">shoppingcart-top</argument>
+                    </arguments>
+                </block>
+            </block>            
+        </referenceContainer>
+        <referenceContainer name="checkout.cart.container">
+            <block class="Magedelight\Arp\Block\Checkout\Cart\CrosellBlock" name="arp.related.product.cart.before" after= "checkout.cart.form"  cacheable="false">
+                <action method="setCustomTemplate"/>
+                <arguments>
+                    <argument name="type" xsi:type="string">cart-products-before</argument>
+                    <argument name="position" xsi:type="string">9</argument>
+                    <argument name="group_name" xsi:type="string">beforenative</argument>
+                </arguments>
+                <block class="Magento\Catalog\Block\Product\ProductList\Item\Container" name="crosssell.product.addto.before" as="addto">
+                    <block class="Magento\Wishlist\Block\Catalog\Product\ProductList\Item\AddTo\Wishlist"
+                           name="crosssell.product.addto.wishlist.before" as="wishlist" before="compare"
+                           template="Magento_Wishlist::catalog/product/list/addto/wishlist.phtml"/>    
+                    <block class="Magento\Catalog\Block\Product\ProductList\Item\AddTo\Compare"
+                           name="crosssell.product.addto.compare.before" as="compare"
+                           template="Magento_Catalog::product/list/addto/compare.phtml"/>
+                </block>
+                <block class="Magento\Framework\View\Element\RendererList" name="category.product.type.details.renderers.before" as="details.renderers">
+                    <block class="Magento\Framework\View\Element\Template" as="default"/>
+                    <block class="Magento\Swatches\Block\Product\Renderer\Listing\Configurable" as="configurable" template="Magedelight_Arp::checkout/cart/product/beforeNative.phtml" >
+                        <arguments>
+                            <argument name="type" xsi:type="string">shoppingcart-before</argument>
+                        </arguments>
+                    </block>
+                </block>      
+            </block>
+            <block class="Magedelight\Arp\Block\Checkout\Cart\CrosellBlock" name="arp.related.product.cart.after" after="-" cacheable="false">
+                <action method="setCustomTemplate"/>
+                <arguments>
+                    <argument name="type" xsi:type="string">cart-products-after</argument>
+                    <argument name="position" xsi:type="string">10</argument>
+                    <argument name="group_name" xsi:type="string">afternative</argument>
+                </arguments>
+                <block class="Magento\Catalog\Block\Product\ProductList\Item\Container" name="crosssell.product.addto.after" as="addto">
+                    <block class="Magento\Wishlist\Block\Catalog\Product\ProductList\Item\AddTo\Wishlist"
+                           name="crosssell.product.addto.wishlist.after" as="wishlist" before="compare"
+                           template="Magento_Wishlist::catalog/product/list/addto/wishlist.phtml"/>    
+                    <block class="Magento\Catalog\Block\Product\ProductList\Item\AddTo\Compare"
+                           name="crosssell.product.addto.compare.after" as="compare"
+                           template="Magento_Catalog::product/list/addto/compare.phtml"/>
+                </block>
+                <block class="Magento\Framework\View\Element\RendererList" name="category.product.type.details.renderers.after" as="details.renderers">
+                    <block class="Magento\Framework\View\Element\Template" as="default"/>
+                    <block class="Magento\Swatches\Block\Product\Renderer\Listing\Configurable" as="configurable" template="Magedelight_Arp::checkout/cart/product/afterNative.phtml" >
+                        <arguments>
+                            <argument name="type" xsi:type="string">shoppingcart-after</argument>
+                        </arguments>
+                    </block>
+                </block>
+            </block> 
+        </referenceContainer>  
+        <referenceContainer name="content.bottom">
+            <block class="Magedelight\Arp\Block\Checkout\Cart\CrosellBlock" name="arp.related.product.cart.bottom" after = "-" cacheable="false">
+                <action method="setCustomTemplate"/>
+                <arguments>
+                    <argument name="type" xsi:type="string">cart-products-bottom</argument>
+                    <argument name="position" xsi:type="string">12</argument>
+                    <argument name="group_name" xsi:type="string">pagebottom</argument>
+                </arguments>
+                <block class="Magento\Catalog\Block\Product\ProductList\Item\Container" name="crosssell.product.addto.bottom" as="addto">
+                    <block class="Magento\Wishlist\Block\Catalog\Product\ProductList\Item\AddTo\Wishlist"
+                           name="crosssell.product.addto.wishlist.bottom" as="wishlist" before="compare"
+                           template="Magento_Wishlist::catalog/product/list/addto/wishlist.phtml"/>    
+                    <block class="Magento\Catalog\Block\Product\ProductList\Item\AddTo\Compare"
+                           name="crosssell.product.addto.compare.bottom" as="compare"
+                           template="Magento_Catalog::product/list/addto/compare.phtml"/>
+                </block>
+                <block class="Magento\Framework\View\Element\RendererList" name="category.product.type.details.renderers.bottom" as="details.renderers">
+                    <block class="Magento\Framework\View\Element\Template" as="default"/>
+                    <block class="Magento\Swatches\Block\Product\Renderer\Listing\Configurable" as="configurable" template="Magedelight_Arp::checkout/cart/product/bottom.phtml" >
+                        <arguments>
+                            <argument name="type" xsi:type="string">shoppingcart-bottom</argument>
+                        </arguments>
+                    </block>
+                </block>
+            </block>
+        </referenceContainer>          
+        <move element="arp.related.product.cart.before" destination="checkout.cart.container.crosssell" />
+        <move element="checkout.cart.crosssell" destination="checkout.cart.container" after= "checkout.cart.container.crosssell" />
+        <move element="arp.related.product.cart.after" destination="checkout.cart.container" after= "checkout.cart.crosssell" />
+        <move element="cart.discount" destination="checkout.cart.container" before="checkout.cart.container.crosssell" />
+    </body>
+</page>

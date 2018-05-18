@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../lib/internal/Magento/Framework/Event/etc/events.xsd">
+    <event name="layout_render_before">
+       <observer name="magedelight_bundlediscount_check_util" instance="Magedelight\Bundlediscount\Observer\Util" />
+    </event>
+    <event name="admin_system_config_changed_section_bundlediscount">
+        <observer name="custom_admin_system_config_changed_section_bundlediscount" instance="Magedelight\Bundlediscount\Observer\Mdkc"/>
+        <observer name="magedelight_bundlediscount_frd_track" instance="Magedelight\Bundlediscount\Observer\Mdfrd" />
+    </event>
+</config>

@@ -1,0 +1,1220 @@
+<?php
+/**
+ * Main menu bar
+ *
+ * @var Infortis_UltraMegamenu_Block_Mainmenu $this
+ */
+?>
+<?php
+    $helper = $block->getHelperData();
+    $isHomepage = $helper->isHomePage();
+?>
+<?php if ($helper->getCfg('mainmenu/enable') && ($isHomepage && $helper->getCfg('mainmenu/remove_on_home')) == false): ?>
+<?php
+    $connectorTheme = $this->getHelperConnectorBaseTheme();
+
+    //-1 = only mobile menu
+    // 0 = both
+    // 1 = only standard desktop dropdown menu
+    $mode = $helper->getCfg('mainmenu/mode');
+
+    //Display categories inside the menu
+    $showCategories = $helper->getCfg('mainmenu/categories');
+
+    //Check if vertical menu type is enabled. 
+    //Vertical menu inside a drop-down box which will be visible when user clicks special button (vertical menu trigger) in the menu bar.
+    //Default menu type is standard horizontal menu (regular menu) with dropdowns displayed at the bottom of the menu.
+    $isTypeVerticalDropdown = $helper->getCfg('mainmenu/vertnav');
+
+    // Check if vertical drop-down menu is initially collapsed (home page has separate option)
+    if ($isHomepage)
+    {
+        $isVertnavCollapsed = ($helper->getCfg('mainmenu/vertnav_collapsed_on_home')) ? true : false;
+    }
+    else
+    {
+        $isVertnavCollapsed = ($helper->getCfg('mainmenu/vertnav_collapsed')) ? true : false;
+    }
+
+    //Additional custom inline links
+    $linksHtml = $this->getChildHtml('block_nav_links');
+
+    //Set variable indicating that the top menu (categories, custom links, or both) exists and is rendered
+    if ($isTypeVerticalDropdown)
+    {
+        if ($showCategories)
+        {
+            $this->getRegistry()->register('umm_top_menu_exists', true);
+        }
+    }
+    else
+    {
+        if ($showCategories || $linksHtml)
+        {
+            $this->getRegistry()->register('umm_top_menu_exists', true);
+        }
+    }
+
+    //CSS classes. By default add regular menu class.
+    $naviClasses = 'navi nav-regular opt-fx-fade-inout ' . $helper->getBlocksVisibilityClassOnMobile();
+
+    if ($isTypeVerticalDropdown)
+    {
+        $naviClasses .= ' nav-vert nav-vert-triggerable';
+    }
+
+    if ($helper->getCfg('mainmenu/centered'))
+    {
+        $naviClasses .= ' centered';
+    }
+
+    if ($helper->getCfg('mainmenu/show_bullets'))
+    {
+        $naviClasses .= ' with-bullets';
+    }
+
+    //Get blocks that can be displayed inside the menu bar
+    //--------------------------------------------------------------
+    $searchHtml = '';
+    $cartHtml = '';
+    $compareHtml = '';
+    $isDisplayedInMenu = $connectorTheme->getIsDisplayedInMenu();
+
+    if ($isDisplayedInMenu !== NULL)
+    {
+        if ($isDisplayedInMenu['search'])
+        {
+            $searchHtml = '<div id="search-marker-regular"></div>';
+        }
+        if ($isDisplayedInMenu['cart'])
+        {
+            $cartHtml = '<div id="mini-cart-marker-regular"></div>';
+        }
+        if ($isDisplayedInMenu['compare'])
+        {
+            $compareHtml = '<div id="mini-compare-marker-regular"></div>';
+        }
+    }
+?>
+<style>
+	/*Start Custom*/
+	.field.choice.admin__field.admin__field-option.required.dpo_swatch {
+	width: 16vw!important;
+	display: inline-block;
+}
+	#itoris_dynamicproductoptions .fieldset, .itoris_dynamicproductoptions .fieldset, #product-options-wrapper .fieldset.fieldset-section {
+	background: #fff;
+	font-weight:bold;
+	text-transform:uppercase;
+	font-family:'bumpers';
+	font-size:20px;
+	 box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.15);
+}
+table.form-list.option-fields-cols-3 {
+	padding: 10px;
+}
+	img.itoris-dynamicoptions-thumbnail-image {
+	max-height: inherit!important;
+width:97%!important;
+}
+
+	.dpo_swatch .itoris-dynamicoptions-thumbnail-image{
+		height:inherit;
+	}
+	.paypal.checkout {
+	text-align: left;
+}
+.paypal.checkout input {
+	width: 100%;
+}
+	strong#red {
+	color:#eb1f27;
+}
+	.cust-spects table td {
+	border: dotted #ddd 2px;
+}
+	a.action.order {
+	padding: 10px;
+}
+a.action.print {
+	padding: 10px;
+}
+.authentication-wrapper{
+	text-align:left;
+}
+	.content-base-cs {
+	font-size: 17px;
+}
+	.content-base-cs {
+	border-radius: 10px;
+	padding: 10px;
+	 box-shadow: 0px 0px 49px rgba(0, 0, 0, 0.21);
+    -moz-box-shadow: 0px 0px 49px rgba(0, 0, 0, 0.21);
+    -webkit-box-shadow: 0px 0px 49px rgba(0, 0, 0, 0.21);
+	margin: 20px 0;
+}
+
+h2.content-head-cs {
+	font-size: 22px;
+	background: #eb1f27;
+	padding: 10px;
+	color: #fff;
+	-webkit-border-top-left-radius: 10px;
+-webkit-border-top-right-radius: 10px;
+-moz-border-radius-topleft: 10px;
+-moz-border-radius-topright: 10px;
+border-top-left-radius: 10px;
+border-top-right-radius: 10px;
+	margin-left: -10px;
+	margin-right: -10px;
+	margin-top: -10px;
+}
+
+	span#log-re{
+	font-family: bumpers;
+	color:#eb1f27;
+}
+@font-face {
+    font-family: bumpers;
+    src: url('https://bumpers4less.com/fonts/ethnocentric.ttf');
+}
+
+h2.text.fadeInUp.delay-0-5.animated{
+		font-family: bumpers!important;
+		
+	}
+	h3.no-margin.fadeInDown.animated{
+		font-family: bumpers!important;
+		text-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
+	}
+	h2.text.fadeInRight.animated {
+	font-family: bumpers!important;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
+}
+	 h1.home-cust {
+	font-family: bumpers!important;
+}
+
+	.home-custom-slide h3 {
+	text-align: left;
+}
+	div#sku-show {
+	background: #19212b;
+	color: #fff;
+text-transform:uppercase;
+	padding: 10px;
+	margin-left: -10px;
+	margin-right: -10px;
+	margin-top: -20px;
+	position: inherit;
+
+}
+	.brand-name.attribute {
+	text-align: left!important;
+}
+
+	div#description-cp {
+	margin-bottom: 20px;
+}
+
+	.grid12-4 {
+    width: 31.33% !important;
+}
+	.product-item-details {
+	position: initial;
+}
+
+	div#user-menu-wrapper-regular {
+	margin-top: 25px;
+}
+.column.main {
+	padding-top: 20px;
+}
+	ul.header.links li a {
+	border-radius: 5px;
+}
+
+	.welcome {
+	display: none;
+}
+.hide-below-960 {
+	display: none;
+}
+.links-wrapper-separators {
+	display: none;
+}
+.container {
+  min-width:90%;
+}
+
+.footer-bottom-container.section-container {
+	background: #000;
+}
+
+div#header-container {
+	background: #0d0e0f;
+}
+
+.item.item-left {
+	color: #eee;
+}
+nav#mainmenu {
+	background: #0d0e0f;
+}
+.links-wrapper-separators a {
+	color: #666;
+}
+div#user-menu a {
+	color: #666;
+}
+div#minicart {
+	color: #999;
+}
+div#header-search {
+	position: absolute;
+	top: 14px;
+	right: 6%;
+	width: 20%;
+}
+.footer-bottom.footer.container {
+	background: #000;
+}
+.footer-primary-container.section-container {
+	background: #ddd;
+}
+
+  /*start navigation active*/
+ li.nav-item .item-active {
+	background: #eb1f27;
+}
+
+  .nav-regular:not(.nav-vert) .nav-item.level0.active:after{
+  	  content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 20px solid #0d0e0f;
+    border-top: 28px solid transparent;
+    border-bottom: 22px solid transparent;
+    z-index: 9;
+  }
+  .nav-regular:not(.nav-vert) .nav-item.level0.active:before{
+  	 content: "";
+    position: absolute;
+    right: -20px;
+    bottom: 0;
+    width: 0;
+    height: 0;
+ 	border-left: 20px solid #eb1f27;
+	border-top: 28px solid transparent;
+	border-bottom: 22px solid transparent;
+	z-index:10;
+  }
+  .nav-regular:not(.nav-vert) .nav-item.level0.active{
+  background:#eb1f27!important;
+  }
+  
+ .nav-regular:not(.nav-vert) .nav-item.level0.active > a{
+ 	background:#eb1f27!important;
+ }
+li.nav-item.nav-item--home.level0.level-top.active {
+background:#eb1f27;
+    position: relative;
+  }
+li.nav-item.nav-item--home.level0.level-top.active:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 20px solid #0d0e0f;
+    border-top: 28px solid transparent;
+    border-bottom: 22px solid transparent;
+    z-index: 9;
+  }
+li.nav-item.nav-item--home.level0.level-top.active:before {
+    content: "";
+    position: absolute;
+    right: -20px;
+    bottom: 0;
+    width: 0;
+    height: 0;
+ 	border-left: 20px solid #eb1f27;
+	border-top: 28px solid transparent;
+	border-bottom: 22px solid transparent;
+	z-index:10;
+  }
+  
+  /*start navigation*/
+ .nav-regular li.level0 a {
+	font-size: .9vw!important;
+}
+
+ li.nav-item.nav-item--stickylogo.level0.level-top.nav-holder {
+	display: none;
+}
+
+ a.level-top {
+	font-size: 12px!important;
+	font-family: arial!important;
+	margin-left: 20px;
+}
+
+ nav#mainmenu {
+	margin-bottom: 8px;
+	margin-top:7px;
+}
+
+ .nav-border-bottom {
+	display: none;
+}
+
+  .nav-regular li.level0 {
+	margin-right: 10px!important;
+	transition: all 0.5s ease!important;
+}
+  .nav-regular li.level0 a{
+  	color:#ddd!important;
+  }
+ 
+  .nav-regular li.level0 {
+
+    position: relative;
+
+  }
+
+.nav-regular li.level0:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 20px solid #0d0e0f;
+    border-top: 28px solid transparent;
+    border-bottom: 22px solid transparent;
+    z-index: 9;
+  }
+.nav-regular li.level0:before {
+    content: "";
+    position: absolute;
+    right: -20px;
+    bottom: 0;
+    width: 0;
+    height: 0;
+ 	border-left: 20px solid transparent;
+	border-top: 28px solid transparent;
+	border-bottom: 22px solid transparent;
+	z-index: 10;
+  }
+  .nav-regular .nav-panel--dropdown {
+		left: -1px!important;
+	}
+  
+/*Stop Custom*/
+
+/*Start sticky Custom*/
+
+.sticky-header .nav-container, .sticky-header .navi-wrapper, .sticky-header .nav-regular:not(.nav-vert) {
+	background-color: #0d0e0f;
+}
+
+/*Stop sticky Custom*/
+
+  .nav-regular:not(.nav-vert) .nav-item.level0:hover > a{
+  background:transparent!important;
+  }
+   .nav-regular li.level0:hover {   
+    background: #eb1f27;
+  }
+.nav-regular li.level0:hover:before {
+    
+ 	border-left: 20px solid  #eb1f27;
+}
+.navi .nav-panel--dropdown {
+	background-color:#0d0e0f;
+}
+.navi .nav-panel--dropdown a:hover{
+	background:#eb1f27!important;
+}
+.nav-regular .nav-item{
+	border:none;
+}
+.feature p {
+	vertical-align: bottom;
+}
+.feature {
+	cursor: pointer;
+}
+ul.bullet li {
+	margin-bottom: 8px;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-family: arial!important;
+	font-weight: bold!important;
+}
+strong{
+	font-family: arial!important;
+	font-weight: bold!important;
+}
+
+ul.uaccordion.uaccordion-style1.sideacco li {
+	margin-bottom: 10px;
+}
+.sidebar strong, span {
+	font-family: arial;
+}
+li.item.product.product-item {
+	border: 1px dotted #ddd;
+	margin-right: 15px;
+	padding-left:10px!important; 
+	padding-right:10px!important;
+}
+.items-grid-partitioned.hover-effect .item:hover {
+	 margin-left:0px!important; 
+	margin-right:15px!important;
+	padding-left:10px!important; 
+	padding-right:10px!important;
+	}
+	h1.home-cust {
+	text-transform: uppercase;
+}
+.ic-cart:before, .ic-cart1:before {
+	color: #999;
+}
+h1.home-cust {
+	color: #fff!important;
+}
+/*start other*/
+.amfinder-horizontal {
+	background: #19212b;
+	color: #fff;
+	position: absolute;
+	top: -58px;
+	right:0;
+	width: 78%;
+		padding-bottom: 20px;
+}
+.toolbar.toolbar-products {
+	margin-top: 20px;
+}
+.header .logo-wrapper .logo {
+	width: 53vw;
+}
+.hp-block.central-column.grid12-4 {
+
+	float: left;
+}
+div#user-menu-wrapper-regular {
+	margin-top: 4vw;
+}
+.grid12-4 {
+	width: 40%;
+}
+.message.info.empty {
+	margin-top: 4vw;
+}
+.column.main {
+	margin-top: 2vw;
+}
+.message.info.empty {
+	background: #ddd;
+	border: 3px #eee solid;
+	border-radius: 7px;
+}
+.itemgrid .item {
+		width: 14vw;
+	margin-bottom:20px;
+}
+.block.block-vertnav.clearfix.hide-below-768 {
+	display: none;
+}
+ 
+@media screen and (max-width: 991px){
+		.block-title.filter-title strong{
+			font-size:0px!important;
+			height: 43px;
+		}
+	.block-title.filter-title strong:before {
+	content: 'Sort By ';
+	font-size:18px;
+}
+
+	.filter-title strong {
+
+		top: 145px;
+	left: 45%;
+	background: red;
+	color: #fff;
+}
+	.itemgrid .item {
+	width: 93%;
+	}
+	
+}
+	
+@media screen and (max-width: 991px){
+	.product-img-column.grid12-4.no-left-gutter.product.media {
+	width: 100%!important;
+}
+.fotorama__stage {
+	width: 100%!important;
+}
+	div#header-search{
+		right:0;
+	}
+	h1.logo img {
+	min-width: 100%!important;
+}
+	.home-custom-slide {
+	width: 95%!important;
+	border: none!important;
+}
+	.logo-wrapper--mobile {
+	width: 100%!important;
+}
+
+.logo-wrapper--mobile img {
+	width: 100%!important;
+}
+
+	.toolbar-sorter.sorter {
+	position: relative;
+}
+	.column.main {
+	margin-top: inherit!important;
+}
+	.message.info.empty {
+	margin-top:inherit!important;
+}
+ .amfinder-horizontal {
+	position: inherit;
+	width: 98%;
+}
+.page-title-wrapper {
+	width: 100%!important;
+	float: none!important;
+}
+.page-products .columns {
+	padding-top: 0;
+}
+}
+.amfinder-horizontal td {
+padding: 0px 10px;
+	margin: 0;
+	line-height:0;
+}
+.amfinder-buttons {
+		padding: 17px 0 0;
+}
+.dropdown-title {
+	margin-bottom: 13px;
+		margin-top: 9px;
+}
+button.action.tocart.primary {
+	background: #19212b;
+	color: #fff;
+	transition: all 0.5s ease;
+}
+button.action.tocart.primary:hover{
+	background:#eb1f27;
+}
+.fotorama__stage {
+	background: #ddd;
+}
+a#scroll-to-top {
+	box-shadow: 0px 0px 23px rgba(0, 0, 0, 0.14);
+	-moz-box-shadow: 0px 0px 23px rgba(0, 0, 0, 0.14);
+	-webkit-box-shadow: 0px 0px 23px rgba(0, 0, 0, 0.14);
+	background: red;
+	color: #fff;
+}
+.minicart-wrapper .action.showcart .counter.qty, .mini-cart .dropdown-heading.action .counter.qty, .mini-compare .dropdown-heading.action .counter.qty, .dropdown-heading.action .counter.qty, .skip-link .counter {
+	background-color: #eb1f27;
+}
+.cart-summary {
+	padding: 15px;
+}
+strong.product-item-name a {
+	font-weight: bold;
+	font-size: 17px;
+}
+button {
+	background: #000;
+	color: #999;
+}
+a.action.continue {
+	background: #000!important;
+	color: #999!important;
+	transition: all 0.5s ease;
+}
+a.action.continue:hover{
+	background: #eb1f27!important;
+	color: #fff!important;
+	
+}
+.actions-toolbar a {
+	transition: all 0.5s ease;
+	background: #eb1f27!important;
+	color: #fff!important;
+}
+.actions-toolbar a:hover{
+	background: #333!important;
+	color: #999!important;
+}
+.sideacco .nav-item > a {
+	background: #19212b;
+	color: #fff;
+		border-radius: 5px;
+}
+ 	
+a.action.remind {
+	padding: 10px;
+}
+a.action.back {
+	padding: 10px;
+}
+button.action.submit.primary {
+	background: #000;
+	color: #fff;	 
+transition: all 0.5s ease;
+}
+
+button.action.submit.primary:hover{
+	background:#eb1f27;
+}
+
+button#send2{
+		background: #000;
+	color: #fff;	 
+transition: all 0.5s ease;
+}
+
+button#send2:hover{
+	background:#eb1f27;
+}
+a.action.viewcart {
+	background: #eb1f27;
+	color: #fff!important;
+	padding: 10px 20px;
+	text-transform: uppercase;
+	transition: all 0.5s ease;
+}
+a.action.viewcart:hover{
+	background:#000;
+}
+/*stop other*/
+/*Start video-css*/
+a.lightbox img {
+height: 150px;
+border: 3px solid white;
+box-shadow: 0px 0px 8px rgba(0,0,0,.5);
+margin: 94px 20px 20px 20px;
+}
+
+/* Styles the lightbox, removes it from sight and adds the fade-in transition */
+
+.lightbox-target {
+position: fixed;
+top: -100%;
+width: 100%;
+background: rgba(0,0,0,.8);
+width: 100%;
+opacity: 0;
+-webkit-transition: opacity .5s ease-in-out;
+-moz-transition: opacity .5s ease-in-out;
+-o-transition: opacity .5s ease-in-out;
+transition: opacity .5s ease-in-out;
+overflow: hidden;
+}
+
+/* Styles the lightbox image, centers it vertically and horizontally, adds the zoom-in transition and makes it responsive using a combination of margin and absolute positioning */
+
+.lightbox-target img {
+margin: auto;
+position: absolute;
+top: 0;
+left:0;
+right:0;
+bottom: 0;
+max-height: 0%;
+max-width: 0%;
+border: 3px solid white;
+box-shadow: 0px 0px 8px rgba(0,0,0,.5);
+box-sizing: border-box;
+-webkit-transition: .5s ease-in-out;
+-moz-transition: .5s ease-in-out;
+-o-transition: .5s ease-in-out;
+transition: .5s ease-in-out;
+}
+
+/* Styles the close link, adds the slide down transition */
+
+a.lightbox-close {
+display: block;
+width:50px;
+height:50px;
+box-sizing: border-box;
+background: white;
+color: black;
+text-decoration: none;
+position: absolute;
+    top: 8vw!important;
+    right: 30vw;
+-webkit-transition: .5s ease-in-out;
+-moz-transition: .5s ease-in-out;
+-o-transition: .5s ease-in-out;
+transition: .5s ease-in-out;
+}
+
+/* Provides part of the "X" to eliminate an image from the close link */
+
+a.lightbox-close:before {
+content: "";
+display: block;
+height: 30px;
+width: 1px;
+background: black;
+position: absolute;
+left: 26px;
+top:10px;
+-webkit-transform:rotate(45deg);
+-moz-transform:rotate(45deg);
+-o-transform:rotate(45deg);
+transform:rotate(45deg);
+}
+
+/* Provides part of the "X" to eliminate an image from the close link */
+
+a.lightbox-close:after {
+content: "";
+display: block;
+height: 30px;
+width: 1px;
+background: black;
+position: absolute;
+left: 26px;
+top:10px;
+-webkit-transform:rotate(-45deg);
+-moz-transform:rotate(-45deg);
+-o-transform:rotate(-45deg);
+transform:rotate(-45deg);
+}
+
+/* Uses the :target pseudo-class to perform the animations upon clicking the .lightbox-target anchor */
+
+.lightbox-target:target {
+opacity: 1;
+top: 0;
+right: 0;
+bottom: 0;
+text-align: center;
+padding-top: 10.5%;
+z-index: 99;
+}
+
+.lightbox-target:target img {
+max-height: 100%;
+max-width: 100%;
+}
+
+.lightbox-target:target a.lightbox-close {
+top: 0px;
+}
+/*Stop video-css*/
+
+.pages-custom-add h2 {
+	font-size: 20px;
+}
+ul.checkmark li {
+  font-size: 16px; 
+  list-style-type: none;
+  margin-bottom: 1em; 
+  padding: 0.25em 0 0 2.5em; 
+  position: relative;
+}
+
+ul.checkmark li:before {
+  content: " ";
+  display: block;
+  border: solid 0.8em #eb1f27;
+  border-radius: .8em;
+  height: 0;
+  width: 0;
+  position: absolute;
+  left: 0.5em;
+  top: 40%; 
+  margin-top: -0.5em;
+}
+
+ul.checkmark li:after {
+  content: " ";
+  display: block;
+  width: 0.3em;
+  height: 0.6em;
+  border: solid white;
+  border-width: 0 0.2em 0.2em 0;
+  position: absolute;
+  left: 1em;
+  top: 40%;
+  margin-top: -0.2em;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+ul.checkmark li:after {
+  content: " ";
+  display: block;
+  width: 0.3em;
+  height: 0.6em;
+  border: solid white;
+  border-width: 0 0.2em 0.2em 0;
+  position: absolute;
+  left: 1em;
+  top: 40%;
+  margin-top: -0.2em;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.pages-custom-add {
+	font-size: 15px;
+}
+ul.checkmark {
+	margin-top: 10px;
+}
+.action.primary {
+	background-color: #000;
+	color:#fff;
+}
+
+.review-form .action.submit.primary{
+	background:#000;
+	color:#fff;
+}
+.review-form .action.submit.primary:hover{
+	background:#eb1f27;
+}
+.sidebar.sidebar-additional {
+	display: none;
+}
+
+.category-view {
+	display: none;
+}
+
+#itoris_dynamicproductoptions .fieldset .legend, .itoris_dynamicproductoptions .fieldset .legend {
+	border: 0;
+	background: #000;
+	color: #fff;
+	margin: -20px 0px 0px 10px;
+}
+.page-contents.promotions {
+	padding: 10px;
+	width: 630px;
+}
+.facebook-side-custom {
+	position: fixed;
+	top: 20%;
+	left: 0;
+	width: 71px;
+	height: 207px;
+	background: rgba(0, 0, 0, .9);	
+	text-align: center;
+	padding: 12px 0;
+	z-index: 9;
+	-webkit-border-top-right-radius: 10px;
+	-webkit-border-bottom-right-radius: 10px;
+	-moz-border-radius-topright: 10px;
+	-moz-border-radius-bottomright: 10px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+ul.social-icons-side i {
+	font-size: 20px;
+	color: #fff;
+}
+ul.social-icons-side li {
+	display: inline-block;
+}
+ul.social-icons-side {
+	margin-top: 15px;
+}
+ul.social-icons-side i {
+	font-size: 18px;
+	color: #fff;
+	padding: 3px;
+	transition: all 0.5s ease;
+}
+ul.social-icons-side i:hover {
+	color:#eb1f27;
+}
+img#facebook-cu-lit {
+	width: 60px;
+	margin-bottom: 5px;
+}
+h1#page-title-heading span {
+	font-family: bumpers!important;
+}
+.product.attribute.sku {
+	color: #132f4c!important;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+.product.attribute.sku strong:after {
+	content: ':';
+}
+span.price {
+	font-weight: bold!important;
+}
+.reviews-actions {
+	display: none!important;
+}
+.product.attribute.overview {
+	padding: 20px;
+	box-shadow: 0px 0px 34px rgba(0, 0, 0, 0.13);
+	-moz-box-shadow: 0px 0px 34px rgba(0, 0, 0, 0.13);
+	-webkit-box-shadow: 0px 0px 34px rgba(0, 0, 0, 0.13);
+		font-size: 17px;
+}
+.cart-summary .block>.content, .paypal-review-discount .block>.content {
+	display: block!important;
+}
+.home-custom-slide {
+	color: #fff!important;
+}
+.paypal.checkout.paypal-logo.paypal-express-in-context-mini-cart-container {
+	margin-bottom: 15px;
+}
+
+</style>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.12&appId=1889038278084767&autoLogAppEvents=1';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<div class="facebook-side-custom">
+<img src="<?php echo $this->getUrl('fonts') ?>like-share.png" id="facebook-cu-lit">
+<div class="fb-like fb_iframe_widget" data-href="https://www.facebook.com/bumpers4less" data-layout="box_count" data-action="like" data-show-faces="true" data-share="true" fb-xfbml-state="rendered" fb-iframe-plugin-query="action=like&amp;app_id=&amp;container_width=55&amp;href=https%3A%2F%2Fwww.facebook.com%2FBumpers4less&amp;layout=box_count&amp;locale=en_US&amp;sdk=joey&amp;share=true&amp;show_faces=true">
+
+	</div>
+
+ <ul class="social-icons-side">
+                <li><a href="https://www.facebook.com/bumpers4less" target="_blank" title="Like us Facebook"><i class="fa fa-facebook-square"></i></a></li>
+                <li><a href="#" target="_blank" title="Follow us onTwitter"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="#" target="_blank" title="Watch us on Youtube"><i class="fa fa-youtube"></i></a></li>
+                <li><a href="#" target="_blank" title="Follow us on google"><i class="fa fa-google-plus-square"></i></a></li>
+            </ul>
+	</div>
+	
+<div class="navi-wrapper">
+
+    <?php //Holder for additional elements inside the menu bar ************************************************************** ?>
+    <ul class="nav-holders-wrapper">
+        <li id="nav-holder1" class="nav-item level0 level-top nav-holder"><?php echo $searchHtml; ?></li>
+        <li id="nav-holder2" class="nav-item level0 level-top nav-holder"><?php echo $cartHtml; ?></li>
+        <li id="nav-holder3" class="nav-item level0 level-top nav-holder"><?php echo $compareHtml; ?></li>
+    </ul>
+
+    <?php //Mobile menu trigger ************************************************************** ?>
+    <?php //Show mobile menu trigger (to toggle mobile menu) ?>
+    <?php if ($mode <= 0): //Mode: mobile or both ?>
+
+        <div id="mobnav-trigger" class="mobnav-trigger menu-trigger">
+            <div class="menu-trigger-inner">
+                <span class="trigger-icon"><span class="line"></span><span class="line"></span><span class="line"></span></span>
+                <span class="label"><?php echo __('Menu'); ?></span>
+            </div>
+        </div>
+
+    <?php endif; ?>
+
+    <?php //Vertical menu trigger ************************************************************** ?>
+    <?php if ($isTypeVerticalDropdown): ?>
+
+        <div id="vertnav-trigger" class="vertnav-trigger menu-trigger">
+            <div class="menu-trigger-inner">
+                <span class="trigger-icon"><span class="line"></span><span class="line"></span><span class="line"></span></span>
+                <span class="label"><?php echo __('Menu'); ?></span>
+            </div>
+        </div>
+
+    <?php endif; ?>
+
+    <?php //Additional links for vertical menu ************************************************************** ?>
+    <?php
+    //Display custom links as inline links only if vertical menu type enabled.
+    //Otherwise custom links are displayed inside block of categories.
+    ?>
+    <?php if ($isTypeVerticalDropdown && $linksHtml): ?>
+        <ul class="nav-inline-links navi nav-regular">
+            <?php echo $linksHtml; ?>
+        </ul>
+    <?php endif; ?>
+
+    <?php //Menu ************************************************************** ?>
+    <div id="nav-marker-regular"></div>
+    <nav id="mainmenu" class="<?php echo $naviClasses; ?>">
+        <ul>
+
+            <?php //Optional sticky logo (Note: block is being added by the base theme) ?>
+            <?php echo $this->getChildHtml('stickylogo'); ?>
+
+            <?php //Home link
+                $isHomeLink = false;
+                $homeLinkWrapperClass = '';
+                $homeLinkIcon = '';
+                $homeLinkText = '';
+
+                //If it's home page
+                if ($isHomepage)
+                {
+                    $homeLinkWrapperClass .= ' active';
+                }
+
+                //Display: home link, single icon
+                if ($helper->getCfg('mainmenu/home_link_icon'))
+                {
+                    $isHomeLink = true;
+                    $homeLinkWrapperClass .= ' nav-item--homeicon'; //Special class, indicates item with single icon
+                    $homeLinkIcon = '<span class="ic ic-home"></span>';
+                }
+
+                //Display: home link (text/icon or both) inside standard menu item
+                if ($isHomeLink === false) //Display it only if single home link was not yet enabled
+                {
+                    if ($helper->getCfg('mainmenu/home') || $helper->getCfg('mainmenu/home_img'))
+                    {
+                        $isHomeLink = true;
+
+                        //If home link with text
+                        if ($helper->getCfg('mainmenu/home'))
+                        {
+                            $homeLinkText = '<span>' . __('Home') . '</span>';
+                        }
+
+                        //If home link with icon
+                        if ($helper->getCfg('mainmenu/home_img'))
+                        {
+                            $homeLinkIcon = '<span class="ic ic-home"></span>';
+                        }
+                    }
+                }
+            ?>
+
+            <?php if ($isHomeLink): ?>
+                <li class="nav-item nav-item--home level0 level-top<?php echo $homeLinkWrapperClass; ?>">
+                    <a class="level-top" href="<?php echo $this->getBaseUrl(); ?>"><?php echo $homeLinkIcon, $homeLinkText; ?></a>
+                </li>
+            <?php endif; ?>
+            <?php //end: home link ?>
+
+            <?php //Categories ?>
+            <?php if ($showCategories): ?>
+                <?php echo $this->getChildHtml('catalog.topnav.navigation'); ?>
+            <?php endif; ?>
+        
+            <?php //Static block as a dropdown ?>
+            <?php if ($tmpHtml = $this->getChildHtml('block_nav_dropdown')): ?>
+                <li class="nav-item nav-item--parent nav-item--only-blocks level0 level-top parent nav-custom-link<?php if ($helper->getCfg('mainmenu/custom_block_floating')) echo ' right'; ?>">
+                    <?php //Get the block title, and display it as menu item
+                        $staticBlockTitle = $this->getStaticBlockTitle('block_nav_dropdown');
+                    ?>
+                    <a class="level-top no-click" href="#"><span><?php echo $staticBlockTitle; ?></span><span class="caret"></span></a>
+                    <span class="opener"></span>
+                    <div class="nav-panel nav-panel--dropdown full-width">
+                        <div class="nav-panel-inner">
+                            <div class="header-nav-dropdown-wrapper nav-block std grid-full clearer"><?php echo $tmpHtml; ?></div>
+                        </div>
+                    </div>
+                </li>
+            <?php endif; ?>
+            
+            <?php //Display custom links inside block of categories only if vertical menu type not enabled ?>
+            <?php if ($isTypeVerticalDropdown == false): ?>
+                <?php echo $linksHtml; ?>
+            <?php endif; ?>
+            
+        </ul>
+    </nav>
+
+    <div class="nav-border-bottom"></div>
+
+</div> <!-- end: navi-wrapper -->
+<script type="text/javascript">
+//<![CDATA[
+
+requirejs(['jquery', 'ultramegamenu'], function(jQuery, ultramegamenu) {
+
+    var topMenuContainer = jQuery('#mainmenu');
+    var topMenuSettings = {
+        mobileMenuThreshold: <?php echo intval($helper->getCfg('mobilemenu/threshold')); ?>
+        , isVerticalLayout: <?php echo ($isTypeVerticalDropdown) ? 'true' : 'false'; ?>
+        , vertnavTriggerSelector: '#vertnav-trigger'
+        , mode: <?php echo $mode; ?>
+        <?php /* , initMobileMenuCollapsed: <?php echo ($helper->getCfg('mobilemenu/collapsed')) ? 'true' : 'false'; ?> */?>
+        , initVerticalMenuCollapsed: <?php echo ($isVertnavCollapsed) ? 'true' : 'false'; ?>
+        , outermostContainer: <?php echo $helper->getOutermostContainer(); ?>
+        , fullWidthDdContainer: <?php echo $helper->getFullwidthDropdownContainer(); ?>
+    };
+    var theTopMenu = topMenuContainer.ultramegamenu(topMenuSettings).data("infortis-ultramegamenu");
+    theTopMenu.enableDropdowns();
+
+    <?php //Mode: regular or both ?>
+    <?php if ($mode >= 0): ?>
+
+        jQuery(function($) {
+
+            var itemsList = topMenuContainer.children('ul'); // itemsList.css('background-color', 'yellow'); ///
+
+            // Non-clickable links
+            itemsList.on('click', '.no-click', function(e) {
+                e.preventDefault();
+            });
+
+        }); //end: on document ready
+
+        jQuery(window).on("load", function() {
+
+            var menubar = topMenuContainer;
+            var isTouchDevice = ('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0);
+            if (isTouchDevice)
+            {
+                menubar.on('click', 'a', function(e) {
+
+                    var link = jQuery(this);
+                    if (!menubar.hasClass('nav-mobile') && link.parent().hasClass('nav-item--parent'))
+                    {
+                        if (!link.hasClass('ready'))
+                        {
+                            e.preventDefault();
+                            menubar.find('.ready').removeClass('ready');
+                            link.parents('li').children('a').addClass('ready');
+                        }
+                    }
+
+                }); //end: on click
+            } //end: if isTouchDevice
+
+        }); //end: on load
+
+    <?php endif; //end: regular or both ?>
+
+}); //end: requirejs
+
+//]]>
+</script>
+<?php endif; //end: if 'mainmenu/enable' ?>

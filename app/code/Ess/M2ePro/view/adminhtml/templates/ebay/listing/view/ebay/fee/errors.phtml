@@ -1,0 +1,24 @@
+<?php
+    $errors = $block->getErrors();
+
+    /** @var \Magento\Framework\View\Element\Messages $messages */
+    $messages = $block->getLayout()->createBlock('\Magento\Framework\View\Element\Messages');
+
+    foreach ($errors as $error) {
+        if ($error['type'] == \Ess\M2ePro\Model\Log\AbstractModel::TYPE_WARNING) {
+            $messages->addWarning($this->getHelper('Data')->escapeHtml($error['text']));
+        }
+
+        if ($error['type'] == \Ess\M2ePro\Model\Log\AbstractModel::TYPE_ERROR) {
+            $messages->addError($this->getHelper('Data')->escapeHtml($error['text']));
+        }
+    }
+?>
+<div class="entry-edit" style="padding-top: 10px;">
+
+    <div><?php echo $block->__('Fee cannot be estimated because of next error(s)') ?>:</div>
+
+    <div style="padding-top: 10px;">
+        <?php echo $messages->toHtml(); ?>
+    </div>
+</div>

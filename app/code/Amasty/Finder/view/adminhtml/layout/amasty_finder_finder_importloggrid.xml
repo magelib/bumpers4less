@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2017 Amasty (https://www.amasty.com)
+ * @package Amasty_Finder
+ */
+-->
+<!--
+/**
+ * Copyright © 2015 Amasty. All rights reserved.
+ */
+-->
+
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/layout_generic.xsd">
+    <update handle="formkey"/>
+    <update handle="amasty_finder_finder_import_log_grid"/>
+    <container name="root">
+        <block class="Magento\Backend\Block\Widget\Grid\Container" name="adminhtml.amasty.finder.finder.import.log.grid.container" template="Magento_Backend::widget/grid/container/empty.phtml"/>
+    </container>
+</layout>

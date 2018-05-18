@@ -1,0 +1,561 @@
+.right {float:right}
+
+#itoris-dynamicoptions-field-manager-area span.required {
+    display: inline;
+    color: #D40707;
+    font-weight: bold;
+}
+
+#edit_form .admin__field > .admin__field-label{
+    width: calc( (100%) * 0.1 - 30px );
+}
+
+#itoris-dynamicoptions-field-manager-area .section .info {
+    margin: 40px 0 25px 0;
+	min-height: 23px;
+}
+#itoris-dynamicoptions-field-manager-area .action-link, #itoris-dynamicoptions-field-manager-area .add-product-link {
+	text-decoration: underline;
+	color: #ff0000;
+	margin: 0 5px;
+	cursor: pointer;
+	font-size: 11px;
+}
+#itoris-dynamicoptions-field-manager-area .remove-icon, #itoris-dynamicoptions-field-manager-area .remove-img-icon {
+	height: 14px;
+	width: 14px;
+	background: url(images/icon-delete.gif);
+	cursor: pointer;
+}
+
+#itoris-dynamicoptions-field-manager-area .sp-replacer {
+    padding: 2px 4px;
+}
+
+#itoris-dynamicoptions-field-manager-area .sp-replacer .sp-preview  {
+    height: 17px;
+}
+
+#itoris-dynamicoptions-field-manager-area .no-color {
+    text-align:left;
+}
+
+#itoris-dynamicoptions-field-manager-area .no-color .sp-replacer {
+    display:none;
+}
+
+.dynamicoptions-value-base_img-span {display:none;}
+#itoris-dynamicoptions-field-manager-area .no-color .dynamicoptions-value-base_img-span {
+    display:inline-block;
+}
+
+#itoris-dynamicoptions-field-manager-area .no-color .dynamicoptions-value-base_img-span span {
+    display: inline-block;
+    font-size: 10px;
+    line-height: 10px;
+    width: 25px;
+}
+#itoris-dynamicoptions-field-manager-area .no-color .remove-img-icon {display:inline-block !important;}
+
+#itoris-dynamicoptions-field-manager-area .section .info .cols-rows-selects {
+	float: right;
+	margin-bottom:5px;
+}
+#itoris-dynamicoptions-field-manager-area .section .info .cols-rows-selects select {
+	margin: 0 5px;
+}
+#itoris-dynamicoptions-field-manager-area .section table {
+	width: 100%;
+	border: 1px solid #a2bce6;
+	background-color: #c9e6dd;
+    border-collapse: inherit;
+    border-spacing: 2px;
+}
+#itoris-dynamicoptions-field-manager-area .section.dpo_from_template  .dynamicoptions-edit-pen-icon{
+    display:none;
+}
+#itoris-dynamicoptions-field-manager-area .section.dpo_from_template table{
+    background-color: #fffcb6;
+    border: 1px solid #d2c692;
+    pointer-events: none;
+}
+#itoris-dynamicoptions-field-manager-area .section.dpo_from_template .section_template_comment {
+    display:block;
+    color: #fff;
+    background: red;
+    clear:both;
+    padding:5px 10px;
+}
+#itoris-dynamicoptions-field-manager-area .section.dpo_from_template .reorder-arrows-box{
+    display:none;
+}
+#itoris-dynamicoptions-field-manager-area .section.dpo_from_template .edit-button{
+    display:none;
+}
+#itoris-dynamicoptions-field-manager-area .section table .field {
+	width: 100%;
+	height: 100%;
+}
+#itoris-dynamicoptions-field-manager-area .section table .field:hover {
+	background-color: #d6d6d6;
+	cursor: move;
+}
+
+#itoris-dynamicoptions-field-manager-area .section.dpo_from_template table .field:hover {
+	background-color: transparent;
+    cursor: default;
+}
+
+#itoris-dynamicoptions-field-manager-area .section table tbody tr td {
+	border: 1px solid #a2bce6;
+    margin: 2px;
+    /*border: 10px solid black;*/
+	padding: 5px;
+}
+#itoris-dynamicoptions-field-manager-area .section table td .field-container {
+	position: relative;
+    min-height: 50px;
+	height:100%;
+}
+#itoris-dynamicoptions-field-manager-area .section table td .field-container:hover {
+	background-color: #d6d6d6;
+}
+#itoris-dynamicoptions-field-manager-area .section.dpo_from_template table td .field-container:hover {
+	background-color: transparent;
+}
+#itoris-dynamicoptions-field-manager-area .section table td .field-container .drag-n-drop {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	z-index: 5;
+	cursor: move;
+}
+#itoris-dynamicoptions-field-manager-area .section.dpo_from_template table td .field-container .drag-n-drop {
+    cursor:default;
+}
+#itoris-dynamicoptions-field-manager-area .section table td .comment {
+	font-size: 10px;
+}
+#itoris-dynamicoptions-field-manager-area .section table .empty {
+	background-color: #bbc8e6;
+	position: relative;
+	height: 50px;
+	width: 295px;
+}
+#itoris-dynamicoptions-field-manager-area .section.dpo_from_template table .empty{
+    background-color: #f0ec95;
+}
+#itoris-dynamicoptions-field-manager-area .section table .edit-button {
+	position: absolute;
+	right: 0;
+	top: 0;
+	background-image: url(images/edit.gif);
+	width: 25px;
+	height: 25px;
+	cursor: pointer;
+	z-index: 6;
+}
+#itoris-dynamicoptions-field-manager-area .section {padding: 10px}
+
+#itoris-dynamicoptions-field-manager-area .popup-background, .dynamicoptions-image-popup-background {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	z-index: 1000;
+	top: 0;
+	left: 0;
+	background-color: #000000;
+	opacity: 0.7;
+	filter: alpha(opacity=70);
+}
+#itoris-dynamicoptions-field-manager-area .popup-loading-mask {
+	width: 100%;
+	height: 100%;
+	top:0;
+	left:0;
+	position: absolute;
+	z-index: 1100;
+	background: url(images/loader.gif) center center no-repeat #000000;
+	opacity: 0.9;
+	filter: alpha(opacity=90);
+}
+#itoris-dynamicoptions-field-manager-area .small-input {
+	width: 20px;
+}
+#itoris-dynamicoptions-field-manager-area .popup-window {
+	width: 70%;
+	border: 4px solid #000000;
+	background-color: #ffffff;
+	position: absolute;
+/*	margin-left: -550px;*/
+	z-index: 1001;
+}
+#itoris-dynamicoptions-field-manager-area .popup-window.wide {
+	width: 1250px;
+}
+#itoris-dynamicoptions-field-manager-area .popup-window.wide.select-window {
+	width: 1000px;
+	margin-left: -500px;
+}
+#itoris-dynamicoptions-field-manager-area .popup-window.wide.select-window table th {
+	font-size: 12px;
+}
+#itoris-dynamicoptions-field-manager-area .popup-window.wide.select-window table td {
+	padding-right: 10px;
+}
+#itoris-dynamicoptions-field-manager-area .popup-window.wide.select-window table input,
+#itoris-dynamicoptions-field-manager-area .popup-window.wide.select-window table select {
+	width: 100% !important;
+}
+#itoris-dynamicoptions-field-manager-area .popup-window.wide.select-window table .sort input {
+	width: 20px !important;
+	float: left;
+}
+#itoris-dynamicoptions-field-manager-area .popup-window .config-box {
+	margin: 10px;
+}
+#itoris-dynamicoptions-field-manager-area .popup-window .config-box .config {
+	margin-top: 5px;
+}
+#itoris-dynamicoptions-field-manager-area .popup-window .config-box .config .ie7-margin {
+	margin-left: -10px;
+}
+#itoris-dynamicoptions-field-manager-area .popup-window .config-box .config .options {
+	font-size: 14px;
+	font-weight: normal;
+}
+#itoris-dynamicoptions-field-manager-area .popup-window .config-box .config .options .label {
+	padding: 0;
+	width: 200px;
+	border: none;
+	margin-top: 3px;
+	float: left;
+	font-size: 12px;
+	font-weight: bold;
+}
+#itoris-dynamicoptions-field-manager-area .popup-window .config-box .config .options .value {
+	float: left;
+	width: 270px;
+}
+#itoris-dynamicoptions-field-manager-area .popup-window.wide .config-box .config .options .value {
+	width: 410px;
+}
+#itoris-dynamicoptions-field-manager-area .popup-window.wide .config-box .config .options .value input {
+	width: 100%;
+}
+#itoris-dynamicoptions-field-manager-area .popup-window .config-box .config .image-size-input {
+	width: 60px !important;
+}
+#itoris-dynamicoptions-field-manager-area .popup-window .config-box .config .options .value .validation-advice {
+	font-size: 12px;
+}
+#itoris-dynamicoptions-field-manager-area .popup-window .config-box .config .dynamicoptions-td-internal-id {
+	color:#0000ff;font-weight: bold;
+}
+#itoris-dynamicoptions-field-manager-area .popup-window .config-box .config .note {
+	font-size: 11px;
+	padding: 0 13px;
+	margin: 0;
+	background: url(images/note.gif) no-repeat scroll 1px 6px transparent;
+}
+#itoris-dynamicoptions-field-manager-area .popup-window .config-box .config .options .text-label {
+	font-size: 12px;
+	font-weight: bold;
+}
+#itoris-dynamicoptions-field-manager-area .popup-window .config-box .buttons{
+	clear: both;
+	margin-top: 10px;
+	border-top: 1px solid #d9d9d9;
+	padding-top: 10px;
+}
+#itoris-dynamicoptions-field-manager-area .popup-window .config-box .sort-arrows-box {
+	width: 30px;
+	float: right;
+}
+#itoris-dynamicoptions-field-manager-area .popup-window .config-box .sort-arrow-up,
+#itoris-dynamicoptions-field-manager-area .popup-window .config-box .sort-arrow-down {
+	height: 15px;
+	width: 15px;
+	cursor: pointer;
+	float: right;
+}
+#itoris-dynamicoptions-field-manager-area .popup-window .config-box .sort-arrow-up {
+	float: left;
+}
+#itoris-dynamicoptions-field-manager-area .popup-window .config-box table {
+	width: 100%;
+}
+#itoris-dynamicoptions-field-manager-area .popup-window .config-box .sort-arrow-up {
+	background-image: url(images/sort-arrow-up.png);
+}
+#itoris-dynamicoptions-field-manager-area .popup-window .config-box .sort-arrow-down {
+	background-image: url(images/sort-arrow-down.png);
+}
+#itoris-dynamicoptions-field-manager-area .popup-window .config-box .buttons .float-left {
+	margin-right: 10px;
+}
+#itoris-dynamicoptions-field-manager-area .popup-window .config-box .buttons .float-right {
+	float: right;
+}
+#itoris-dynamicoptions-field-manager-area .popup-window .config-box .config .options .row {
+	clear: both;
+	margin-bottom: 5px;
+}
+#itoris-dynamicoptions-field-manager-area .popup-window .config-box .config .options .row .label {
+	margin-right: 10px;
+}
+#itoris-dynamicoptions-field-manager-area .popup-window .config-box .config .options .row .label input,
+#itoris-dynamicoptions-field-manager-area .popup-window .config-box .config .options .row .label select {
+	width: 98%;
+}
+#itoris-dynamicoptions-field-manager-area .popup-window .config-box .config .options .row td input{
+	width: 90%;
+}
+#itoris-dynamicoptions-field-manager-area .popup-window .label {
+	padding-bottom: 4px;
+	width: 100%;
+	border-bottom: 1px solid #d9d9d9;
+	color: #000000;
+	font-size: 16px;
+	font-weight: bold;
+}
+#itoris-dynamicoptions-field-manager-area .popup-window * {font-family:Arial;}
+#itoris-dynamicoptions-field-manager-area .popup-window .float-right .label {
+	font-size: 12px;
+}
+#itoris-dynamicoptions-field-manager-area .popup-window input,
+#itoris-dynamicoptions-field-manager-area .popup-window select {
+	width: 100%;
+    height: 22px;
+    font-size: 12px;
+	padding:2px;
+}
+#itoris-dynamicoptions-field-manager-area .popup-window select {background-size: auto auto, 22px 100%, 1px 100%; background-position:calc(100% - 8px) -38px, 100% center, calc(100% - 22px) 0px}
+#itoris-dynamicoptions-field-manager-area .popup-window input[type="checkbox"] {
+	width: 16px;
+	height:16px;
+}
+#itoris-dynamicoptions-field-manager-area .popup-window button {font-size:11px; font-weight:normal; padding: 3px 5px;}
+#itoris-dynamicoptions-field-manager-area .popup-window td, #itoris-dynamicoptions-field-manager-area .popup-window th {
+	padding-left: 5px;
+	white-space: normal;
+	font-size:12px;
+}
+#itoris-dynamicoptions-field-manager-area .popup-window td.field-label {
+	color: #000000;
+	font-size: 12px;
+	font-weight: bold;
+}
+#itoris-dynamicoptions-field-manager-area .float-right {
+	float: right;
+}
+#itoris-dynamicoptions-field-manager-area .itoris-dynamicproductoptions-section-visibility {
+	clear: both;
+}
+#itoris-dynamicoptions-field-manager-area .itoris-dynamicproductoptions-section-visibility div {
+	display: inline-block;
+	vertical-align: top;
+}
+#itoris-dynamicoptions-field-manager-area .itoris-dynamicproductoptions-section-visibility div .validation-advice {
+	display: block !important;
+	opacity: 100 !important;
+}
+#itoris-dynamicoptions-field-manager-area .itoris-dynamicproductoptions-section-visibility select {
+	margin-right: 10px;
+}
+#itoris-dynamicoptions-field-manager-area .reorder-arrows-box {
+    position: absolute;
+}
+#itoris-dynamicoptions-field-manager-area .reorder-arrow {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    position: absolute;
+    background: url(images/reorder-arrows.png) no-repeat;
+    z-index: 6;
+}
+#itoris-dynamicoptions-field-manager-area .reorder-arrow-left { top: 10px; }
+#itoris-dynamicoptions-field-manager-area .reorder-arrow-top { left: 20px; background-position: 0 -20px;}
+#itoris-dynamicoptions-field-manager-area .reorder-arrow-right { left: 40px; top:10px;background-position: -20px -20px;}
+#itoris-dynamicoptions-field-manager-area .reorder-arrow-bottom { top: 20px; left:20px;background-position: -20px 0;}
+
+.itoris-dynamicproductoptions-table-templates {
+	width: 100%;
+	border-collapse: separate;
+	border-spacing: 5px;
+}
+.itoris-dynamicproductoptions-table-templates button {
+	margin-left: 8px;
+}
+.itoris-dynamicproductoptions-template-select {
+	width: 250px;
+}
+#itoris-dynamicproductoptions-new-template-name.empty-text {
+	color: #b8b8b8;
+	font-style: italic;
+}
+
+.rule-param {
+	text-decoration: underline;
+	cursor: pointer;
+	font-weight: bold;
+}
+.rule-param:hover {
+	color: blue;
+}
+.rule-tree {
+	border-left: 1px dotted #888888;
+	padding-left: 16px !important;
+	list-style:none;
+}
+.rule-tree img {
+	vertical-align: middle;
+	cursor: pointer;
+}
+.dynamicoptions-edit-pen-icon {
+	width: 17px;
+	height: 20px;
+	cursor: pointer;
+	background-image: url(images/icon-edit.png);
+	margin: 3px;
+	float: right;
+}
+.dynamicoptions-edit-pin-icon {
+	width: 13px;
+	height: 20px;
+	cursor: pointer;
+	background-image: url(images/icon-pin.png);
+	margin: 3px;
+	float: right;
+}
+.itoris-dynamicproductoptions-conditions-popup, .itoris-dynamicproductoptions-customergroups-popup {
+	position: absolute;
+	z-index: 10000;
+	border: 1px solid #000000;
+	background-color: #ffffff;
+	padding: 5px;
+}
+.itoris-dynamicproductoptions-conditions-popup button, .itoris-dynamicproductoptions-customergroups-popup button {
+	margin: 5px 5px 0 0;
+}
+.itoris-dynamicproductoptions-conditions-popup button.last, .itoris-dynamicproductoptions-customergroups-popup button.last {
+	margin-right: 0;
+}
+.itoris-dynamicproductoptions-customergroups-popup {
+	z-index: 10001;
+}
+.itoris-dynamicproductoptions-customergroups-popup select {
+	width: 100%;
+}
+.dynamicoptions-internal-id-box {
+	position: absolute;
+	right: 0;
+	top: 0;
+	background-color: #a5e0f3;
+	border: 1px solid #a2bce6;
+	padding: 1px 10px 0;
+	font-size:10px;
+	line-height:12px;
+	width:auto;
+	font-weight:bold;
+}
+.dynamicoptions-internal-id-box span.internal-id {
+	color: #ff0000;
+}
+.dynamicoptions-internal-id-box span.visibility-visible, .dynamicoptions-internal-id-box span.visibility-hidden, .dynamicoptions-internal-id-box span.visibility-disabled {
+	font-style: italic;
+	text-transform: capitalize;
+}
+.dynamicoptions-internal-id-box span.visibility-visible {
+	color: #0000ff;
+}
+.dynamicoptions-internal-id-box span.visibility-hidden {
+	color: #ff0000;
+}
+.dynamicoptions-internal-id-box span.visibility-disabled {
+	color: #ffa500;
+}
+.dynamicoptions-image-thumbnail {cursor: pointer; max-width:37px; max-height:26px;}
+.dynamicoptions-image-full-preview {position:absolute;cursor: pointer;left: 50%;top:50%;z-index: 1200;}
+
+#itoris_dynamicoptions_products_grid_popup {
+	background-color: #FFFFFF;
+	border: 1px solid #000000;
+	height: 500px;
+	left: 50%;
+	margin-left: -350px;
+	padding: 10px;
+	position: fixed;
+	top: 50px;
+	width: 700px;
+	z-index: 1005;
+}
+#itoris_dynamicoptions_products_grid_popup .product-grid-popup-content {
+	height: 460px;
+	overflow: auto;
+}
+#itoris_dynamicoptions_products_grid_popup .product-grid-popup-buttons {
+	position:absolute;
+	bottom:0;
+	height: 40px;
+	width: 95%;
+	text-align: right;
+}
+
+#itoris_dynamicoptions_tier_popup {
+	background-color: #FFFFFF;
+	border: 1px solid #000000;
+	padding: 5px;
+	position: absolute;
+	width: 250px;
+	z-index: 1005;
+}
+.dynamicoptions-has-tier {position:relative;}
+
+#loading-mask {z-index: 1010;}
+#itoris-dynamicoptions-field-manager-area .remove-product-link {display: none;}
+#itoris-dynamicoptions-field-manager-area td.dynamicoptions-item-sku-is-product-id input {text-align: right;}
+#itoris-dynamicoptions-field-manager-area td.dynamicoptions-item-sku-is-product-id .add-product-link {display: none;}
+#itoris-dynamicoptions-field-manager-area td.dynamicoptions-item-sku-is-product-id .remove-product-link {display: block;}
+#itoris-dynamicoptions-field-manager-area tr.item-sku-is-product-id .edit-value-tier {display:none}
+#itoris-dynamicoptions-field-manager-area tr.item-sku-is-product-id .dynamicoptions-has-tier {display:none}
+#itoris-dynamicoptions-field-manager-area .edit-linked-item {display:none}
+#itoris-dynamicoptions-field-manager-area tr.item-sku-is-product-id .edit-linked-item {display:inline;}
+#itoris-dynamicoptions-field-manager-area .pin-linked-item {display:none}
+#itoris-dynamicoptions-field-manager-area td.dynamicoptions-item-sku-is-product-id .pin-linked-item {display: inline;}
+#itoris-dynamicoptions-field-manager-area tr.item-sku-is-product-id td.dynamicoptions-item-sku-is-product-id .pin-linked-item {display: none;}
+
+#itoris-dynamicoptions-field-manager-area .section table td.highlight-target-ceil {border-top:3px solid #ff6666;}
+#itoris-dynamicoptions-field-manager-area .section table td.empty.highlight-target-ceil {background-color: #ff6666;}
+#itoris_dynamicproductoptions_configuration_fieldset {border:none;}
+#itoris_dynamicproductoptions_configuration_fieldset .field-row {display:block; margin:0px 0px 5px 0px;}
+#itoris_dynamicproductoptions_configuration_fieldset legend{display:none;}
+#itoris_dynamicproductoptions_configuration_fieldset .field {margin:0px 0px 5px 0px;}
+
+.admin__scope-old .fieldset {position: inherit}
+
+.admin__scope-old h4 {
+    color: #303030;
+    font-size: 1.7rem;
+    border-bottom: 1px solid #cac3b4;
+    margin: 0 0 18px;
+    padding: 7px 0 10px;
+}
+
+.product-custom-options {min-width:850px;}
+#itoris-dynamicoptions-field-manager-area .popup-window select#itoris_dynamicoptions_copy_dropdown {width:140px;}
+#itoris-dynamicoptions-field-manager-area .popup-window select#itoris_dynamicoptions_type_dropdown {width:120px;}
+#itoris-dynamicoptions-field-manager-area .popup-window td.only-radio {text-align:center}
+
+.admin__fieldset .admin__field-complex .admin__field-complex-content {max-width:100%}
+
+.setting_block1 {float:left; width:40%;}
+.setting_block2 {float:left; width:45%;}
+.setting_block1 > div > * , .setting_block2 > div > * {display:inline-block;}
+.setting_block1 > div > label, .setting_block2 > div > label {width: 120px !important; margin-right:10px;}
+#options_settings_div {border-bottom: 1px solid #ccc; margin-bottom: 20px;}
+.product-custom-options > div.entry-edit-head h4, #edit_form > div.entry-edit-head h4 {float:left;}
+#css_adjustments_div, #extra_js_div {margin-top:20px;}
+#edit_form #options_settings_div {padding-bottom:20px;}

@@ -1,0 +1,215 @@
+<?php
+/**
+ * Magedelight
+ * Copyright (C) 2016 Magedelight <info@magedelight.com>
+ *
+ * NOTICE OF LICENSE
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://opensource.org/licenses/gpl-3.0.html.
+ *
+ * @category Magedelight
+ * @package Magedelight_Bundlediscount
+ * @copyright Copyright (c) 2016 Mage Delight (http://www.magedelight.com/)
+ * @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License,version 3 (GPL-3.0)
+ * @author Magedelight <info@magedelight.com>
+ */
+?>
+<?php
+$bundle = $this->getBundle();
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$baseProduct = $objectManager->create('Magento\Catalog\Model\Product')->load($bundle->getProductId());
+?>
+
+<div class="configure_bundle_content<?php echo $bundle->getBundleId() ?>" id="configure_bundle_content<?php echo $bundle->getBundleId() ?>">
+    <form data-form="quick-view-form" data-role="tocart-form" action="<?php echo $this->getFormActionUrl() ?>" name="bundlediscount-option" id="bundle_product_addtocart_form" method="post" enctype="multipart/form-data" validate="validate">
+        <div class="configure_form_fields product-options">
+            <?php if ($bundle->hasOptions(true) || $bundle->hasCustomOptions(true)): ?>
+                <div class="bundles-info">
+                    <div class="base-product-name">
+                        <h4><?php echo $bundle->getProductName() ?></h4>
+                    </div>
+                    <div class="base-product-price">
+                        <div class="selection-product-price-<?php echo $bundle->getProductId() ?>">
+                            <?php
+                            echo $block->getProductPriceHtml(
+                                    $baseProduct, \Magento\Catalog\Pricing\Price\FinalPrice::PRICE_CODE, \Magento\Framework\Pricing\Render::ZONE_ITEM_VIEW, [
+                                'price_id_suffix' => '-bundle-promotions'
+                                    ]
+                            )
+                            ?>
+                        </div>
+
+
+                    </div>
+                </div>
+                <table border="0" cellpadding="0" cellspacing="0">
+                    <tbody>
+                        <?php if ($bundle->hasOptions() || $bundle->hasCustomOptions()): ?>
+                            <tr>
+                                <td>
+                                    <img src="<?php echo $bundle->getImageUrl() ?>" height="90" width="90" /> 
+                                </td>
+
+
+                                <td>
+
+
+                                    <?php
+                                    $renderer = $this->getRenderer($bundle->getTypeId());
+                                    if (isset($renderer['block']) && isset($renderer['template'])) {
+
+                                        $wrapperBlock = $this->getLayout()->createBlock('Magento\Catalog\Block\Product\View', uniqid(microtime()))->setTemplate('Magento_Catalog::product/view/options/wrapper.phtml');
+
+                                        $wrapperBlock->setProductId($bundle->getProductId());
+
+                                        $optionBlock = $this->getLayout()->createBlock($renderer['block'])
+                                                ->setProduct($baseProduct)
+                                                ->setTemplate($renderer['template']);
+
+                                        if (isset($renderer['actions']) && $bundle->getTypeId() == 'bundle') {
+                                            foreach ($renderer['actions'] as $action) {
+                                                $actionBlock = $this->getLayout()->createBlock($action['block'])->setProduct($baseProduct);
+                                                $optionBlock->setChild($action['type'], $actionBlock);
+                                            }
+                                            $summaryblock = $this->getLayout()->createBlock('Magento\Catalog\Block\Product\View')
+                                                    ->setProduct($baseProduct)
+                                                    ->setProductId($bundle->getProductId())
+                                                    ->setTemplate('Magedelight_Bundlediscount::product/view/summary.phtml');
+
+
+                                            $createPriceRender = $summaryblock->getLayout()->createBlock('Magento\Framework\Pricing\Render', 'product.price.render.default', ['data' => ['price_render_handle' => 'catalog_product_prices']]);
+
+                                            $priceRender = $this->getLayout()->createBlock('Magento\Catalog\Pricing\Render', 'product.price.render.bundle.customization', ['data' => ['price_render' => 'product.price.render.default', 'price_type_code' => 'configured_price', 'zone' => 'item_view']]);
+
+                                            $summaryblock->setChild('', $priceRender);
+
+                                            echo $summaryblock->toHtml();
+                                        }
+                                        $wrapperBlock->setChild('options_configurable', $optionBlock);
+                                        echo $wrapperBlock->toHtml();
+                                    }
+
+                                    if ($bundle->hasCustomOptions()) {
+                                        ?>
+                                        <div id="options[<?php echo $baseProduct->getId() ?>]" name="options[<?php echo $baseProduct->getId() ?>]">
+
+
+                                            <?php echo $this->getOptionsHtml($baseProduct); ?>
+
+                                        </div>
+                                        <?php
+                                    }
+                                    ?>
+                                </td>
+
+
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+
+            <?php endif; ?>
+
+
+            <?php foreach ($bundle->getSelections() as $_selection): ?>
+                <?php if ($_selection->hasOptions() || $_selection->hasCustomOptions()): ?>
+                    <?php
+                    $renderer = $this->getRenderer($_selection->getTypeId());
+                    $selectionProduct = $objectManager->create('Magento\Catalog\Model\Product')->load($_selection->getProductId());
+                    ?>
+                    <div class="selection-info">
+                        <div class="selection-product-name">
+                            <h4><?php echo $_selection->getName() ?></h4>
+                        </div>
+                        <div class="selection-product-price-<?php echo $_selection->getProductId() ?>"><?php
+                            echo $this->getProductPriceHtml(
+                                    $selectionProduct, \Magento\Catalog\Pricing\Price\FinalPrice::PRICE_CODE, \Magento\Framework\Pricing\Render::ZONE_ITEM_VIEW, [
+                                'price_id_suffix' => '-bundle-promotions'
+                                    ]
+                            )
+                            ?></div>
+
+
+                    </div>
+                    <table border="0" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <img src="<?php echo $_selection->getImageUrl() ?>" height="90" width="90" /> 
+                                </td>
+                                <td>
+
+
+                                    <?php
+                                    if (isset($renderer['block']) && isset($renderer['template'])) {
+
+                                        $wrapperBlock = $this->getLayout()->createBlock('Magento\Catalog\Block\Product\View', uniqid(microtime()))->setTemplate('Magento_Catalog::product/view/options/wrapper.phtml');
+
+                                        $wrapperBlock->setProductId($selectionProduct->getId());
+
+                                        $optionBlock = $this->getLayout()->createBlock($renderer['block'])
+                                                ->setProduct($selectionProduct)
+                                                ->setTemplate($renderer['template']);
+
+
+
+                                        if (isset($renderer['actions']) && $_selection->getTypeId() == 'bundle') {
+                                            foreach ($renderer['actions'] as $action) {
+                                                $actionBlock = $this->getLayout()->createBlock($action['block'])->setProduct($selectionProduct);
+                                                $optionBlock->setChild($action['type'], $actionBlock);
+                                            }
+                                            $summaryblock = $this->getLayout()->createBlock('Magento\Catalog\Block\Product\View')
+                                                    ->setProduct($selectionProduct)
+                                                    ->setProductId($_selection->getProductId())
+                                                    ->setTemplate('Magedelight_Bundlediscount::product/view/summary.phtml');
+
+
+                                            $createPriceRender = $summaryblock->getLayout()->createBlock('Magento\Framework\Pricing\Render', 'product.price.render.default', ['data' => ['price_render_handle' => 'catalog_product_prices']]);
+
+                                            $priceRender = $this->getLayout()->createBlock('Magento\Catalog\Pricing\Render', 'product.price.render.bundle.customization', ['data' => ['price_render' => 'product.price.render.default', 'price_type_code' => 'configured_price', 'zone' => 'item_view']]);
+
+                                            $summaryblock->setChild('', $priceRender);
+
+                                            echo $summaryblock->toHtml();
+                                        }
+
+                                        $wrapperBlock->setChild('options_configurable', $optionBlock);
+                                        echo $wrapperBlock->toHtml();
+                                    }
+                                    if ($_selection->hasCustomOptions()) {
+                                        ?>
+                                        <div id="options[<?php echo $selectionProduct->getId() ?>]" name="options[<?php echo $selectionProduct->getId() ?>]">
+                                            <?php echo $this->getOptionsHtml($selectionProduct); ?>
+                                        </div>
+                                        <?php
+                                    }
+                                    ?>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                <?php endif; ?>
+            <?php endforeach; ?>
+
+        </div>
+
+
+        <div class="configure-buttons-set a-right">
+
+            <button type="submit" id="options-submit-button-<?php echo $bundle->getId() ?>" class="action primary tocart"><span><span><?php echo __('Add To Cart') ?></span></span></button>
+        </div>
+    </form>
+</div>
+

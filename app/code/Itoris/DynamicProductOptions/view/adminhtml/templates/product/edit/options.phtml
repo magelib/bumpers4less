@@ -1,0 +1,118 @@
+<?php
+/**
+ * ITORIS
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the ITORIS's Magento Extensions License Agreement
+ * which is available through the world-wide-web at this URL:
+ * http://www.itoris.com/magento-extensions-license.html
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to sales@itoris.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extensions to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to the license agreement or contact sales@itoris.com for more information.
+ *
+ * @category   ITORIS
+ * @package    ITORIS_M2_DYNAMIC_PRODUCT_OPTIONS
+ * @copyright  Copyright (c) 2016 ITORIS INC. (http://www.itoris.com)
+ * @license    http://www.itoris.com/magento-extensions-license.html  Commercial License
+ */
+
+ 
+?>
+<?php /** @var $block \Itoris\DynamicProductOptions\Block\Adminhtml\Product\Edit\Tab\Options */ ?>
+<div class="entry-edit custom-options product-custom-options">
+	<?php if (!$block->isBundleWithDynamicPrice()) { ?>
+		<div id="options_templates_div">
+			<div class="entry-edit-head">
+				<h4><?php echo $block->escapeHtml(__('Product Options Templates')) ?></h4>
+				<div class="right"></div>
+			</div>
+			<div class="fieldset">
+				<table class="itoris-dynamicproductoptions-table-templates">
+					<colgroup>
+						<col width="500px"/>
+						<col/>
+					</colgroup>
+					<tbody>
+						<tr>
+							<?php $existingTemplates = $block->getExistingTemplates() ?>
+							<td style="border:1px solid #ddd; padding:10px 20px; vertical-align:top; background:#f5f5f5;">
+								<span><strong><?php echo $block->escapeHtml(__('Load Existing Template')) ?>:</strong></span><br/>
+								<select id="itoris-dynamicproductoptions-templates-dropdown-load" class="itoris-dynamicproductoptions-template-select select admin__control-select">
+									<option value="0">--<?php echo $block->escapeHtml(__('Please select a template')) ?>--</option>
+									<?php foreach ($existingTemplates as $template): ?>
+										<option value="<?php echo $template->getId() ?>"><?php echo $template->getName() ?></option>
+									<?php endforeach; ?>
+								</select><br /><br />
+                                <span><strong><?php echo $block->escapeHtml(__('Method')) ?>:</strong></span><br/>
+								<select id="itoris-dynamicproductoptions-templates-dropdown-load-method" class="itoris-dynamicproductoptions-template-select-method select admin__control-select">
+									<option value="0"><?php echo $block->escapeHtml(__('Replace and leave options editable')) ?></option>
+									<option value="1"><?php echo $block->escapeHtml(__('Append and leave options editable')) ?></option>
+									<option value="2" selected="selected"><?php echo $block->escapeHtml(__('Replace and associate to template')) ?></option>
+									<option value="3"><?php echo $block->escapeHtml(__('Append and associate to template')) ?></option>
+								</select>                                
+								<button id="itoris-dynamicproductoptions-button-load" type="button" class="scalable save"><span><?php echo $block->escapeHtml(__('Load')) ?></span></button>
+							</td>
+							<td style="border:1px solid #ddd; padding:10px 20px; vertical-align:top; background:#f5f5f5;">
+								<span><strong><?php echo $block->escapeHtml(__('Update Existing Template')) ?>:</strong></span><br/>
+								<div style="width: 250px; display:inline-block">
+									<select id="itoris-dynamicproductoptions-templates-dropdown" style="width: 100%;" class="select admin__control-select">
+										<option value="0">--<?php echo $block->escapeHtml(__('Please select a template')) ?>--</option>
+										<?php foreach ($existingTemplates as $template): ?>
+											<option value="<?php echo $template->getId() ?>"><?php echo $template->getName() ?></option>
+										<?php endforeach; ?>
+									</select>
+								</div>
+								<button id="itoris-dynamicproductoptions-button-update" type="button" class="scalable save"><span><?php echo $block->escapeHtml(__('Update')) ?></span></button>
+								<button id="itoris-dynamicproductoptions-button-delete" type="button" class="scalable delete" style="display:none"><span><?php echo $block->escapeHtml(__('Delete')) ?></span></button>
+                                <br/><br/>
+                                <span><strong><?php echo $block->escapeHtml(__('Or Create a New Template')) ?>:</strong></span><br/>
+                                <div style="width: 250px; display:inline-block"><input type="text" style="width: 100%;" id="itoris-dynamicproductoptions-new-template-name" class="admin__control-text" /></div>
+                                <button id="itoris-dynamicproductoptions-button-new-template" type="button" class="scalable add"><span><?php echo $block->escapeHtml(__('Create New Template')) ?></span></button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<?php echo $block->getOptionsHtml() ?>
+	<?php } else { ?>
+	<div id="dynamic-price-warrning">
+		<ul class="messages">
+			<li class="error-msg">
+				<ul>
+					<li><?php echo $block->escapeHtml(__('Bundle with dynamic pricing cannot include custom defined options. Options will not be saved.')) ?></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<?php } ?>
+
+</div>
+
+<script type="text/javascript">
+    require(['itoris_options', 'prototype'], function(Itoris) {
+        <?php if (!$block->isBundleWithDynamicPrice()): ?>
+        <?php $messages = [
+            'empty_text'  => $block->escapeHtml(__('Enter New Template Name')),
+            'err_no_name' => $block->escapeHtml(__('Please enter new template name')),
+        ];
+        ?>
+        window.dynamicProductOptionsTemplates = new Itoris.DynamicProductOptionsTemplate(<?php echo Zend_Json::encode($messages) ?>, <?php echo $block->getTemplatesConfigJson() ?>);
+        <?php endif; ?>
+		/* // re-bind form elements onchange
+        varienWindowOnload(true);
+        //show error message
+        if ($('price_type')) {
+            if ($('price_type').value == '0' && $('dynamic-price-warrning')) {
+                $('dynamic-price-warrning').show();
+            }
+        }*/
+    });
+</script>

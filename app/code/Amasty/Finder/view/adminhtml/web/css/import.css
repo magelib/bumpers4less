@@ -1,0 +1,110 @@
+.uploader
+{
+    border: 2px dotted #A5A5C7;
+    width: 100%;
+    color: #92AAB0;
+    text-align: center;
+    vertical-align: middle;
+    padding: 40px 0px;
+    margin-bottom: 10px;
+    font-size: 24px;
+    cursor: default;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.uploader div.browser label {
+    background-color: #eb5202;
+    padding: 5px 15px;
+    color: white;
+    padding: 6px 0px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    display: block;
+    width: 300px;
+    margin: 20px auto 0px auto;
+
+    box-shadow: 2px 2px 2px #888888;
+}
+
+.uploader div.browser span {
+    cursor: pointer;
+}
+
+
+.uploader div.browser input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    border: solid transparent;
+    border-width: 0 0 100px 200px;
+    opacity: .0;
+    filter: alpha(opacity= 0);
+    -o-transform: translate(250px,-50px) scale(1);
+    -moz-transform: translate(-300px,0) scale(4);
+    direction: ltr;
+    cursor: pointer;
+}
+
+.uploader div.browser label:hover {
+    background-color: #ba4000;
+}
+
+.uploader-spinner {
+    background: url(../images/ajax-loader.gif) no-repeat;
+    width: 32px;
+    height: 32px;
+    content: '&nbsp;';
+    margin: 0 auto;
+    margin-top: 20px;
+    display: none;
+}
+
+
+/*
+.am_finder_popup {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    margin-left: -301px;
+    width: 600px;
+    background: #efefef;
+    padding: 10px;
+    height: 440px;
+    border: 3px solid #bbb;
+    z-index: 401;
+}
+*/
+.am_finder_popup_log {
+    padding: 10px;
+    height: 300px;
+    overflow-y: scroll;
+}
+
+
+.am_finder_popup_progress_container {
+    margin: 10px 0px;
+}
+.am_finder_popup_progress {
+    background: #ff9933;
+}
+
+.am_finder_popup .am_finder_popup_log li {
+    border-bottom: 1px solid #999;
+    background: #fff;
+    padding: 3px;
+}
+
+.am_finder_popup .am_finder_popup_result {
+    background: #fff;
+    padding: 10px;
+}

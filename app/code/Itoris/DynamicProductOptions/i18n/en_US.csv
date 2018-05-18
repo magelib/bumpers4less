@@ -1,0 +1,226 @@
+"+ Add Tier Price","+ Add Tier Price"
+"+ Link","+ Link"
+"<b>Please Note.</b> You can't remove or create new options (except Image and HTML Text) for specific store view. That should be done in the Default configuration scope and then inherited to the store view scope. However, you still can hide some options by setting <i>visibility = hidden</i>. In the store view scope you can also rename options, reorder, set custom prices and change other properties.","<b>Please Note.</b> You can't remove or create new options (except Image and HTML Text) for specific store view. That should be done in the Default configuration scope and then inherited to the store view scope. However, you still can hide some options by setting <i>visibility = hidden</i>. In the store view scope you can also rename options, reorder, set custom prices and change other properties."
+"Don't use name attribute here. It is in the field below.","Don't use name attribute here. It is in the field below."
+"In a Popup after clicking ""Add to Cart""","In a Popup after clicking ""Add to Cart"""
+"In a Popup after clicking ""Configure""","In a Popup after clicking ""Configure"""
+"Please, enter the text shown in the image into the field below","Please, enter the text shown in the image into the field below"
+"Product doesn't have custom options","Product doesn't have custom options"
+"The size of image '%s' could not be detected","The size of image '%s' could not be detected"
+"You can't remove section with fields on a store view. Move fields to another section before remove","You can't remove section with fields on a store view. Move fields to another section before remove"
+"example: png, jpg, jpeg, gif","example: png, jpg, jpeg, gif"
+%s products have been changed,%s products have been changed
+-- Please Select --,-- Please Select --
+--No validation--,--No validation--
+--select default field--,--select default field--
+A template with such a name already exists,A template with such a name already exists
+Action,Action
+Add New Section,Add New Section
+Add New Template,Add New Template
+Add Option,Add Option
+Add to Cart,Add to Cart
+Alikon mod,Alikon mod
+All Groups,All Groups
+Allowed File Extensions,Allowed File Extensions
+Appearance,Appearance
+Apply,Apply
+Are you sure want to delete selected templates?,Are you sure want to delete selected templates?
+Are you sure want to reset the form? This will discard all changes you have made.,Are you sure want to reset the form? This will discard all changes you have made.
+Base Img?,Base Img?
+Bundle with dynamic pricing cannot include custom defined options. Options will not be saved.,Bundle with dynamic pricing cannot include custom defined options. Options will not be saved.
+Buy %1 for %2 each,Buy %1 for %2 each
+CSS Adjustments (for advanced use only),CSS Adjustments (for advanced use only)
+CSS Class,CSS Class
+Cancel,Cancel
+Cannot change quantity. Please remove unnecessary items.,Cannot change quantity. Please remove unnecessary items.
+Cannot delete this item. Field should contain at least one item.,Cannot delete this item. Field should contain at least one item.
+Cannot resize table. Please remove or move bordered fields.,Cannot resize table. Please remove or move bordered fields.
+Captcha form,Captcha form
+Captcha,Captcha
+Carriage return,Carriage return
+Check Boxes,Check Boxes
+Checkbox(es),Checkbox(es)
+Checked,Checked
+Click Add to Cart to Configure,Click Add to Cart to Configure
+Columns,Columns
+Comment,Comment
+Configuration,Configuration
+Configure %s,Configure %s
+Configure,Configure
+Copy Custom Options 1 to Many,Copy Custom Options 1 to Many
+Create New Template,Create New Template
+Create or Update Existing Template,Create or Update Existing Template
+Css Class,Css Class
+Customer Groups,Customer Groups
+DIV/HTML Text,DIV/HTML Text
+Date & Time,Date & Time
+Date,Date
+Def,Def
+Default Value,Default Value
+Default configuration will be used for the store view. Uncheck checkbox &quot;Use Default&quot; to create custom.,Default configuration will be used for the store view. Uncheck checkbox &quot;Use Default&quot; to create custom.
+Del,Del
+Delete,Delete
+Disabled,Disabled
+Do you really want to copy configuration from selected element?,Do you really want to copy configuration from selected element?
+Do you really want to remove all fields?,Do you really want to remove all fields?
+Do you really want to remove this field?,Do you really want to remove this field?
+Do you really want to remove this item?,Do you really want to remove this item?
+Do you really want to remove this section?,Do you really want to remove this section?
+Dropdown,Dropdown
+Dynamic Product Options,Dynamic Product Options
+Edit Template,Edit Template
+Edit,Edit
+Email,Email
+Enter New Template Name,Enter New Template Name
+Entered name is used. Please enter other name.,Entered name is used. Please enter other name.
+Entered value is used. Please enter other value.,Entered value is used. Please enter other value.
+Extra JavaScript (for advanced use only),Extra JavaScript (for advanced use only)
+Field ID,Field ID
+Field Type,Field Type
+File Extensions Allowed,File Extensions Allowed
+File Upload,File Upload
+File,File
+Fixed,Fixed
+Form Style,Form Style
+HTML Arguments,HTML Arguments
+HTML,HTML
+Hidden,Hidden
+Hide on focus,Hide on focus
+ID,ID
+If,If
+Image Alt,Image Alt
+Image SRC,Image SRC
+Image SRC or Color,Image SRC or Color
+Image Title,Image Title
+Image has not been uploaded,Image has not been uploaded
+Image,Image
+Incl. Tax,Incl. Tax
+Input Box,Input Box
+Item Label,Item Label
+Item Value,Item Value
+Label,Label
+List Box,List Box
+List DIV-based,List DIV-based
+Load Existing Template,Load Existing Template
+Load Options Template 1 to Many,Load Options Template 1 to Many
+Load,Load
+Make it,Make it
+Max Characters,Max Characters
+Max Len,Max Len
+Max file size in bytes,Max file size in bytes
+Maximum Image Size,Maximum Image Size
+Min required should be equal or less than quantity of checkboxes,Min required should be equal or less than quantity of checkboxes
+Minimum Required,Minimum Required
+Money,Money
+Move Down,Move Down
+Move Up,Move Up
+Multi-select List Box,Multi-select List Box
+Multiple Select,Multiple Select
+Name,Name
+New template has been created based on current settings,New template has been created based on current settings
+No,No
+Number,Number
+OR,OR
+On Product View,On Product View
+Only one item can be checked at the same time,Only one item can be checked at the same time
+Option Configuration,Option Configuration
+Options Configuration,Options Configuration
+Options will be converted into %s style. Ok?,Options will be converted into %s style. Ok?
+Order,Order
+Password Box,Password Box
+Percent,Percent
+Phone,Phone
+Please check conditions!,Please check conditions!
+Please configure the product,Please configure the product
+Please enter new template name,Please enter new template name
+Please enter template name,Please enter template name
+Please enter the product Id you wish to copy options from,Please enter the product Id you wish to copy options from
+Please select a template,Please select a template
+Please select an option template you wish to apply to selected products,Please select an option template you wish to apply to selected products
+Please select product ids,Please select product ids
+Please select,Please select
+Price Type,Price Type
+Price,Price
+Product Id,Product Id
+Product Name,Product Name
+Product Options Settings,Product Options Settings
+Product Options Templates,Product Options Templates
+Products have not been changed,Products have not been changed
+Qty,Qty
+Qty:,Qty:
+Quantity,Quantity
+Radio Buttons,Radio Buttons
+Radio(s),Radio(s)
+Remove All,Remove All
+Remove,Remove
+Required,Required
+Reupload,Reupload
+Rows,Rows
+SKU,SKU
+Save and Continue Edit,Save and Continue Edit
+Section Label,Section Label
+SecurImage,SecurImage
+Select Box,Select Box
+Select,Select
+Selected templates have been deleted,Selected templates have been deleted
+Selected,Selected
+Size,Size
+Sku,Sku
+Sku/Product Id,Sku/Product Id
+Some of the products are out of stock.,Some of the products are out of stock.
+Some selected templates have not been deleted,Some selected templates have not been deleted
+Static Text,Static Text
+Swatch,Swatch
+Table-based with sections,Table-based with sections
+Table-based,Table-based
+Template %s has been deleted,Template %s has been deleted
+Template %s has been loaded,Template %s has been loaded
+Template %s has been updated,Template %s has been updated
+Template Name,Template Name
+Template has been deleted,Template has been deleted
+Template has been saved,Template has been saved
+Template has not been created,Template has not been created
+Template has not been deleted,Template has not been deleted
+Template has not been loaded,Template has not been loaded
+Template has not been saved,Template has not been saved
+Template has not been updated,Template has not been updated
+Template name is required,Template name is required
+Template not found,Template not found
+Template,Template
+Textarea,Textarea
+The product has required options.,The product has required options.
+This Field Type required options,This Field Type required options
+This name will be used for saving field value in database.,This name will be used for saving field value in database.
+This product is out of stock.,This product is out of stock.
+Tier,Tier
+Time,Time
+Title,Title
+Update Cart,Update Cart
+Update,Update
+Upload Image,Upload Image
+Use Default,Use Default
+Validation,Validation
+Visibility,Visibility
+Visible,Visible
+Weight,Weight
+Yes,Yes
+Zip Code,Zip Code
+contains,contains
+default option,default option
+does not contain,does not contain
+equals or greater than,equals or greater than
+equals or less than,equals or less than
+greater than,greater than
+is not one of,is not one of
+is not,is not
+is one of,is one of
+is,is
+leave blank if it is not an image,leave blank if it is not an image
+leave blank if its not an image,leave blank if its not an image
+less than,less than
+maximum: 35,maximum: 35
+out of stock,out of stock
+remove,remove
+select,select
+unlimited,unlimited
+Ñopy Configuration From,Ñopy Configuration From

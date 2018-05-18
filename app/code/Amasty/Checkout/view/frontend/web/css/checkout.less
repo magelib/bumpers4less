@@ -1,0 +1,247 @@
+@mobile-screen-width: 900px;
+
+.checkout-index-index {
+  br {
+    display: none !important;
+  }
+  .authentication-wrapper {
+    margin-right: 9px;
+  }
+
+  .checkout-header {
+    margin: 12px 0 20px;
+    padding: 0 9px;
+
+    .title {
+      margin: 0 auto 7px;
+    }
+
+    .description {
+      font-size: 18px;
+    }
+  }
+  .opc-wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+
+    @media (max-width: @mobile-screen-width) {
+      flex-direction: column;
+    }
+
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+    &.layout-2-columns {
+      .checkout-column {
+        width: 50%;
+      }
+    }
+
+    &.layout-3-columns {
+      .checkout-column {
+        width: 33.3%;
+      }
+    }
+
+    &.layout-3-columns,
+    &.layout-2-3-columns {
+      .shipping-address-item {
+        width: 50%;
+      }
+      .table-checkout-shipping-method {
+        width: 100%;
+        min-width: 0;
+
+        td:last-child {
+          white-space: normal;
+        }
+      }
+    }
+
+    .opc.checkout-column {
+      @media (max-width: @mobile-screen-width) {
+        width: 100%;
+      }
+    }
+
+    .step-content {
+      margin: 0;
+    }
+
+    .shipping-address {
+      margin-bottom: 0;
+    }
+  }
+  .checkout-block {
+    background: white;
+    box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.15);
+    padding: 24px 12px;
+    margin: 7px 9px 32px;
+    transition: box-shadow .5s;
+    &:hover {
+      box-shadow: 0 1px 4px 1px rgba(25, 121, 195, 0.45);
+    }
+  }
+
+  #checkout {
+    background: #eaeaea;
+    padding: 12px;
+    margin: 20px 0 20px 0;
+  }
+
+  .opc-block-summary {
+    margin: -24px -12px 0;
+    padding: 24px 12px;
+
+    .minicart-items-wrapper {
+      margin: 0;
+    }
+  }
+
+  .discount-code .payment-option-title {
+    border: none;
+  }
+
+  .additional-options {
+    margin: 24px 7px 12px;
+
+    .field {
+      margin-top: 7px;
+    }
+  }
+
+  .am-gift-message {
+    .edit-link {
+      display: none;
+      color: #1979c3;
+      cursor: pointer;
+    }
+
+    &.checked .edit-link {
+      display: inline;
+    }
+  }
+
+  .amcheckout-delivery-date {
+    .field {
+      width: 50%;
+      float: left;
+      box-sizing: border-box;
+      padding-top: 4px;
+
+      &:nth-child(2n) {
+        padding-left: 7px;
+      }
+
+      &.datepicker .control {
+        display: flex;
+
+        .ui-datepicker-trigger {
+          margin-left: 7px;
+        }
+      }
+      .label {
+        display: block;
+        margin: 12px 0;
+      }
+    }
+    .clearer {
+      clear: both;
+    }
+    .field._required > .label:after {
+      content: '*';
+      color: #e02b27;
+      font-size: 1.2rem;
+      margin: 0 0 0 5px;
+    }
+  }
+
+  .opc-block-summary .minicart-items {
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: inner-spin-button !important;
+    }
+
+    input[type="number"]:focus {
+      -moz-appearance: spinner !important;
+    }
+
+    input.qty {
+      width: 55px;
+    }
+
+    button {
+      margin-top: 12px;
+      float: right;
+    }
+
+    .delete {
+      width: 7px;
+      height: 7px;
+      padding: 3px;
+      border: 1px #b6b6b6 solid;
+      background: url(../img/close.png) no-repeat center;
+      float: left;
+      cursor: pointer;
+    }
+
+    .product-item-details {
+      padding-left: 118px;
+    }
+
+    .product-image-container {
+      margin-left: 16px;
+    }
+  }
+}
+
+#shipping-method-buttons-container {
+  display: none;
+}
+
+#checkout-payment-method-load .payment-method-content > .actions-toolbar {
+  display: none;
+}
+
+.checkout-payment-method.submit .payment-methods {
+  margin: 0;
+}
+
+#payment .payment-methods {
+  margin: 0;
+}
+
+.checkout-payment-method .payment-methods .actions-toolbar .primary {
+  line-height: 2.2rem;
+  padding: 14px 17px;
+  font-size: 1.8rem;
+}
+
+#co-payment-form .discount-code {
+  display: none;
+}
+
+.fieldset.address {
+  margin: 0 -7px;
+
+  &>.field {
+    display: inline-block;
+    padding: 0 7px;
+    box-sizing: border-box;
+    width: 100%;
+    vertical-align: top;
+  }
+}
+
+.opc-wrapper.layout-3-columns {
+  .shipping-address-item {
+    &:nth-child(3n + 1):before {
+      display: block;
+    }
+    &:nth-child(2n + 1):before {
+      display: none;
+    }
+  }
+}

@@ -1,0 +1,146 @@
+"Product Parts Filnders","Product Parts Filnders"
+"Add New Item","Add New Item"
+"Save and Continue Edit","Save and Continue Edit"
+"Edit Parts Finder '%1'","Edit Parts Finder '%1'"
+"New Parts Finder","New Parts Finder"
+"Finder Information","Finder Information"
+Dropdowns,Dropdowns
+"Dropdown #%1","Dropdown #%1"
+Name,Name
+Sort,Sort
+"alphabetically, asc","alphabetically, asc"
+"alphabetically, desc","alphabetically, desc"
+"numerically, asc","numerically, asc"
+"numerically, desc","numerically, desc"
+Range,Range
+No,No
+Yes,Yes
+Import,Import
+View,View
+"Import History","Import History"
+General,General
+Title,Title
+"Number of Dropdowns","Number of Dropdowns"
+Template,Template
+"E.g. `vertical`, `horizontal`, `responsive`. Leave blank to use a default template","E.g. `vertical`, `horizontal`, `responsive`. Leave blank to use a default template"
+"Custom Destination URL","Custom Destination URL"
+"E.g. special-category.html  In most cases you don`t need to set it. Useful when you have 2 or more finders and want to show search results at specific categories. It`s NOT the url key. You can modify /amfinder/ url key in app/code/Amasty/Finder/etc/config.xml","E.g. special-category.html  In most cases you don`t need to set it. Useful when you have 2 or more finders and want to show search results at specific categories. It`s NOT the url key. You can modify /amfinder/ url key in app/code/Amasty/Finder/etc/config.xml"
+"Code for inserting","Code for inserting"
+"Code for inserting in Layout Update XML","Code for inserting in Layout Update XML"
+Products,Products
+"Add New Product","Add New Product"
+"Remove all products","Remove all products"
+"Are you sure?","Are you sure?"
+SKU,SKU
+Action,Action
+Delete,Delete
+"Universal Products","Universal Products"
+"Universal Products Import","Universal Products Import"
+"Import Universal Products","Import Universal Products"
+"Delete Existing Data","Delete Existing Data"
+"CSV File","CSV File"
+"SKU1,SKU2,SKU3,...","SKU1,SKU2,SKU3,..."
+"Finder Options","Finder Options"
+"Edit product","Edit product"
+"Value Information","Value Information"
+"Please specify the Parts Finder ID","Please specify the Parts Finder ID"
+"Please specify an exiting Parts Finder ID","Please specify an exiting Parts Finder ID"
+Finder,Finder
+"You deleted the item.","You deleted the item."
+"We can't delete item right now. Please review the log and try again.","We can't delete item right now. Please review the log and try again."
+"We can't find a item to delete.","We can't find a item to delete."
+"This item no longer exists.","This item no longer exists."
+"Edit Parts Finder `%1`","Edit Parts Finder `%1`"
+"Add new Parts Finder","Add new Parts Finder"
+"Record does not exist.","Record does not exist."
+"Product Parts Finder","Product Parts Finder"
+Amasty,Amasty
+Items,Items
+"You deleted the finder(s).","You deleted the finder(s)."
+"We can't delete finder(s) right now. Please review the log and try again.","We can't delete finder(s) right now. Please review the log and try again."
+"We can't find a file(s) to delete.","We can't find a file(s) to delete."
+"You deleted the file(s).","You deleted the file(s)."
+"We can't delete file(s) right now. Please review the log and try again.","We can't delete file(s) right now. Please review the log and try again."
+"You deleted the history file(s).","You deleted the history file(s)."
+"We can't delete history file(s) right now. Please review the log and try again.","We can't delete history file(s) right now. Please review the log and try again."
+"We can't find a history file(s) to delete.","We can't find a history file(s) to delete."
+"You deleted the universal product(s).","You deleted the universal product(s)."
+"We can't delete the universal product(s) right now. Please review the log and try again.","We can't delete the universal product(s) right now. Please review the log and try again."
+"We can't find a the universal product(s) to delete.","We can't find a the universal product(s) to delete."
+"You deleted all products in the finder.","You deleted all products in the finder."
+"We can't delete products right now. Please review the log and try again.","We can't delete products right now. Please review the log and try again."
+"We can't find a products to delete.","We can't find a products to delete."
+"File not exists","File not exists"
+"File already running","File already running"
+"File imported successfully","File imported successfully"
+" with %1 errors"," with %1 errors"
+"The file is invalid, please see <a class=""show-import-errors"" data-url=""%1"">errors log</a> for details.","The file is invalid, please see <a class=""show-import-errors"" data-url=""%1"">errors log</a> for details."
+"Imported %1 rows of total %2 rows (%3%)","Imported %1 rows of total %2 rows (%3%)"
+"The wrong item is specified.","The wrong item is specified."
+"You saved the item.","You saved the item."
+"Something went wrong while saving the item data. Please review the error log.","Something went wrong while saving the item data. Please review the error log."
+"The file %s has been uploaded","The file %s has been uploaded"
+", all other files in the queue have been removed",", all other files in the queue have been removed"
+"Record does not exist","Record does not exist"
+"Edit Product","Edit Product"
+"Add new Product","Add new Product"
+"Product has been deleted","Product has been deleted"
+"Record have been successfully saved","Record have been successfully saved"
+"Please Select ...","Please Select ..."
+"Upload is impossible, there is a file replace.csv","Upload is impossible, there is a file replace.csv"
+"'The file with the same name already exists! ' .","'The file with the same name already exists! ' ."
+"Error occurred save file","Error occurred save file"
+"Incorrect file type. CSV needed","Incorrect file type. CSV needed"
+Uploaded,Uploaded
+Processing,Processing
+"lines of","lines of"
+errors,errors
+"Replace Products","Replace Products"
+"Add Products","Add Products"
+"To Home Page","To Home Page"
+"To The Same Page","To The Same Page"
+"To The Result Page","To The Result Page"
+"At least one finder value is selected","At least one finder value is selected"
+"All finder values are selected","All finder values are selected"
+"Upload Files","Upload Files"
+"Drag & Drop CSV Files Here","Drag & Drop CSV Files Here"
+or,or
+"Click to open the file Browser","Click to open the file Browser"
+"Click to add Files","Click to add Files"
+"Failed to Upload file #","Failed to Upload file #"
+"File %1 cannot be added: must be an CSV","File %1 cannot be added: must be an CSV"
+Progress,Progress
+STOP,STOP
+"List Errors","List Errors"
+Find,Find
+Reset,Reset
+Loading...,Loading...
+CLOSE,CLOSE
+"Finder block should be present on the page for filtering to work. Please add finder block on this page. Check <a href=""https://amasty.com/docs/doku.php?id=magento_2:product_parts_finder#how_to_add_finder_block_to_a_category"">User Guide</a> for instructions.</a>","Finder block should be present on the page for filtering to work. Please add finder block on this page. Check <a href=""https://amasty.com/docs/doku.php?id=magento_2:product_parts_finder#how_to_add_finder_block_to_a_category"">User Guide</a> for instructions.</a>"
+"Display `Find` button when","Display `Find` button when"
+"Use `universal` products","Use `universal` products"
+"Show `universal` products last","Show `universal` products last"
+"Apply filter for current category only","Apply filter for current category only"
+"Eg. special-category.html  In most cases you don't need to set it. Useful when you want to redirect all search results to one category. It's NOT the url key. You can modify /amfinder/ url key in app/code/Amasty/Finder/etc/config.xml","Eg. special-category.html  In most cases you don't need to set it. Useful when you want to redirect all search results to one category. It's NOT the url key. You can modify /amfinder/ url key in app/code/Amasty/Finder/etc/config.xml"
+"Start search when value in the last dropdown is  selected","Start search when value in the last dropdown is  selected"
+"Reset finder","Reset finder"
+"Clear other (previous) finders conditions","Clear other (previous) finders conditions"
+"Import history lifetime (days)","Import history lifetime (days)"
+"Max rows per import","Max rows per import"
+"Created at","Created at"
+Line,Line
+Message,Message
+CSV,CSV
+"Are you sure you want to delete the selected product(s)?","Are you sure you want to delete the selected product(s)?"
+"Are you sure you want to delete the selected file(s)?","Are you sure you want to delete the selected file(s)?"
+"File Name","File Name"
+Started,Started
+Finished,Finished
+Errors,Errors
+"Files are sorted by priority","Files are sorted by priority"
+Path,Path
+State,State
+Mode,Mode
+Run,Run
+"Are you sure you want to delete the selected finder(s)?","Are you sure you want to delete the selected finder(s)?"
+ID,ID

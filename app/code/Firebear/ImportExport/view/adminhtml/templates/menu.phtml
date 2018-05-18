@@ -1,0 +1,23 @@
+<?php
+/**
+ * @copyright: Copyright © 2017 Firebear Studio. All rights reserved.
+ * @author   : Firebear Studio <fbeardev@gmail.com>
+ */
+?>
+<?php
+$items = $block->getItems();
+$inc = 1;
+?>
+<div class="fire_menu">
+    <img src="<?php echo $block->getViewFileUrl('Firebear_ImportExport::images/logo.png'); ?>" width="50px"
+         height="50px"/>
+    Firebear Improved Import / Export v. <?php /* @escapeNotVerified */ echo $block->getVersion()?>
+    <?php
+    foreach ($items as $element) :?>
+        <a target="_blank" class="<?php /* @escapeNotVerified */
+        echo ($inc == 1) ? 'first' : '' ?>" href="<?php /* @escapeNotVerified */
+        echo $element['url'] ?>"><?php /* @escapeNotVerified */
+            echo $element['label'] ?></a>
+        <?php $inc++; ?>
+    <?php endforeach; ?>
+</div>

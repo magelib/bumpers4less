@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    
+    <htmlContent name="product.form.bundlediscount.matrix.content" sortOrder="1000">
+        <argument name="data" xsi:type="array">
+            <item name="wrapper" xsi:type="array">
+                <item name="collapsible" xsi:type="boolean">false</item>
+                <item name="label" xsi:type="string" translate="true"/>
+            </item>
+        </argument>
+        <settings>
+            <wrapper>
+                <canShow>true</canShow>
+                <componentType>fieldset</componentType>
+            </wrapper>
+        </settings>
+        <block name="product.form.bundlediscount.matrix" class="Magento\ConfigurableProduct\Block\Adminhtml\Product\Edit\Tab\Variations\Config\Matrix" template="Magedelight_Bundlediscount::catalog/product/edit/tab/bundles.phtml" as="product_bundlediscount">
+                <arguments>
+                    <argument name="config" xsi:type="array">
+                        <item name="collapsible" xsi:type="boolean">false</item>
+                        <item name="label" xsi:type="string" translate="true" />
+                        <item name="sortOrder" xsi:type="string">1000</item>
+                        <item name="canShow" xsi:type="boolean">true</item>
+                        <item name="componentType" xsi:type="string">fieldset</item>
+                        <item name="provider" xsi:type="string">product_form.product_form_data_source</item>
+                        <item name="form" xsi:type="string">product_form.product_form</item>
+                        <item name="modal" xsi:type="string">bundlediscountModal</item>
+                        <item name="nameStepWizard" xsi:type="string">variation-steps-wizard</item>
+                        <item name="dataScope" xsi:type="string">productFormBundleDiscount</item>
+                        <item name="urlWizard" xsi:type="string">md_bundlediscount/index/bundle</item>
+                    </argument>
+                </arguments>
+            </block>
+    </htmlContent>
+</form>

@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="main">
+            <block class="Magedelight\Arp\Block\Catalog\Category\RelatedItems"  name="arp.related.product.top" before="-" cacheable="false">
+                <action method="setCustomTemplate"/>
+                <arguments>
+                    <argument name="type" xsi:type="string">category-top</argument>
+                    <argument name="position" xsi:type="string">14</argument>
+                    <argument name="group_name" xsi:type="string">pagetop</argument>        
+                </arguments>               
+                <block class="Magento\Catalog\Block\Product\ProductList\Item\Container" name="related.product.addto.top" as="addto">
+                    <block class="Magento\Wishlist\Block\Catalog\Product\ProductList\Item\AddTo\Wishlist"
+                               name="related.product.addto.wishlist.top" as="wishlist" before="compare"
+                               template="Magento_Wishlist::catalog/product/list/addto/wishlist.phtml"/>    
+                    <block class="Magento\Catalog\Block\Product\ProductList\Item\AddTo\Compare"
+                               name="related.product.addto.compare.top" as="compare"
+                               template="Magento_Catalog::product/list/addto/compare.phtml"/>
+                </block>
+                <block class="Magento\Framework\View\Element\RendererList" name="category.product.type.details.renderers.top" as="details.renderers">
+                    <block class="Magento\Framework\View\Element\Template" as="default"/>
+                </block>
+            </block>
+        </referenceContainer>
+        <referenceBlock name="category.product.type.details.renderers.top">
+            <block class="Magento\Swatches\Block\Product\Renderer\Listing\Configurable" as="configurable" template="Magedelight_Arp::catalog/category/product/top.phtml" >
+                <arguments>
+                    <argument name="type" xsi:type="string">category-top</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+        <referenceContainer name="page.bottom.container">
+            <block class="Magedelight\Arp\Block\Catalog\Category\RelatedItems" ifconfig="arp_products/categorypage/pagebottom/enabled" name="arp.related.product.bottom" template="Magedelight_Arp::catalog/category/related-items.phtml" after="-" cacheable="false">
+                <action method="setCustomTemplate"/>
+                <arguments>
+                    <argument name="type" xsi:type="string">category-bottom</argument>
+                    <argument name="position" xsi:type="string">15</argument>
+                    <argument name="group_name" xsi:type="string">pagebottom</argument>
+                </arguments>
+                <block class="Magento\Catalog\Block\Product\ProductList\Item\Container" name="related.product.addto.bottom" as="addto">
+                    <block class="Magento\Wishlist\Block\Catalog\Product\ProductList\Item\AddTo\Wishlist"
+                               name="related.product.addto.wishlist.bottom" as="wishlist" before="compare"
+                               template="Magento_Wishlist::catalog/product/list/addto/wishlist.phtml"/>    
+                    <block class="Magento\Catalog\Block\Product\ProductList\Item\AddTo\Compare"
+                               name="related.product.addto.compare.bottom" as="compare"
+                               template="Magento_Catalog::product/list/addto/compare.phtml"/>
+                </block>
+                
+                <block class="Magento\Framework\View\Element\RendererList" name="category.product.type.details.renderers.bottom" as="details.renderers">
+                    <block class="Magento\Framework\View\Element\Template" as="default"/>
+                </block>
+            </block>            
+        </referenceContainer>
+        <referenceBlock name="category.product.type.details.renderers.bottom">
+            <block class="Magento\Swatches\Block\Product\Renderer\Listing\Configurable" as="configurable" template="Magedelight_Arp::catalog/category/product/bottom.phtml" >
+                <arguments>
+                    <argument name="type" xsi:type="string">category-bottom</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

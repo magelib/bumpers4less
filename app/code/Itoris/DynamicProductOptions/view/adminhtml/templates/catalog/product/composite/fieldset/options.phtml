@@ -1,0 +1,155 @@
+<?php
+/**
+ * ITORIS
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the ITORIS's Magento Extensions License Agreement
+ * which is available through the world-wide-web at this URL:
+ * http://www.itoris.com/magento-extensions-license.html
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to sales@itoris.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extensions to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to the license agreement or contact sales@itoris.com for more information.
+ *
+ * @category   ITORIS
+ * @package    ITORIS_M2_DYNAMIC_PRODUCT_OPTIONS
+ * @copyright  Copyright (c) 2016 ITORIS INC. (http://www.itoris.com)
+ * @license    http://www.itoris.com/magento-extensions-license.html  Commercial License
+ */
+
+?>
+
+<?php /* @var $block \Magento\Catalog\Block\Adminhtml\Product\Composite\Fieldset\Options */ ?>
+<?php $options = $block->decorateArray($block->getOptions()); ?>
+<?php if (count($options)): ?>
+
+<?php echo $block->getChildHtml('options_js') ?>
+
+<fieldset id="product_composite_configure_fields_options" class="fieldset admin__fieldset <?php echo $block->getIsLastFieldset() ? 'last-fieldset' : '' ?>">
+    <legend class="legend admin__legend">
+        <span><?php /* @escapeNotVerified */ echo __('Custom Options') ?></span>
+    </legend><br>
+    <?php foreach ($options as $option): ?>
+        <?php echo $block->getOptionHtml($option); ?>
+    <?php endforeach;?>
+</fieldset>
+
+
+<?php
+    /** @var $dpoBlock \Itoris\DynamicProductOptions\Block\Options\Config */
+    $dpoBlock = $block->getDpoBlock();
+	$allFieldsJson = $dpoBlock->getAllFieldsJson();
+	if ($allFieldsJson != '[]') echo '<style>.catalog-product-view #product_addtocart_form {display:none;}</style>';
+?>
+<?php if ($dpoBlock->getStyles()): ?>
+    <style>
+        <?php echo $dpoBlock->getStyles() ?>
+    </style>
+<?php endif; ?>
+<?php $isTable = $dpoBlock->getConfig()->getFormStyle() != 'list_div' ?>
+<div id="itoris_dynamicproductoptions_add_to_cart_configure" style="display: none;">
+    <button type="button" class="button">
+        <span><span><?php echo $dpoBlock->escapeHtml(__('Configure')) ?></span></span>
+    </button>
+</div>
+<div id="itoris_dynamicproductoptions_popup_mask" style="display: none;"></div>
+<div id="itoris_dynamicproductoptions_popup" style="display: none;">
+    <div id="itoris_dynamicproductoptions_popup_close_icon"></div>
+    <h2 class="popup-title"><?php echo $dpoBlock->escapeHtml(sprintf(__('Configure %s'), $dpoBlock->getProduct()->getName())) ?></h2>
+    <div id="itoris_dynamicproductoptions">
+        <?php $sectionConditions = []; ?>
+        <?php foreach ($dpoBlock->getSections() as $section): ?>
+            <?php if ($dpoBlock->getConfig()->getFormStyle() == 'table_sections') {$sectionConditions = $dpoBlock->prepareSectionConditions($section, $sectionConditions);} ?>
+            <div class="fieldset<?php if ($section->getTitle()): ?> fieldset-section<?php endif; ?> fieldset-section-<?php echo $section->getOrder() ?>">
+                <?php if ($section->getTitle()): ?>
+                    <h2 class="legend"><?php echo $section->getTitle() ?></h2>
+                <?php endif; ?>
+                <?php if ($isTable): ?>
+                    <table class="form-list <?php echo 'option-fields-cols-' . $section->getCols() ?>">
+                        <?php for ($i = 1; $i <= $section->getRows(); $i++): ?>
+                            <tr class="fields">
+                                <?php for ($j = 1; $j <= $section->getCols(); $j++): ?>
+                                    <?php $order = ($i - 1) * $section->getCols() + $j; ?>
+                                    <?php foreach ($section->getFields() as $field): ?>
+                                        <?php if ($field->getOrder() == $order): ?>
+                                            <td>
+                                                <div id="<?php if ($field->getOptionId()): ?>dynamic_option_id_<?php echo $field->getOptionId(); else: ?>itoris_dynamic_option_id_<?php echo $field->getItorisOptionId();endif;?>" class="field">
+                                                    <?php if ($field->getTitle() && $dpoBlock->isSystemOption($field)): ?>
+                                                        <label <?php if ($field->getIsRequire()):?>class="required"<?php endif; ?>><?php if ($field->getIsRequire()):?><em>*</em><?php endif; ?><?php echo $field->getTitle() ?></label>
+                                                        <?php echo $dpoBlock->getOptionPrice($field) ?>
+                                                    <?php endif; ?>
+                                                    <?php if (!$dpoBlock->isSystemOption($field)): ?>
+                                                        <?php echo $dpoBlock->getFieldHtml($field); ?>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </td>
+                                            <?php continue 2; endif; ?>
+                                    <?php endforeach; ?>
+                                    <td><div class="field empty" style="height: 1px;"></div></td>
+                                <?php endfor; ?>
+                            </tr>
+                        <?php endfor; ?>
+                    </table>
+                <?php else: ?>
+                    <ul class="form-list <?php echo 'option-fields-cols-' . $section->getCols() ?>">
+                        <?php for ($i = 1; $i <= $section->getRows(); $i++): ?>
+                            <li class="fields">
+                                <?php for ($j = 1; $j <= $section->getCols(); $j++): ?>
+                                    <?php $order = ($i - 1) * $section->getCols() + $j; ?>
+                                    <?php foreach ($section->getFields() as $field): ?>
+                                        <?php if ($field->getOrder() == $order): ?>
+                                            <div id="<?php if ($field->getOptionId()): ?>dynamic_option_id_<?php echo $field->getOptionId(); else: ?>itoris_dynamic_option_id_<?php echo $field->getItorisOptionId();endif;?>" class="field">
+                                                <?php if ($field->getTitle() && $dpoBlock->isSystemOption($field)): ?>
+                                                    <label <?php if ($field->getIsRequire()):?>class="required"<?php endif; ?>><?php if ($field->getIsRequire()):?><em>*</em><?php endif; ?><?php echo $field->getTitle() ?></label><?php echo $dpoBlock->getOptionPrice($field) ?>
+                                                <?php endif; ?>
+                                                <?php if (!$dpoBlock->isSystemOption($field)): ?>
+                                                    <?php echo $dpoBlock->getFieldHtml($field); ?>
+                                                <?php endif; ?>
+                                            </div>
+                                            <?php continue 2; endif; ?>
+                                    <?php endforeach; ?>
+                                    <div class="field empty" style="height: 1px;"></div>
+                                <?php endfor; ?>
+                            </li>
+                        <?php endfor; ?>
+                    </ul>
+                <?php endif; ?>
+            </div>
+        <?php endforeach; ?>
+    </div>
+    <div class="product-options-bottom">
+        <button id="itoris_dynamicproductoptions_popup_button_cancel" type="button" class="button"><span><span><?php echo $dpoBlock->escapeHtml(__('Cancel')) ?></span></span></button>
+        <?php $catalogHelper = $dpoBlock->getCatalogHelper(); ?>
+        <div class="add-to-box">
+            <span id="itoris_dynamicproductoptions_popup_price"></span>
+            <button id="itoris_dynamicproductoptions_popup_button_apply" type="button" class="button"><span><span><?php echo $dpoBlock->escapeHtml(__('Apply')) ?></span></span></button>
+            <span class="or"><?php echo $dpoBlock->escapeHtml(__('OR')) ?></span>
+            <!--<div class="add-to-cart">
+                <label for="qty"><?php echo $dpoBlock->escapeHtml(__('Qty:')) ?></label>
+                <input type="text" name="qty" id="itoris_dynamicoptions_qty" maxlength="12" value="" title="<?php echo $dpoBlock->escapeHtml(__('Qty')) ?>" class="input-text qty" />
+                <?php $buttonTitle = $dpoBlock->isEditAction() ? $dpoBlock->escapeHtml(__('Update Cart')) : $dpoBlock->escapeHtml(__('Add to Cart')) ?>
+                <button type="button" title="<?php echo $buttonTitle ?>" id="itoris_dynamicoptions_add_to_cart" class="button btn-cart"><span><span><?php echo $buttonTitle ?></span></span></button>
+            </div>-->
+        </div>
+    </div>
+</div>
+<div id="itoris_dynamicproductoptions_configuration" style="display: none;">
+    <ul></ul>
+    <button id="itoris_dynamicproductoptions_button_edit" type="button" class="button"><span><span><?php echo $dpoBlock->escapeHtml(__('Edit')) ?></span></span></button>
+</div>
+<script type="text/javascript">
+    require(['prototype','Itoris_DynamicProductOptions/js/composite'], function(Itoris) {
+		window.opConfig = <?php echo $dpoBlock->getJsonConfig()?>;
+		window.dynamicOptions<?php echo $dpoBlock->getProductId() ?> = new DynamicProductOptions(<?php echo $dpoBlock->getJsObjectConfig(['section_conditions' => $sectionConditions]) ?>, <?php echo $allFieldsJson ?>);
+		<?php if ($dpoBlock->getExtraJs()): ?>
+			<?php echo $dpoBlock->getExtraJs() ?>
+		<?php endif; ?>
+    });
+</script>
+<?php endif; ?>

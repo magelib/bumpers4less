@@ -1,0 +1,125 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Framework\Search\Adapter\Mysql\Field\FieldInterface" type="Magento\Framework\Search\Adapter\Mysql\Field\Field" />
+    <type name="ShipperHQ\Shipper\Helper\LogAssist">
+        <arguments>
+            <argument name="logger" xsi:type="object">ShipperHQ\Logger\Model\Logger</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Quote\Model\Quote\Address\Rate">
+        <plugin name="shipperhq_shipper_model_sales_quote_address_rate"
+                type="ShipperHQ\Shipper\Model\Sales\Quote\Address\RatePlugin"
+                sortOrder="10"
+                disabled="false"/>
+    </type>
+    <type name="Magento\Checkout\Model\ShippingInformationManagement">
+        <plugin name="shipperhq_shipper_plugin_checkout_shipping_information_management"
+                type="ShipperHQ\Shipper\Plugin\Checkout\ShippingInformationPlugin"
+                sortOrder="10"
+                disabled="false"/>
+    </type>
+    <type name="Magento\Shipping\Model\Config\Source\Allmethods">
+        <plugin name="shipperhq_shipper_plugin_shipping_config_source_allmethods"
+                type="ShipperHQ\Shipper\Plugin\Shipping\AllmethodsPlugin"
+                sortOrder="1"
+                disabled="false"/>
+    </type>
+    <type name="Magento\Sales\Block\Adminhtml\Order\View\Items\Renderer\DefaultRenderer">
+        <plugin name="shipperhq_shipper_plugin_adminhtml_order_items_getcolumns"
+                type="ShipperHQ\Shipper\Plugin\Adminhtml\DefaultRendererPlugin" sortOrder="20"/>
+    </type>
+    <type name="Magento\Quote\Model\Cart\ShippingMethodConverter">
+        <plugin name="shipperhq_shipping_plugin_shipping_method_converter"
+                type="ShipperHQ\Shipper\Plugin\Cart\ShippingMethodConverterPlugin" sortOrder="20"/>
+    </type>
+    <!--SHQ16-1851 remove until grid is resolved and removed columns from uicomponent -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <plugin
+                name="sales_order_shipperhq_columns"
+                type="ShipperHQ\Shipper\Plugin\Order\CollectionFactory"
+                sortOrder="100"
+                disabled="false"
+        />
+    </type>
+    <type name="ShipperHQ\Shipper\Plugin\Checkout\ShippingInformationPlugin">
+        <arguments>
+            <argument name="checkoutSession" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="ShipperHQ\Shipper\Observer\SetCheckoutFlag">
+        <arguments>
+            <argument name="checkoutSession" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="ShipperHQ\Shipper\Observer\SetCartFlag">
+        <arguments>
+            <argument name="checkoutSession" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="ShipperHQ\Shipper\Observer\RecordOrder">
+        <arguments>
+            <argument name="checkoutSession" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="ShipperHQ\Shipper\Model\Carrier\Shipper">
+        <arguments>
+            <argument name="checkoutSession" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="ShipperHQ\Shipper\Helper\Data">
+        <arguments>
+            <argument name="checkoutSession" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Quote\Model\ShippingMethodManagement">
+        <plugin name="shipperhq_shipper_plugin_quote_shipping_method_management"
+                type="ShipperHQ\Shipper\Plugin\Quote\ShippingMethodManagementPlugin"
+                sortOrder="10"
+                disabled="false"/>
+    </type>
+    <type name="Magento\Shipping\Model\Shipping">
+        <plugin name="shipperhq_shipper_plugin_shipping_model_shipping"
+                type="ShipperHQ\Shipper\Plugin\Shipping\ShippingPlugin"
+                sortOrder="10"
+                disabled="false"/>
+    </type>
+    <!--
+    /**
+     * SHQ16-2375 specify connection name of sales to support split database, otherwise uses default
+     */
+     -->
+    <type name="ShipperHQ\Shipper\Model\ResourceModel\Quote\AddressDetail">
+        <arguments>
+            <argument name="connectionName" xsi:type="string">sales</argument>
+         </arguments>
+        </type>
+    <type name="ShipperHQ\Shipper\Model\ResourceModel\Order\Detail">
+        <arguments>
+            <argument name="connectionName" xsi:type="string">sales</argument>
+        </arguments>
+    </type>
+    <type name="ShipperHQ\Shipper\Model\ResourceModel\Quote\ItemDetail">
+        <arguments>
+            <argument name="connectionName" xsi:type="string">sales</argument>
+        </arguments>
+    </type>
+    <type name="ShipperHQ\Shipper\Model\ResourceModel\Order\ItemDetail">
+        <arguments>
+           <argument name="connectionName" xsi:type="string">sales</argument>
+        </arguments>
+    </type>
+    <type name="ShipperHQ\Shipper\Model\ResourceModel\Quote\Packages">
+        <arguments>
+            <argument name="connectionName" xsi:type="string">sales</argument>
+        </arguments>
+    </type>
+    <type name="ShipperHQ\Shipper\Model\ResourceModel\Order\Packages">
+        <arguments>
+            <argument name="connectionName" xsi:type="string">sales</argument>
+        </arguments>
+    </type>
+    <type name="ShipperHQ\Shipper\Model\ResourceModel\Order\GridDetail">
+        <arguments>
+            <argument name="connectionName" xsi:type="string">sales</argument>
+        </arguments>
+    </type>
+</config>

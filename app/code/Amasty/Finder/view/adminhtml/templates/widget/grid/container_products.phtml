@@ -1,0 +1,31 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2017 Amasty (https://www.amasty.com)
+ * @package Amasty_Finder
+ */
+?>
+<?php if ($block->getButtonsHtml()): ?>
+    <div class="page-actions"><?php echo $block->getButtonsHtml() ?></div>
+<?php endif; ?>
+<?php echo $block->getGridHtml() ?>
+
+<?php /** Fix for js event in input page input */?>
+<script>
+    require(['mage/adminhtml/grid'], function() {
+
+        varienGrid.prototype.inputPage = function (event, maxNum) {
+            var element = Event.element(event);
+            var keyCode = event.keyCode || event.which;
+            if (keyCode == Event.KEY_RETURN) {
+                this.setPage(element.value);
+            }
+            if (keyCode > 47 && keyCode < 58) {
+
+            }
+            else {
+                Event.stop(event);
+            }
+        };
+    });
+</script>

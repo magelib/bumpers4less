@@ -1,0 +1,68 @@
+<?php
+/**
+ * Magedelight
+ * Copyright (C) 2016 Magedelight <info@magedelight.com>
+ *
+ * NOTICE OF LICENSE
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://opensource.org/licenses/gpl-3.0.html.
+ *
+ * @category Magedelight
+ * @package Magedelight_Bundlediscount
+ * @copyright Copyright (c) 2016 Mage Delight (http://www.magedelight.com/)
+ * @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License,version 3 (GPL-3.0)
+ * @author Magedelight <info@magedelight.com>
+ */
+?>
+
+<div class="admin__fieldset-wrapper-content _show" >
+    <fieldset class="admin__fieldset" data-bind="foreach: {data: elems, as: 'element'}">
+        <div class="fieldset-wrapper" id="bundlediscount_container" data-block="product-custom-options">
+            <form data-form="quick-view-form" data-role="tocart-form"  name="bundlediscount-option" id="bundle_product_save_form" method="post" enctype="multipart/form-data" validate="validate">
+                 <?php $product_id = $this->getRequest()->getParam('id'); ?>
+                 <input type="hidden" data-form-part="product_form"  name="base_product_id" value="<?php echo $product_id ?>">
+            <div class="fieldset-wrapper-title">
+                <strong class="title">
+                    <span><?php /* @escapeNotVerified */ echo __('Product Items') ?></span>
+                </strong>
+                <div class="page-actions">
+                    <button class="action-primary" id="save_bundlediscount" onclick="closeBundlePopup()" type="button" data-role="action"><span><?php echo __("Done"); ?></span>
+
+                    </button>
+                </div>
+            </div>
+          
+               
+                <div class="fieldset-wrapper-content" id="bundlediscount-options-content" data-role="bundlediscount-options-content">
+                    <fieldset class="admin__fieldset">
+
+                        <div class="admin__field-complex">
+                            <div class="admin__field-complex-elements">
+
+                                <?php echo $block->getAddButtonHtml() ?>
+                            </div>
+                        </div>
+
+                        <div id="productbundle_options_container" class="sortable-wrapper admin__dynamic-rows admin__control-collapsible">
+                            <div id="productbundle_container_top"></div>
+                            <?php echo $block->getOptionsBoxHtml() ?>
+                        </div>
+
+                    </fieldset>
+                </div>
+            </form>
+        </div>
+    </fieldset>
+</div>
+

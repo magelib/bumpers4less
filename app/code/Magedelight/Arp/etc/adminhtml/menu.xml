@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+       <add id="Magedelight_Arp::rule_content" dependsOnConfig = "arp_products/general/enabled_arp" title="Automatic related products" module="Magedelight_Arp" sortOrder="50" resource="Magedelight_Arp::rule_content"/>
+       <add id="Magedelight_Arp::productrule" title="Manage Product Rule" module="Magedelight_Arp" sortOrder="10" parent="Magedelight_Arp::rule_content" action="advancerelated/index" resource="Magedelight_Arp::productrule" />
+       <add id="Magedelight_Arp::configuration" title="Configuration" module="Magedelight_Arp" sortOrder="20" parent="Magedelight_Arp::rule_content" action="adminhtml/system_config/edit/section/arp_products" resource="Magedelight_Arp::configuration" />
+    </menu>
+</config>

@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2017 Amasty (https://www.amasty.com)
+ * @package Amasty_Finder
+ */
+-->
+<!--
+/**
+ * Copyright © 2015 Amasty. All rights reserved.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="amasty_finder_finder_edit_tab_universal">
+            <block class="Amasty\Finder\Block\Adminhtml\Finder\Edit\Tab\Universal\Grid" name="adminhtml.amasty.finder.finder.universal.grid" as="grid">
+                <arguments>
+                    <argument name="id" xsi:type="string">amasty_finder_finder_universal_grid</argument>
+                    <argument name="default_sort" xsi:type="string">file_id</argument>
+                    <argument name="default_dir" xsi:type="string">DESC</argument>
+                    <argument name="use_ajax" xsi:type="string">1</argument>
+                    <argument name="save_parameters_in_session" xsi:type="string">1</argument>
+                    <argument name="grid_url" xsi:type="url" path="*/*/universalGrid">
+                        <param name="_current">1</param>
+                    </argument>
+                </arguments>
+                <block class="Magento\Backend\Block\Widget\Grid\Massaction" name="adminhtml.amasty.finder.finder.universal.grid.massaction" as="grid.massaction">
+                    <arguments>
+                        <argument name="massaction_id_field" xsi:type="string">universal_id</argument>
+                        <argument name="form_field_name" xsi:type="string">universal_ids</argument>
+                        <argument name="use_select_all" xsi:type="string">1</argument>
+                        <argument name="options" xsi:type="array">
+                            <item name="delete" xsi:type="array">
+                                <item name="label" xsi:type="string" translate="true">Delete</item>
+                                <item name="url" xsi:type="url" path="*/*/massDeleteUniversal">
+                                    <param name="_current">1</param>
+                                </item>
+                                <item name="confirm" xsi:type="string" translate="true">Are you sure you want to delete the selected product(s)?</item>
+                            </item>
+                        </argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Backend\Block\Widget\Grid\Export" name="adminhtml.amasty.finder.finder.universal.grid.export" as="grid.export">
+                    <arguments>
+                        <argument name="exportTypes" xsi:type="array">
+                            <item name="csv" xsi:type="array">
+                                <item name="urlPath" xsi:type="string">*/*/universalExportCsv</item>
+                                <item name="label" xsi:type="string" translate="true">CSV</item>
+                            </item>
+                        </argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Backend\Block\Widget\Grid\ColumnSet" as="grid.columnSet" name="dminhtml.amasty.finder.finder.universal.grid.columnSet">
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="sku">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">SKU</argument>
+                            <argument name="index" xsi:type="string">sku</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="action">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Action</argument>
+                            <argument name="type" xsi:type="string">action</argument>
+                            <argument name="filter" xsi:type="string">0</argument>
+                            <argument name="sortable" xsi:type="string">0</argument>
+                            <argument name="is_system" xsi:type="string">1</argument>
+                            <argument name="getter" xsi:type="string">getId</argument>
+                            <argument name="actions" xsi:type="array">
+                                <item name="edit" xsi:type="array">
+                                    <item name="caption" xsi:type="string" translate="true">Delete</item>
+                                    <item name="url" xsi:type="array">
+                                        <item name="base" xsi:type="string">*/value/deleteUniversal</item>
+                                    </item>
+                                    <item name="field" xsi:type="string">id</item>
+                                    <item name="confirm" xsi:type="string" translate="true">Are you sure?</item>
+                                </item>
+                            </argument>
+                        </arguments>
+                    </block>
+                </block>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

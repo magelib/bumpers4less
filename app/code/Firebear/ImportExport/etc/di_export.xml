@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @copyright: Copyright © 2017 Firebear Studio. All rights reserved.
+ * @author   : Firebear Studio <fbeardev@gmail.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Firebear_ImportExport:etc/di_export.xsd">
+    <entity name="order" label="Order" model="Firebear\ImportExport\Model\Export\Order">
+        <item name="orders" label="Order" model="\Magento\Sales\Model\Order" collection="Magento\Sales\Model\ResourceModel\Order\CollectionFactory" main_field="entity_id">
+            <field name="state" type="select" delete="1"/>
+            <field name="status" type="select" model="\Firebear\ImportExport\Model\Export\Order\Fields\Status\Options"/>
+            <field name="store_id" type="select" model="\Firebear\ImportExport\Model\Export\Order\Fields\StoreId\Options"/>
+            <field name="store_currency_code" type="select" model="\Magento\Config\Model\Config\Source\Locale\Currency"/>
+        </item>
+        <item name="orders_item" label="Items of Order" model="\Magento\Sales\Model\Order\Item" collection="Magento\Sales\Model\ResourceModel\Order\Item\CollectionFactory" parent="orders" parent_field="order_id" main_field="item_id">
+            <field name="store_id" type="select" model="\Firebear\ImportExport\Model\Export\Order\Fields\StoreId\Options"/>
+            <field name="product_type" type="select" model="\Magento\Catalog\Model\Product\Type"/>
+            <field name="product_options" type="select" delete="1"/>
+        </item>
+        <item name="orders_address" label="Addresses" model="\Magento\Sales\Model\Order\Address" collection="Magento\Sales\Model\ResourceModel\Order\Address\CollectionFactory" parent="orders" parent_field="parent_id" main_field="entity_id">
+            <field name="country_id" type="select" model="\Magento\Directory\Model\Config\Source\Country"/>
+            <field name="address_type" type="select" model="\Firebear\ImportExport\Model\Export\Order\Address\Fields\AddressType\Options"/>
+        </item>
+        <item name="orders_payment" label="Payments" model="\Magento\Sales\Model\Order\Payment" collection="Magento\Sales\Model\ResourceModel\Order\Payment\CollectionFactory" parent="orders" parent_field="parent_id" main_field="entity_id">
+            <field name="additional_information" type="select" delete="1"/>
+        </item>
+        <item name="shipments" label="Shipments" model="\Magento\Sales\Model\Order\Shipment" collection="Magento\Sales\Model\ResourceModel\Order\Shipment\CollectionFactory" parent="orders" parent_field="order_id" main_field="entity_id">
+            <field name="store_id" type="select" model="\Firebear\ImportExport\Model\Export\Order\Fields\StoreId\Options"/>
+        </item>
+        <item name="shipments_item" label="Item of Shipment" model="\Magento\Sales\Model\Order\Shipment\Item" collection="Magento\Sales\Model\ResourceModel\Order\Shipment\Item\CollectionFactory" parent="shipments" parent_field="parent_id" main_field="entity_id"/>
+        <item name="invoices" label="Invoices" model="\Magento\Sales\Model\Order\Invoice" collection="Magento\Sales\Model\ResourceModel\Order\Invoice\CollectionFactory" parent="orders" parent_field="order_id" main_field="entity_id">
+            <field name="store_id" type="select" model="\Firebear\ImportExport\Model\Export\Order\Fields\StoreId\Options"/>
+            <field name="store_currency_code" type="select" model="\Magento\Config\Model\Config\Source\Locale\Currency"/>
+            <field name="order_currency_code" type="select" model="\Magento\Config\Model\Config\Source\Locale\Currency"/>
+            <field name="base_currency_code" type="select" model="\Magento\Config\Model\Config\Source\Locale\Currency"/>
+            <field name="global_currency_code" type="select" model="\Magento\Config\Model\Config\Source\Locale\Currency"/>
+        </item>
+        <item name="invoices_item" label="Item of Invoice" model="\Magento\Sales\Model\Order\Invoice\Item" collection="Magento\Sales\Model\ResourceModel\Order\Invoice\Item\CollectionFactory" parent="invoices" parent_field="parent_id" main_field="entity_id"/>
+        <item name="creditmemos" label="Credit Memos" model="\Magento\Sales\Model\Order\Creditmemo" collection="Magento\Sales\Model\ResourceModel\Order\Creditmemo\CollectionFactory" parent="orders" parent_field="order_id" main_field="entity_id">
+            <field name="store_id" type="select" model="\Firebear\ImportExport\Model\Export\Order\Fields\StoreId\Options"/>
+        </item>
+        <item name="creditmemos_item" label="Items of Credit Memo" model="\Magento\Sales\Model\Order\Creditmemo\Item" collection="Magento\Sales\Model\ResourceModel\Order\Creditmemo\Item\CollectionFactory" parent="creditmemos" parent_field="parent_id" main_field="entity_id"/>
+    </entity>
+    <entity name="catalog_category" label="Categories" model="Firebear\ImportExport\Model\Export\Category"/>
+</config>

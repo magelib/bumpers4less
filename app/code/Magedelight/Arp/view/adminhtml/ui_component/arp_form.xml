@@ -1,0 +1,679 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">arp_form.arp_form_data_source</item>
+            <item name="deps" xsi:type="string">arp_form.arp_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Rule Information</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">arp_form</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Magedelight\Arp\Block\Adminhtml\Index\Edit\BackButton</item>
+            <item name="delete" xsi:type="string">Magedelight\Arp\Block\Adminhtml\Index\Edit\DeleteButton</item>
+            <item name="reset" xsi:type="string">Magedelight\Arp\Block\Adminhtml\Index\Edit\ResetButton</item>
+            <item name="save" xsi:type="string">Magedelight\Arp\Block\Adminhtml\Index\Edit\SaveButton</item>
+            <item name="save_and_continue" xsi:type="string">Magedelight\Arp\Block\Adminhtml\Index\Edit\SaveAndContinueButton</item>
+        </item>
+    </argument>
+    <dataSource name="arp_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magedelight\Arp\Model\Source\DataProvider</argument>
+            <argument name="name" xsi:type="string">arp_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">rule_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="advancerelated/index/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string"/>
+            </item>
+        </argument>
+        <field name="status">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">boolean</item>
+                    <item name="label" xsi:type="string" translate="true">Enable Rule</item>
+                    <item name="formElement" xsi:type="string">checkbox</item>
+                    <item name="prefer" xsi:type="string">toggle</item>
+                    <item name="source" xsi:type="string">arp</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="dataScope" xsi:type="string">status</item>
+                    <item name="valueMap" xsi:type="array">
+                        <item name="true" xsi:type="number">1</item>
+                        <item name="false" xsi:type="number">2</item>
+                    </item>
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
+        </field>
+        <field name="name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Name</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">arp</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="dataScope" xsi:type="string">name</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="block_page">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magedelight\Arp\Model\Source\BlockPage</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="component" xsi:type="string">Magedelight_Arp/js/form/element/optionsGrid</item>
+                    <item name="label" xsi:type="string" translate="true">Block Page</item>
+                    <item name="additionalClasses" xsi:type="string">block_page_depend</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">arp</item>
+                    <item name="sortOrder" xsi:type="number">25</item>
+                    <item name="dataScope" xsi:type="string">block_page</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="block_position_product">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magedelight\Arp\Model\Source\BlockPositionProduct</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="label" xsi:type="string" translate="true">Block position</item>
+                    <item name="dataScope" xsi:type="string">block_position_product</item>
+                    <item name="additionalClasses" xsi:type="array">
+                        <item name="block_position_product" xsi:type="boolean">true</item>
+                        <item name="displayblock" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">arp</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
+                    <item name="breakLine" xsi:type="boolean">true</item>
+                    <item name="visibleValue" xsi:type="string">1</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+        </field>
+        <field name="block_position_shoppingcart">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magedelight\Arp\Model\Source\BlockPositionShoppingCart</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="label" xsi:type="string" translate="true">Block position</item>
+                    <item name="dataScope" xsi:type="string">block_position_shoppingcart</item>
+                    <item name="additionalClasses" xsi:type="array">
+                        <item name="block_position_shoppingcart" xsi:type="boolean">true</item>
+                        <item name="displayblock" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">arp</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
+                    <item name="breakLine" xsi:type="boolean">true</item>
+                    <item name="visibleValue" xsi:type="string">2</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+        </field>
+        <field name="block_position_category">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magedelight\Arp\Model\Source\BlockPositionCategory</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="label" xsi:type="string" translate="true">Block position</item>
+                    <item name="dataScope" xsi:type="string">block_position_category</item>
+                    <item name="additionalClasses" xsi:type="array">
+                        <item name="block_position_category" xsi:type="boolean">true</item>
+                        <item name="displayblock" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">arp</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
+                    <item name="breakLine" xsi:type="boolean">true</item>
+                    <item name="visibleValue" xsi:type="string">3</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+        </field>
+        <field name="block_position_cms">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magedelight\Arp\Model\Source\BlockPositionCms</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="label" xsi:type="string" translate="true">Block position</item>
+                    <item name="dataScope" xsi:type="string">block_position_cms</item>
+                    <item name="additionalClasses" xsi:type="array">
+                        <item name="block_position_cms" xsi:type="boolean">true</item>
+                        <item name="displayblock" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">arp</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
+                    <item name="breakLine" xsi:type="boolean">true</item>
+                    <item name="visibleValue" xsi:type="string">5</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+        </field>
+        <field name="customer_group_ids">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magedelight\Arp\Model\Rule\CustomerGroupsOptionsProvider</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Customer Groups</item>
+                    <item name="componentType" xsi:type="string">field</item>
+                    <item name="formElement" xsi:type="string">multiselect</item>
+                    <item name="component" xsi:type="string">Magento_Catalog/js/components/new-category</item>
+                    <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                    <item name="dataScope" xsi:type="string">customer_group_ids</item>
+                    <item name="filterOptions" xsi:type="boolean">true</item>
+                    <item name="showCheckbox" xsi:type="boolean">true</item>
+                    <item name="disableLabel" xsi:type="boolean">true</item>
+                    <item name="multiple" xsi:type="boolean">true</item>
+                    <item name="levelsVisibility" xsi:type="number">1</item>
+                    <item name="sortOrder" xsi:type="number">60</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="listens" xsi:type="array">
+                        <item name="${ $.namespace }.${ $.namespace }:responseData" xsi:type="string">setParsed</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="priority">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Priority</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="notice" xsi:type="string" translate="true">Some products might fall under several rules. Priority is here to decide which rule will be executed in such case. Rules with higher priority (e.g. 10 is higher than 20) will be executed first.</item>
+                    <item name="source" xsi:type="string">arp</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="validate-number" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="dataScope" xsi:type="string">priority</item>
+                </item>
+            </argument>
+        </field>
+        <field name="stores">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Cms\Ui\Component\Listing\Column\Cms\Options</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">int</item>
+                    <item name="label" xsi:type="string" translate="true">Store View</item>
+                    <item name="formElement" xsi:type="string">multiselect</item>
+                    <item name="source" xsi:type="string">arp</item>
+                    <item name="dataScope" xsi:type="string">stores</item>
+                    <item name="sortOrder" xsi:type="number">70</item>
+                    <item name="default" xsi:type="string">0</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+    <fieldset name="where_to_display">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="label" xsi:type="string" translate="true">Where to display related products</item>
+                <item name="sortOrder" xsi:type="number">30</item>
+            </item>
+        </argument>
+        <container name="conditions_apply_to">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+            <htmlContent name="html_content">
+                <argument name="block" xsi:type="object">Magedelight\Arp\Block\Adminhtml\Index\Edit\Tab\Conditions</argument>
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="sortOrder" xsi:type="number">10</item>
+                        <!--item name="component" xsi:type="string">Magedelight_Arp/js/form/element/conditionTree</item-->
+                        <item name="visible" xsi:type="boolean">false</item>
+                        <item name="breakLine" xsi:type="boolean">true</item>
+                        <item name="visibleValue" xsi:type="string">1</item>
+                    </item>
+                </argument>
+            </htmlContent>
+        </container>
+        <field name="products_category">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Catalog\Ui\Component\Product\Form\Categories\Options</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Category</item>
+                    <item name="componentType" xsi:type="string">field</item>
+                    <item name="formElement" xsi:type="string">multiselect</item>
+                    <item name="component" xsi:type="string">Magedelight_Arp/js/form/element/categoryTree</item>
+                    <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                    <item name="dataScope" xsi:type="string">products_category</item>
+                    <item name="filterOptions" xsi:type="boolean">true</item>
+                    <item name="showCheckbox" xsi:type="boolean">true</item>
+                    <item name="disableLabel" xsi:type="boolean">true</item>
+                    <item name="multiple" xsi:type="boolean">true</item>
+                    <item name="levelsVisibility" xsi:type="number">1</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="additionalClasses" xsi:type="array">
+                        <item name="block_page_category_tree" xsi:type="boolean">true</item>
+                        <item name="displayblock" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="breakLine" xsi:type="boolean">true</item>
+                    <item name="visibleValue" xsi:type="string">3</item>
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="listens" xsi:type="array">
+                        <item name="${ $.namespace }.${ $.namespace }:responseData" xsi:type="string">setParsed</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="cms_page">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magedelight\Arp\Model\Source\Page</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">CMS Page</item>
+                    <item name="componentType" xsi:type="string">field</item>
+                    <item name="formElement" xsi:type="string">multiselect</item>
+                    <item name="component" xsi:type="string">Magedelight_Arp/js/form/element/cmsPage</item>
+                    <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                    <item name="dataScope" xsi:type="string">cms_page</item>
+                    <item name="filterOptions" xsi:type="boolean">true</item>
+                    <item name="showCheckbox" xsi:type="boolean">true</item>
+                    <item name="disableLabel" xsi:type="boolean">true</item>
+                    <item name="multiple" xsi:type="boolean">true</item>
+                    <item name="levelsVisibility" xsi:type="number">1</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="additionalClasses" xsi:type="array">
+                        <item name="block_page_cms_tree" xsi:type="boolean">true</item>
+                        <item name="displayblock" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="breakLine" xsi:type="boolean">true</item>
+                    <item name="visibleValue" xsi:type="string">5</item>
+                    <item name="listens" xsi:type="array">
+                        <item name="${ $.namespace }.${ $.namespace }:responseData" xsi:type="string">setParsed</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+    <fieldset name="actions">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Which products are displayed</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="sortOrder" xsi:type="number">40</item>
+            </item>
+        </argument>
+        <container name="actions_apply_to" >
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">40</item>
+                </item>
+            </argument>
+            <htmlContent name="html_content">
+                <argument name="block" xsi:type="object">Magedelight\Arp\Block\Adminhtml\Index\Edit\Tab\Actions</argument>
+            </htmlContent>
+        </container>
+    </fieldset>
+    <fieldset name="display_style">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="label" xsi:type="string" translate="true">Display Settings</item>
+                <item name="sortOrder" xsi:type="number">100</item>
+            </item>
+        </argument>
+        <field name="block_title">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Block title</item>
+                    <item name="notice" xsi:type="string" translate="true">Name the block in a way that reflects what kind of products it displays. e.g. Frequently bought together, you might be also interested in, featured products, more in this collection, etc.</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">arp</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="dataScope" xsi:type="string">block_title</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        
+        <container name="available_block_layout_group">
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">group</item>
+                <item name="config" xsi:type="array">
+                    <item name="breakLine" xsi:type="boolean">false</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/components/group</item>
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="sortOrder" xsi:type="number">89</item>
+                    <item name="label" xsi:type="string" translate="true">Block layout</item>
+                </item>
+            </argument>
+            <field name="block_layout">
+                <argument name="data" xsi:type="array">
+                    <item name="options" xsi:type="object">Magedelight\Arp\Model\Source\BlockLayout</item>
+                    <item name="config" xsi:type="array">
+                        <item name="dataType" xsi:type="string">number</item>
+                        <item name="component" xsi:type="string">Magedelight_Arp/js/form/element/optionsLayout</item>
+                        <item name="label" xsi:type="string" translate="true">Block layout</item>
+                        <item name="formElement" xsi:type="string">select</item>
+                        <item name="source" xsi:type="string">arp</item>
+                        <item name="additionalClasses" xsi:type="array">
+                            <item name="blocklayout" xsi:type="boolean">true</item>
+                        </item>
+                        <item name="sortOrder" xsi:type="number">25</item>
+                        <item name="dataScope" xsi:type="string">block_layout</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">true</item>
+                        </item>
+                        <item name="default" xsi:type="number">2</item>
+                    </item>
+                </argument>
+            </field>
+            <field name="use_config.block_layout">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="description" xsi:type="string" translate="true">Use Config Settings</item>
+                        <item name="dataType" xsi:type="string">boolean</item>
+                        <item name="formElement" xsi:type="string">checkbox</item>
+                        <item name="valueMap" xsi:type="array">
+                            <item name="true" xsi:type="boolean">true</item>
+                            <item name="false" xsi:type="boolean">false</item>
+                        </item>
+                        <item name="exports" xsi:type="array">
+                            <item name="checked" xsi:type="string">ns = ${ $.ns }, index = block_layout :disabled</item>
+                        </item>
+                        <item name="default" xsi:type="boolean">true</item>
+                    </item>
+                </argument>
+            </field> 
+        </container>
+        <container name="default_number_of_rows_group">
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">group</item>
+                <item name="additionalClasses" xsi:type="array">
+                    <item name="number-of-rows" xsi:type="boolean">true</item>
+                </item>
+                <item name="config" xsi:type="array">
+                    <item name="breakLine" xsi:type="boolean">false</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/components/group</item>
+                    <item name="label" xsi:type="string" translate="true">Number of columns</item>
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="sortOrder" xsi:type="number">90</item>
+                </item>
+            </argument>
+            <field name="number_of_rows">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string">Number of columns</item>
+                        <item name="notice" xsi:type="string" translate="true">Number of columns would be calculated automatically based on outer block width also please enter between 1 to 5</item>
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="formElement" xsi:type="string">input</item>
+                        <item name="additionalClasses" xsi:type="array">
+                            <item name="number-of-rows" xsi:type="boolean">true</item>
+                        </item>
+                        <item name="source" xsi:type="string">arp</item>
+                        <item name="dataScope" xsi:type="string">number_of_rows</item>  
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">true</item>
+                            <item name="validate-digits-range" xsi:type="string">1-5</item>
+                        </item>                 
+                    </item>
+                </argument>
+            </field>
+            <field name="use_config.number_of_rows">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="description" xsi:type="string" translate="true">Use Config Settings</item>
+                        <item name="dataType" xsi:type="string">boolean</item>
+                        <item name="formElement" xsi:type="string">checkbox</item>
+                        <item name="additionalClasses" xsi:type="array">
+                            <item name="number-of-rows" xsi:type="boolean">true</item>
+                        </item>
+                        <item name="valueMap" xsi:type="array">
+                            <item name="true" xsi:type="boolean">true</item>
+                            <item name="false" xsi:type="boolean">false</item>
+                        </item>
+                        <item name="exports" xsi:type="array">
+                            <item name="checked" xsi:type="string">ns = ${ $.ns }, index = number_of_rows :disabled</item>
+                        </item>
+                        <item name="default" xsi:type="boolean">true</item>
+                    </item>
+                </argument>
+            </field>
+        </container>
+        <container name="default_max_products_display_group">
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">group</item>
+                <item name="config" xsi:type="array">
+                    <item name="breakLine" xsi:type="boolean">false</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/components/group</item>
+                    <item name="label" xsi:type="string" translate="true">Max products to display</item>
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="sortOrder" xsi:type="number">100</item>
+                </item>
+            </argument>
+            <field name="max_products_display">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string">Max products to display</item>
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="formElement" xsi:type="string">input</item>
+                        <item name="source" xsi:type="string">arp</item>
+                        <item name="dataScope" xsi:type="string">max_products_display</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">true</item>
+                            <item name="validate-greater-than-zero" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                </argument>
+            </field>
+            <field name="use_config.max_products_display">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="description" xsi:type="string" translate="true">Use Config Settings</item>
+                        <item name="dataType" xsi:type="string">boolean</item>
+                        <item name="formElement" xsi:type="string">checkbox</item>
+                        <item name="valueMap" xsi:type="array">
+                            <item name="true" xsi:type="boolean">true</item>
+                            <item name="false" xsi:type="boolean">false</item>
+                        </item>
+                        <item name="exports" xsi:type="array">
+                            <item name="checked" xsi:type="string">ns = ${ $.ns }, index = max_products_display :disabled</item>
+                        </item>
+                        <item name="default" xsi:type="boolean">true</item>
+                    </item>
+                </argument>
+            </field>
+        </container>
+        <container name="default_slides_to_show_group">
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">group</item>
+                <item name="config" xsi:type="array">
+                    <item name="breakLine" xsi:type="boolean">false</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/components/group</item>
+                    <item name="label" xsi:type="string" translate="true">Product slides To Show</item>
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="sortOrder" xsi:type="number">100</item>
+                </item>
+            </argument>
+            <field name="slides_to_show">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string">Product slides To Show</item>
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="notice" xsi:type="string" translate="true">Please enter between 1 to 5</item>
+                        <item name="formElement" xsi:type="string">input</item>
+                        <item name="source" xsi:type="string">arp</item>
+                        <item name="dataScope" xsi:type="string">slides_to_show</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">true</item>
+                            <item name="validate-digits-range" xsi:type="string">1-5</item>
+                        </item>
+                    </item>
+                </argument>
+            </field>
+            <field name="use_config.slides_to_show">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="description" xsi:type="string" translate="true">Use Config Settings</item>
+                        <item name="dataType" xsi:type="string">boolean</item>
+                        <item name="formElement" xsi:type="string">checkbox</item>
+                        <item name="valueMap" xsi:type="array">
+                            <item name="true" xsi:type="boolean">true</item>
+                            <item name="false" xsi:type="boolean">false</item>
+                        </item>
+                        <item name="exports" xsi:type="array">
+                            <item name="checked" xsi:type="string">ns = ${ $.ns }, index = slides_to_show :disabled</item>
+                        </item>
+                        <item name="default" xsi:type="boolean">true</item>
+                    </item>
+                </argument>
+            </field>
+        </container>
+        <container name="default_slides_to_scroll_group">
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">group</item>
+                <item name="config" xsi:type="array">
+                    <item name="breakLine" xsi:type="boolean">false</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/components/group</item>
+                    <item name="label" xsi:type="string" translate="true">Product slides To Scroll</item>
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="sortOrder" xsi:type="number">110</item>
+                </item>
+            </argument>
+            <field name="slides_to_scroll">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string">Product slides To Scroll</item>
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="notice" xsi:type="string" translate="true">Please enter between 1 to 5</item>
+                        <item name="formElement" xsi:type="string">input</item>
+                        <item name="source" xsi:type="string">arp</item>
+                        <item name="dataScope" xsi:type="string">slides_to_scroll</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">true</item>
+                            <item name="validate-digits-range" xsi:type="string">1-5</item>
+                        </item>
+                    </item>
+                </argument>
+            </field>
+            <field name="use_config.slides_to_scroll">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="description" xsi:type="string" translate="true">Use Config Settings</item>
+                        <item name="dataType" xsi:type="string">boolean</item>
+                        <item name="formElement" xsi:type="string">checkbox</item>
+                        <item name="valueMap" xsi:type="array">
+                            <item name="true" xsi:type="boolean">true</item>
+                            <item name="false" xsi:type="boolean">false</item>
+                        </item>
+                        <item name="exports" xsi:type="array">
+                            <item name="checked" xsi:type="string">ns = ${ $.ns }, index = slides_to_scroll :disabled</item>
+                        </item>
+                        <item name="default" xsi:type="boolean">true</item>
+                    </item>
+                </argument>
+            </field>
+        </container>
+        <container name="default_display_cart_button_group">
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">group</item>
+                <item name="config" xsi:type="array">
+                    <item name="breakLine" xsi:type="boolean">false</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/components/group</item>
+                    <item name="label" xsi:type="string" translate="true">Show "Add To Cart" button</item>
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="sortOrder" xsi:type="number">120</item>
+                </item>
+            </argument>
+            <field name="display_cart_button">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="dataType" xsi:type="string">boolean</item>
+                        <item name="label" xsi:type="string" translate="true">Show "Add To Cart" button</item>
+                        <item name="formElement" xsi:type="string">checkbox</item>
+                        <item name="prefer" xsi:type="string">toggle</item>
+                        <item name="source" xsi:type="string">arp</item>
+                        <item name="sortOrder" xsi:type="number">10</item>
+                        <item name="dataScope" xsi:type="string">display_cart_button</item>
+                        <item name="valueMap" xsi:type="array">
+                            <item name="true" xsi:type="number">1</item>
+                            <item name="false" xsi:type="number">2</item>
+                        </item>
+                        <item name="default" xsi:type="number">1</item>
+                    </item>
+                </argument>
+            </field>
+            <field name="use_config.display_cart_button">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="description" xsi:type="string" translate="true">Use Config Settings</item>
+                        <item name="dataType" xsi:type="string">boolean</item>
+                        <item name="formElement" xsi:type="string">checkbox</item>
+                        <item name="valueMap" xsi:type="array">
+                            <item name="true" xsi:type="boolean">true</item>
+                            <item name="false" xsi:type="boolean">false</item>
+                        </item>
+                        <item name="exports" xsi:type="array">
+                            <item name="checked" xsi:type="string">ns = ${ $.ns }, index = display_cart_button :disabled</item>
+                        </item>
+                        <item name="default" xsi:type="boolean">true</item>
+                    </item>
+                </argument>
+            </field>     
+        </container>
+        <field name="sort_by">
+        <argument name="data" xsi:type="array">
+            <item name="options" xsi:type="object">Magedelight\Arp\Model\Source\SortBy</item>
+            <item name="config" xsi:type="array">
+                <item name="dataType" xsi:type="string">text</item>
+                <item name="component" xsi:type="string">Magedelight_Arp/js/form/element/options</item>
+                <item name="label" xsi:type="string" translate="true">Sort by</item>
+                <item name="formElement" xsi:type="string">select</item>
+                <item name="source" xsi:type="string">arp</item>
+                <item name="sortOrder" xsi:type="number">180</item>
+                <item name="dataScope" xsi:type="string">sort_by</item>
+                <item name="validation" xsi:type="array">
+                    <item name="required-entry" xsi:type="boolean">true</item>
+                </item>
+            </item>
+        </argument>
+</field>  
+    </fieldset>
+</form>

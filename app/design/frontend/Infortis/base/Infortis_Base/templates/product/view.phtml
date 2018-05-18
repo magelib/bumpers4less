@@ -1,0 +1,449 @@
+<?php
+/**
+ * @var \Infortis\Base\Block\Catalog\Product\View $block
+ */
+?>
+<?php
+    $theme = $block->getHelperTheme();
+    $helperProductView = $block->getHelperProductView();
+    $helperLabels = $this->helper('Infortis\Base\Helper\Labels');
+    $helperAddToLinks = $this->helper('Infortis\Base\Helper\AddToLinks');
+
+    // Get grid classes for product page sections
+    $grid = $helperProductView->getGridClasses();
+
+    // Get positions of blocks
+    $position = $helperProductView->getPositions();
+
+    // Brand info
+    $brandHtml = $block->getChildHtml('brand-info');
+    if (!empty($brandHtml)) {
+        if (isset($p[$position['brand']])) {
+            $p[$position['brand']] = $p[$position['brand']] . $brandHtml;
+        } else {
+            $p[$position['brand']] = $brandHtml;
+        }
+    }
+
+    // Product collateral data
+    $collateralHtml = $block->getChildHtml('product.info.details');
+    if (!empty($collateralHtml)) {
+        if (isset($p[$position['collateral']])) {
+            $p[$position['collateral']] = $p[$position['collateral']] . $collateralHtml;
+        } else {
+            $p[$position['collateral']] = $collateralHtml;
+        }
+    }
+
+    // Related products
+    $relatedProductsHtml = $block->getChildHtml('catalog.product.related');
+    if (!empty($relatedProductsHtml)) {
+        if (isset($p[$position['related']])) {
+            $p[$position['related']] = $p[$position['related']] . $relatedProductsHtml;
+        } else {
+            $p[$position['related']] = $relatedProductsHtml;
+        }
+    }
+
+    // Up-sell products
+    $upsellProductsHtml = $block->getChildHtml('product.info.upsell');
+    if (!empty($upsellProductsHtml)) {
+        if (isset($p[$position['upsell']])) {
+            $p[$position['upsell']] = $p[$position['upsell']] . $upsellProductsHtml;
+        } else {
+            $p[$position['upsell']] = $upsellProductsHtml;
+        }
+    }
+?>
+<style>
+.footer-primary.footer.container {
+	font-weight: 600;
+}
+
+.grid12-3 .feature.feature-icon-hover p {
+
+	padding-top: 10px;
+}
+
+span.red-dot {
+	font-family: arial;
+	font-weight: bold;
+	color: #999;
+}
+span.read-mo {
+	color: #eb1f27;
+	font-weight: bold;
+}
+.product-secondary-column p.no-margin {
+	font-family: bumpers;
+	padding-top:3px!important;
+}
+
+.fotorama__arr.fotorama__arr--next {
+	display: inherit!important;
+}
+.fotorama__arr.fotorama__arr--prev{
+	display: inherit!important;
+}
+.brand-name.attribute {
+	color: #eb1f27;
+	text-transform:uppercase;
+}
+.brand-name.attribute span{
+	color:black;
+	text-transform:uppercase;
+	margin-right:5px;
+}
+div#tab-label-additional {
+	display: none;
+}
+
+div#trigger-Yes{
+	display:table;
+	width: 100%;
+}
+div#trigger-No{
+	display:none;
+}
+.cust-spects span {
+	font-weight: bold;
+	margin-right: 10px;
+}
+.custom-info-pg h2 {
+	font-size: 18px;
+	margin-bottom: 10px;
+	border-bottom: dotted #ddd 2px;
+	padding-bottom: 10px;
+	font-family:'bumpers'!important;
+}
+.custom-info-pg {
+	padding: 20px;
+  box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.13);
+    -moz-box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.13);
+    -webkit-box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.13);
+}
+
+.custom-info-pg {
+	width: 43%;
+	display: inline-table;
+	margin-right: 20px;
+	margin-bottom: 20px;
+	font-size:15px;
+}
+
+.product-lower-primary-column.grid12-9 {
+
+	margin: 0;
+}
+.cust-spects ul li:before {
+	content: '»';
+	color:#eb1f27;
+	margin-right: 5px;
+	font-size: 20px;
+	font-weight: bold;
+}
+.cust-spects ul li {
+	line-height: 1;
+	margin: 15px 0;
+}
+h2.fitment-set {
+	margin-top: 15px;
+}
+.page-title-wrapper.product {
+	float: none;
+	width: 100%;
+}
+.instructions img {
+	width: 100px;
+	margin-left: 17px;
+}
+span#activate-instructions-Yes{
+	display:initial;
+		margin-right: 20px;
+}
+span#activate-instructions-No{
+	display:none;
+}
+a#activate-youtube-Yes{
+		display: initial;
+}
+a#activate-youtube-No{
+	display:none;
+}
+img#custom-intruc {	  
+	  transition: all 0.5s ease;
+}
+img#custom-intruc:hover{
+	filter: opacity(.5) drop-shadow(0 0 0 #eb1f27);
+}
+img#custom-youtub {
+	transition: all 0.5s ease;
+		width: 70px;
+
+} 
+img#custom-youtub:hover{
+	filter: grayscale(100%);
+}
+span.sticker.sale.save{
+	opacity:.0;
+}
+.product-info-price .old-price span {
+	color: #19212b;
+}
+.product-info-price .old-price {
+	color:red;
+}
+div#wrap-all-sec {
+	width: 100%;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	border-bottom: 2px dotted #ddd;
+}
+.stock.available {
+	background: #69a120;
+	padding: 16px 13px 8px;
+	color: #fff;
+	border-radius: 50%;
+	height: 38px;
+	width: 38px;
+	line-height: 1;
+	text-align: center;
+}
+.stock.unavailable {
+	background: #0d2c3e;
+	padding: 25px 13px 8px;
+	color: #fff;
+	border-radius: 50%;
+	height: 41px;
+	width: 50px;
+	line-height: 1;
+	font-size: 12px;
+	text-align: center;
+}
+@media screen and (max-width: 991px){
+  div#wrap-all-sec{
+  	width:100%;
+  }
+  .custom-info-pg {
+	width: 90%;
+}
+}
+.product.attribute.sku {
+	display: none;
+}
+.sku-ser {
+	font-weight: bold;
+		font-size: 17px;
+			text-transform: uppercase;
+			color:#eb1f27;
+}
+.sku-ser strong {
+	color:#333;
+}
+.product.attribute.overview {
+	font-weight: bold;
+	color: #145d7b;
+}
+span#seperator-cs {
+	color: #ddd;
+	margin-left: 7px;
+	margin-right: 7px;
+}
+</style>
+<div class="product-view product-columns-wrapper">
+
+    <div class="product-img-column <?php echo $grid['imgCol']; ?> no-left-gutter product media <?php echo $helperLabels->getLabelsClasses(); ?>">
+
+        <?php echo $block->getChildHtml('product.info.media'); ?>
+        <?php echo $helperLabels->getLabels($block->getProduct()); ?>
+        <?php if (isset($p['imgCol_1'])) echo $p['imgCol_1']; ?>
+
+        <?php // Container at the bottom ?>
+        <?php echo $block->getChildHtml('container_product_image_1'); ?>
+
+        <div class="non-collapsing-column-placeholder"></div>
+
+    </div>
+
+    <?php // TODO: remove old classes such as "product-shop" ?>
+    <div class="product-primary-column product-shop <?php echo $grid['primCol']; ?> product-info-main">
+   
+        <?php echo $block->getChildHtml('page.main.title'); ?>
+ <div class="sku-ser"><strong>SKU:</strong> <?php $_product = $block->getProduct(); $myattribute = $_product->getResource()->getAttribute('sku')->getFrontend()->getValue($_product); echo $myattribute; ?> <span id="seperator-cs">|</span> <strong>Part Number:</strong> <?php $_product = $block->getProduct(); $myattribute = $_product->getResource()->getAttribute('mpn')->getFrontend()->getValue($_product); echo $myattribute; ?> </div>
+        <?php echo $block->getChildHtml('product.info.review'); ?>
+
+        <?php if (isset($p['primCol_1'])) echo $p['primCol_1']; ?>
+        <?php echo $block->getChildHtml('product.info.main'); ?>
+        <?php if (isset($p['primCol_2'])) echo $p['primCol_2']; ?>
+
+        <?php // Container at the bottom ?>
+        <?php echo $block->getChildHtml('container_product_primary_2'); ?>
+
+    </div>
+    
+    <?php if (isset($grid['secCol'])): ?>
+
+        <div class="product-secondary-column custom-sidebar-right <?php echo $grid['secCol']; ?> no-right-gutter">
+            <div class="inner">
+
+                <?php // Container at the top ?>
+                <?php echo $block->getChildHtml('container_product_secondary_1'); ?>
+
+                <?php if (isset($p['secCol_1'])) echo $p['secCol_1']; ?>
+                <?php echo $block->getChildHtml('block_product_secondary_bottom'); ?>
+                <?php if (isset($p['secCol_2'])) echo $p['secCol_2']; ?>
+
+                <?php // Container at the bottom ?>
+                <?php echo $block->getChildHtml('container_product_secondary_2'); ?>
+
+                <?php //if (isset($p['secCol_3'])) echo $p['secCol_3']; ?>
+
+                <?php // TODO: ?>
+                <?php if ($tmpHtml = $block->getChildHtml('product_secondary_top_placeholder')): ?>
+                    <div class="feature-wrapper bottom-border"><?php echo $tmpHtml; ?></div>
+                <?php endif; ?>
+<?php echo $block->getChildHtml('bundle.options.container'); ?>
+        <?php echo $block->getChildHtml('moved.downloadable.product-info'); ?>
+
+        <?php // Container at the top. Important: required AFTER the bundle and downloadable blocks. ?>
+        <?php echo $block->getChildHtml('container_product_lower_primary_1'); ?>
+
+        <?php if (isset($p['lowerPrimCol_1'])) echo $p['lowerPrimCol_1']; ?>
+
+        <?php // Container at the bottom ?>
+        <?php echo $block->getChildHtml('container_product_lower_primary_2'); ?>
+        
+            </div>
+        
+        </div>
+     
+    <?php endif; ?>
+<div class="lightbox-target" id="playvideo">    
+<a class="lightbox-close" href="#" onClick="stopVideo()"></a>    	
+  <div id="player"></div>
+    <script type="text/javascript">
+      
+      var tag = document.createElement('script');
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);     
+      
+        //var player;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          height: '390',
+          width: '640',
+          videoId: '<?php $_product = $block->getProduct(); $myattribute = $_product->getResource()->getAttribute('youtube_code')->getFrontend()->getValue($_product); echo $myattribute; ?>'
+        });
+      }
+        
+       //Functions to stop-pause Video  
+      function stopVideo() {
+        player.stopVideo();
+      }
+        
+        function pauseVideo() {
+        player.pauseVideo();
+      }
+      
+        function play(){
+        player.playVideo();
+      }
+    </script>
+
+</div>
+    <div class="product-lower-primary-column <?php echo $grid['lowerPrimCol']; ?>">
+
+        <div class="custom-info-pg">
+        	 
+<span class="instructions" id="activate-instructions-<?php $_product = $block->getProduct(); $myattribute = $_product->getResource()->getAttribute('activate_instructions')->getFrontend()->getValue($_product); echo $myattribute; ?>">
+	
+<a href="<?php echo $this->getUrl('instructions') ?><?php $_product = $block->getProduct(); $myattribute = $_product->getResource()->getAttribute('instructions')->getFrontend()->getValue($_product); echo $myattribute; ?>" target="_blank">
+		<img src="<?php echo $this->getUrl('instructions/media/') ?>instructions.png" id="custom-intruc" style="margin-bottom:20px;"></a>
+		</span>
+		
+		<a href="#playvideo" onclick="play();" id="activate-youtube-<?php $_product = $block->getProduct(); $myattribute = $_product->getResource()->getAttribute('activate_youtube')->getFrontend()->getValue($_product); echo $myattribute; ?>">
+		<img src="<?php echo $this->getUrl('pub/media/wysiwyg/') ?>you-tube.png" id="custom-youtub" style="margin-bottom:20px;">
+		</a>		
+		
+
+
+        	
+<h2>TECHNICAL SPECIFICATIONS</h2>
+
+<div class="cust-spects" id="trigger-<?php $_product = $block->getProduct(); $myattribute = $_product->getResource()->getAttribute('activate_materials')->getFrontend()->getValue($_product); echo $myattribute; ?>">	
+<p><span>Materials:</span><?php $_product = $block->getProduct(); $myattribute = $_product->getResource()->getAttribute('materials')->getFrontend()->getValue($_product); echo $myattribute; ?></p>
+</div>
+
+<div class="cust-spects" id="trigger-<?php $_product = $block->getProduct(); $myattribute = $_product->getResource()->getAttribute('activate_finish')->getFrontend()->getValue($_product); echo $myattribute; ?>">	
+<p><span>Finish:</span><strong id="red"><?php $_product = $block->getProduct(); $myattribute = $_product->getResource()->getAttribute('finish')->getFrontend()->getValue($_product); echo $myattribute; ?></strong></p>
+</div>
+
+<div class="cust-spects" id="trigger-<?php $_product = $block->getProduct(); $myattribute = $_product->getResource()->getAttribute('activate_size_weight')->getFrontend()->getValue($_product); echo $myattribute; ?>">	
+<p><span>Size/Weight:</span><?php $_product = $block->getProduct(); $myattribute = $_product->getResource()->getAttribute('size_weight')->getFrontend()->getValue($_product); echo $myattribute; ?></p>
+</div>
+
+<div class="cust-spects" id="trigger-<?php $_product = $block->getProduct(); $myattribute = $_product->getResource()->getAttribute('activate_application')->getFrontend()->getValue($_product); echo $myattribute; ?>">	
+<p><span>Application:</span><?php $_product = $block->getProduct(); $myattribute = $_product->getResource()->getAttribute('application')->getFrontend()->getValue($_product); echo $myattribute; ?></p>
+</div>
+
+<div class="cust-spects" id="trigger-<?php $_product = $block->getProduct(); $myattribute = $_product->getResource()->getAttribute('activate_fitment')->getFrontend()->getValue($_product); echo $myattribute; ?>">	
+	<h2 class="fitment-set">FITMENT</h2>
+<p><?php $_product = $block->getProduct(); $myattribute = $_product->getResource()->getAttribute('fitment')->getFrontend()->getValue($_product); echo $myattribute; ?></p>
+</div>
+
+<div class="cust-spects" id="trigger-<?php $_product = $block->getProduct(); $myattribute = $_product->getResource()->getAttribute('activate_special_notes')->getFrontend()->getValue($_product); echo $myattribute; ?>">	
+	<h2 class="fitment-set">SPECIAL NOTES:</h2>
+<p><?php $_product = $block->getProduct(); $myattribute = $_product->getResource()->getAttribute('special_notes')->getFrontend()->getValue($_product); echo $myattribute; ?></p>
+</div>
+
+</div>
+<div class="custom-info-pg" style="	margin-right: 0;">
+	<div id="description-cp">
+	<h2>DESCRIPTION</h2>	
+	<?php echo $this->helper('Magento\Catalog\Helper\Output')->productAttribute($_product, $_product->getDescription(), 'description') ?>
+</div>
+	 <div class="cust-spects" id="trigger-<?php $_product = $block->getProduct(); $myattribute = $_product->getResource()->getAttribute('activate_features')->getFrontend()->getValue($_product); echo $myattribute; ?>">	
+		<h2 id="featuir">FEATURES</h2>	
+		<p><?php $_product = $block->getProduct(); $myattribute = $_product->getResource()->getAttribute('features')->getFrontend()->getValue($_product); echo $myattribute; ?></p>
+</div>
+
+    </div>
+    
+   
+
+
+    <?php if (isset($grid['lowerSecCol'])): ?>
+
+        <div class="product-lower-secondary-column custom-sidebar-right <?php echo $grid['lowerSecCol']; ?>">
+            <div class="inner">
+
+                <?php // Container at the top ?>
+                <?php echo $block->getChildHtml('container_product_lower_secondary_1'); ?>
+
+                <?php if (isset($p['lowerSecCol_1'])) echo $p['lowerSecCol_1']; ?>
+
+                <?php // Container at the bottom ?>
+                <?php echo $block->getChildHtml('container_product_lower_secondary_2'); ?>
+
+            </div>
+        </div>
+
+    <?php endif; ?>
+
+</div>
+<script type="text/javascript">
+//<![CDATA[
+
+    requirejs(['jquery','qtycontrol'], function(jQuery, qtycontrol) {
+        jQuery(function($) {
+            $('input.qty').qtycontrol();
+        }); //end: on document ready
+    });
+
+//]]>
+</script>

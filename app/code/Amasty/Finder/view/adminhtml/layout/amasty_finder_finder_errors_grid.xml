@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2017 Amasty (https://www.amasty.com)
+ * @package Amasty_Finder
+ */
+-->
+<!--
+/**
+ * Copyright © 2015 Amasty. All rights reserved.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="adminhtml.amasty.finder.finder.import.errors.grid.container">
+            <block class="Amasty\Finder\Block\Adminhtml\Finder\Edit\Tab\Import\ErrorsGrid" name="adminhtml.amasty.finder.finder.import.errors.grid" as="grid">
+                <arguments>
+                    <argument name="id" xsi:type="string">amasty_finder_finder_import_errors_grid</argument>
+                    <argument name="default_sort" xsi:type="string">file_id</argument>
+                    <argument name="default_dir" xsi:type="string">DESC</argument>
+                    <argument name="use_ajax" xsi:type="string">1</argument>
+                    <argument name="save_parameters_in_session" xsi:type="string">1</argument>
+                    <argument name="grid_url" xsi:type="url" path="*/*/errorsGrid">
+                        <param name="_current">1</param>
+                    </argument>
+                </arguments>
+                <block class="Magento\Backend\Block\Widget\Grid\ColumnSet" as="grid.columnSet" name="adminhtml.amasty.finder.finder.import.log.grid.columnSet">
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="created_at">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Created at</argument>
+                            <argument name="index" xsi:type="string">created_at</argument>
+                            <argument name="type" xsi:type="string">datetime</argument>
+                        </arguments>
+                    </block>
+
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="line">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Line</argument>
+                            <argument name="index" xsi:type="string">line</argument>
+                            <argument name="type" xsi:type="string">number</argument>
+                        </arguments>
+                    </block>
+
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="message">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Message</argument>
+                            <argument name="index" xsi:type="string">message</argument>
+                        </arguments>
+                    </block>
+                </block>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2017 Amasty (https://www.amasty.com)
+ * @package Amasty_Finder
+ */
+-->
+<!--
+/**
+ * Copyright © 2015 Amasty. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="amfinder" translate="label" type="text" sortOrder="161809" showInDefault="1" showInWebsite="1" showInStore="1">
+            <resource>Amasty_Finder::config_finder</resource>
+            <class>separator-top</class>
+            <label>Product Parts Finder</label>
+            <tab>amasty</tab>
+            <group id="general" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="partial_search" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display `Find` button when</label>
+                    <source_model>Amasty\Finder\Model\Source\Type</source_model>
+                </field>
+                <field id="universal" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Use `universal` products</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Allows to add set of products to any search, but might slow down the pages in some cases</comment>
+                </field>
+                <field id="universal_last" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Show `universal` products last</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="universal">1</field>
+                    </depends>
+                </field>
+                <field id="category_search" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Apply filter for current category only</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="custom_category" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Custom Destination URL</label>
+                    <comment>Eg. special-category.html  In most cases you don't need to set it. Useful when you want to redirect all search results to one category. It's NOT the url key. You can modify /amfinder/ url key in app/code/Amasty/Finder/etc/config.xml</comment>
+                </field>
+                <!--<field id="seo_urls" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use Param in URL</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>After search add a param in the url, so customers can bookmark the search results</comment>
+                </field>-->
+                <field id="auto_submit" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Start search when value in the last dropdown is  selected</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="reset_home" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Reset finder</label>
+                    <source_model>Amasty\Finder\Model\Source\Reset</source_model>
+                </field>
+                <field id="clear_other_conditions" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Clear other (previous) finders conditions</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Useful when you have 2 or more finders at the same page.</comment>
+                </field>
+                <field id="redirect_single_product" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Redirect to product page when there is only one product in result</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="import" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Import</label>
+                <field id="archive_lifetime" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Import history lifetime (days)</label>
+                </field>
+                <field id="max_rows_per_import" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Max rows per import</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
